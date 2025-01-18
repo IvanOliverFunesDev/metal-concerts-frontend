@@ -10,6 +10,7 @@
     <!-- Información del evento debajo de la imagen -->
     <div class="event-info">
         <h2>{{ concert.title }}</h2>
+        <p>{{concert.description}}</p>
         <p>{{ concert.date | date: 'fullDate' }}</p>
         <p>Género: {{ concert.genre }}</p>
     </div>
@@ -18,7 +19,7 @@
     <div class="vertical-line"></div>
 
     <!-- Imagen de la banda a la derecha -->
-    <div class="band-container">
+    <div class="band-container" (click)="goToDetails()">
         <img class="band-image" [src]="concert.band.image" alt="{{ concert.band.name }}">
         <p class="band-info"><strong>{{ concert.band.name }}</strong></p>
         <p class="band-info"><strong>{{ concert.band.description }}</strong></p>

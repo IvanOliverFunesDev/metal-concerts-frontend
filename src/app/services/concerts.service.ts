@@ -84,9 +84,14 @@ export class ConcertsService {
 
   getBandById(id: string): Observable<Band | null> {
     return this.getBandsAll().pipe(
-      map(bands => bands.find(band => band._id === id) || null)
+      map(bands => bands.find(band => band._id === id) || null),
+      catchError((error) => {
+        console.error(`Error al obtener la banda con ID: ${id}`, error);
+        return of(null); // Devuelve null si no se encuentra la banda
+      })
     );
   }
+
 }
 
 

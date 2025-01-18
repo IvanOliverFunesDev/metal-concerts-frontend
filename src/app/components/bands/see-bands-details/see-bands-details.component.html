@@ -1,1 +1,10 @@
-<p> {{band?.name}} </p>
+<div *ngIf="band; else loading">
+    <!-- Mostrar detalles de la banda aquí -->
+    <h2>{{ band.name }}</h2>
+    <img [src]="band.image" alt="{{ band.name }}">
+    <p>{{ band.description }}</p>
+</div>
+
+<ng-template #loading>
+    <p>Cargando detalles de la banda...</p>
+</ng-template>

@@ -12,7 +12,7 @@ export class BandsCardComponent {
   @Input() band!: Band;
 
   constructor(private router: Router) { }
-  goToDetaisl() {
+  goToDetails() {
     this.router.navigate(['/band', this.band._id])
   }
 }
