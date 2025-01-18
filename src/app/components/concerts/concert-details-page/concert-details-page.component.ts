@@ -12,7 +12,7 @@ import { Concert } from '../../../interfaces/concert';
   styleUrl: './concert-details-page.component.css'
 })
 export class ConcertDetailsPageComponent implements OnInit {
-  concert: Concert | null = null;
+  concert!: Concert | null;
   constructor(private route: ActivatedRoute, private concertsService: ConcertsService) { }
   ngOnInit(): void {
 

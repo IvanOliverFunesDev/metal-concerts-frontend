@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Band } from '../../../interfaces/band';
+import { ConcertsService } from '../../../services/concerts.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-see-bands-details',
@@ -7,5 +10,18 @@ import { Component } from '@angular/core';
   styleUrl: './see-bands-details.component.css'
 })
 export class SeeBandsDetailsComponent {
+  band!: Band | null;
+  constructor(private route: ActivatedRoute, private concertsService: ConcertsService) { }
+  ngOnInit(): void {
 
+    const bandId = this.route.snapshot.paramMap.get('id');
+
+    if (bandId) {
+      this.concertsService.getBandById(bandId).subscribe({
+        next: (data) => { this.band = data },
+        error: (err) => { console.error('Error cargando el concierto:', err); }
+      })
+
+    }
+  }
 }

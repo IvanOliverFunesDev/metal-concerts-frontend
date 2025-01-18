@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Band } from '../interfaces/band';
 import { Concert } from '../interfaces/concert';
 
@@ -54,11 +54,7 @@ export class ConcertsService {
   // Obtiene un concierto por su ID
   getConcertById(id: string): Observable<Concert | null> {
     return this.getConcertsAll().pipe(
-      map(concerts => concerts.find(concert => concert._id === id) || null), // Busca el concierto por ID
-      catchError(error => {
-        console.error('Error buscando concierto:', error);
-        return of(null);
-      })
+      map(concerts => concerts.find(concert => concert._id === id) || null)
     );
   }
 
@@ -88,11 +84,7 @@ export class ConcertsService {
 
   getBandById(id: string): Observable<Band | null> {
     return this.getBandsAll().pipe(
-      map(bands => bands.find(band => band._id === id) || null),
-      catchError(error => {
-        console.error('Error buscando concierto:', error);
-        return of(null);
-      })
+      map(bands => bands.find(band => band._id === id) || null)
     );
   }
 }
