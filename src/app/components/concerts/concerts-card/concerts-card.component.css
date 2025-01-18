@@ -1,0 +1,70 @@
+.card {
+    position: relative;
+    width: 300px;
+    text-align: center;
+    background-color: #222;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.card p {
+    position: absolute;
+    width: 100%;
+    color: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.card p:first-of-type {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 18px;
+}
+
+.card p:nth-child(3),
+.card p:nth-child(4),
+.card p:nth-child(5) {
+    left: 15px;
+    text-align: left;
+}
+
+.card p:nth-child(3) {
+    top: 80px;
+}
+
+/* Fecha */
+.card p:nth-child(4) {
+    top: 110px;
+}
+
+/* Género */
+.card p:nth-child(5) {
+    top: 140px;
+}
+
+/* Banda */
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+    /* Brillo rosa */
+}
+
+.card:hover img {
+    opacity: 0.3;
+}
+
+.card:hover p {
+    color: white;
+}

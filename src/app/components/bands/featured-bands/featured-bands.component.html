@@ -1,0 +1,9 @@
+<div class="featured-concerts">
+    <h2>Featured Bands</h2>
+    <div class="concerts-container">
+        <div *ngFor="let banda of bandasAleatorias" class="concert-card">
+            <img [src]="banda.image" alt="{{banda.title}}">
+        </div>
+
+    </div>
+</div>

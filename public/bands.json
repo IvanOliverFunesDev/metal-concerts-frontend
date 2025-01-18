@@ -1,0 +1,86 @@
+[
+    {
+        "_id": "1",
+        "name": "Linkin Park",
+        "description": "Una banda de nu-metal icónica.",
+        "genre": "Nu-Metal",
+        "image": "https://tse2.mm.bing.net/th?id=OIP.Tz5RnqiG3P7gX_CweLsTlAHaHa&w=474&h=474&c=7"
+    },
+    {
+        "_id": "2",
+        "name": "System of a Down",
+        "description": "Banda de metal alternativo.",
+        "genre": "Alternative Metal",
+        "image": "https://img.europapress.es/fotoweb/fotonoticia_20161015090403_1200.jpg"
+    },
+    {
+        "_id": "3",
+        "name": "Metallica",
+        "description": "Una leyenda del thrash metal.",
+        "genre": "Thrash Metal",
+        "image": "https://example.com/metallica.jpg"
+    },
+    {
+        "_id": "4",
+        "name": "Iron Maiden",
+        "description": "Pioneros del heavy metal.",
+        "genre": "Heavy Metal",
+        "image": "https://example.com/ironmaiden.jpg"
+    },
+    {
+        "_id": "5",
+        "name": "Slipknot",
+        "description": "Una banda de metal alternativo y nu-metal.",
+        "genre": "Nu-Metal",
+        "image": "https://example.com/slipknot.jpg"
+    },
+    {
+        "_id": "6",
+        "name": "Pantera",
+        "description": "Leyendas del groove metal.",
+        "genre": "Groove Metal",
+        "image": "https://example.com/pantera.jpg"
+    },
+    {
+        "_id": "7",
+        "name": "Avenged Sevenfold",
+        "description": "Una banda de metal progresivo.",
+        "genre": "Progressive Metal",
+        "image": "https://example.com/avengedsevenfold.jpg"
+    },
+    {
+        "_id": "8",
+        "name": "Megadeth",
+        "description": "Pioneros del thrash metal.",
+        "genre": "Thrash Metal",
+        "image": "https://example.com/megadeth.jpg"
+    },
+    {
+        "_id": "9",
+        "name": "Judas Priest",
+        "description": "Padres del heavy metal moderno.",
+        "genre": "Heavy Metal",
+        "image": "https://example.com/judaspriest.jpg"
+    },
+    {
+        "_id": "10",
+        "name": "Lamb of God",
+        "description": "Líderes del metalcore.",
+        "genre": "Metalcore",
+        "image": "https://example.com/lambofgod.jpg"
+    },
+    {
+        "_id": "11",
+        "name": "Korn",
+        "description": "Pioneros del nu-metal.",
+        "genre": "Nu-Metal",
+        "image": "https://example.com/korn.jpg"
+    },
+    {
+        "_id": "12",
+        "name": "Rammstein",
+        "description": "Íconos del industrial metal.",
+        "genre": "Industrial Metal",
+        "image": "https://example.com/rammstein.jpg"
+    }
+]

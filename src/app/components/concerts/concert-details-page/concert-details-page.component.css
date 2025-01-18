@@ -1,0 +1,72 @@
+.concert-detail {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    position: relative;
+}
+
+/* Imagen del concierto (esquina superior izquierda) */
+.concert-image-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.concert-image {
+    width: 300px;
+    height: auto;
+    border: 2px solid black;
+}
+
+/* Línea horizontal debajo de la imagen del concierto */
+.horizontal-line {
+    position: absolute;
+    top: 330px;
+    left: 20px;
+    width: 300px;
+    height: 4px;
+    background-color: black;
+}
+
+/* Información del evento debajo de la imagen */
+.event-info {
+    position: absolute;
+    top: 350px;
+    left: 20px;
+    width: 300px;
+    text-align: left;
+}
+
+/* Línea vertical en el centro derecho */
+.vertical-line {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    width: 4px;
+    height: 90%;
+    background-color: black;
+}
+
+/* Imagen de la banda (derecha, circular) */
+.band-container {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    text-align: center;
+}
+
+.band-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+/* Información de la banda al lado derecho */
+.band-info {
+    margin-top: 10px;
+    font-weight: bold;
+}

@@ -1,0 +1,39 @@
+.bands {
+    text-align: center;
+    padding: 20px;
+}
+
+.bands-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.bands-container>div {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 100px;
+    margin-top: 20px;
+}
+
+h2 {
+    position: relative;
+    text-align: center;
+    margin: 0;
+    color: #6AAAAA;
+    padding: 10px 0 0px;
+}
+
+h2::before {
+    content: "";
+    display: block;
+    width: 50%;
+    max-width: 500px;
+    height: 4px;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}

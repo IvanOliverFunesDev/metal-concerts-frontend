@@ -1,0 +1,6 @@
+<div class="concerts-list">
+    <h2> {{title}} </h2>
+    <div class="concerts-container">
+        <app-concerts-card *ngFor="let concert of concerts" [concert]="concert"></app-concerts-card>
+    </div>
+</div>

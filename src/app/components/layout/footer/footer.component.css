@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  /* Fondo negro */
+  color: #fff;
+  /* Texto blanco */
+}
+
+.footer {
+  background-color: #000;
+  /* Fondo negro */
+  color: #fff;
+  /* Texto blanco */
+  padding: 40px 20px;
+  border-top: 2px solid #ff00ff;
+  /* Línea superior rosa neón */
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.footer-description {
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.footer-heading {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: #ff00ff;
+  /* Rosa neón */
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.footer-link:hover {
+  color: #fff;
+  /* Blanco al pasar el ratón */
+  text-shadow: 0 0 8px #fff, 0 0 15px #fff;
+}
+
+.highlight {
+  color: #ff00ff;
+  /* Rosa neón */
+  font-weight: bold;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.highlight:hover {
+  color: #fff;
+  /* Blanco al pasar el ratón */
+  text-shadow: 0 0 8px #fff, 0 0 15px #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+  font-size: 0.9em;
+}

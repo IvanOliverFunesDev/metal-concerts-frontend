@@ -1,0 +1,198 @@
+[
+    {
+        "_id": "65a3f1a1e1b1c0001",
+        "title": "Meteora",
+        "description": "Un increíble concierto de Linkin Park",
+        "date": "2025-01-19",
+        "genre": "Nu-Metal",
+        "bandId": "1",
+        "image": "https://tse4.mm.bing.net/th?id=OIP.CkVSativ_3X5C9zcWbSY8QHaF7&w=379&h=379&c=7",
+        "band": {
+            "_id": "1",
+            "name": "Linkin Park",
+            "description": "Una banda de nu-metal icónica.",
+            "genre": "Nu-Metal",
+            "image": "https://tse2.mm.bing.net/th?id=OIP.Tz5RnqiG3P7gX_CweLsTlAHaHa&w=474&h=474&c=7"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0002",
+        "title": "Hybrid Theory",
+        "description": "Concierto icónico de Linkin Park basado en su álbum debut.",
+        "date": "2025-02-20",
+        "genre": "Nu-Metal",
+        "image": "https://tse2.mm.bing.net/th?id=OIP.Tz5RnqiG3P7gX_CweLsTlAHaHa&w=474&h=474&c=7",
+        "band": {
+            "_id": "1",
+            "name": "Linkin Park",
+            "description": "Una banda de nu-metal icónica.",
+            "genre": "Nu-Metal",
+            "image": "https://tse2.mm.bing.net/th?id=OIP.Tz5RnqiG3P7gX_CweLsTlAHaHa&w=474&h=474&c=7"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0003",
+        "title": "System of a Down Live",
+        "description": "Explosivo concierto de System of a Down.",
+        "date": "2025-08-10",
+        "genre": "Alternative Metal",
+        "image": "https://www.thexboxhub.com/wp-content/uploads/2014/01/system-of-a-down-header.jpg",
+        "band": {
+            "_id": "2",
+            "name": "System of a Down",
+            "description": "Banda de metal alternativo.",
+            "genre": "Alternative Metal",
+            "image": "https://img.europapress.es/fotoweb/fotonoticia_20161015090403_1200.jpg"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0004",
+        "title": "Metallica - Master of Puppets",
+        "description": "Un show épico con el legendario álbum de Metallica.",
+        "date": "2025-09-25",
+        "genre": "Thrash Metal",
+        "image": "https://upload.wikimedia.org/wikipedia/en/b/b2/Metallica_-_Master_of_Puppets_cover.jpg",
+        "band": {
+            "_id": "3",
+            "name": "Metallica",
+            "description": "Una leyenda del thrash metal.",
+            "genre": "Thrash Metal",
+            "image": "https://example.com/metallica.jpg"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0005",
+        "title": "Iron Maiden - The Number of the Beast",
+        "description": "Celebrando el álbum icónico de Iron Maiden.",
+        "date": "2025-07-12",
+        "genre": "Heavy Metal",
+        "image": "https://tse3.mm.bing.net/th?id=OIP.g5wcsd5dYlIxDCzS2JESGAHaHa&w=474&h=474&c=7",
+        "band": {
+            "_id": "4",
+            "name": "Iron Maiden",
+            "description": "Pioneros del heavy metal.",
+            "genre": "Heavy Metal",
+            "image": "https://example.com/ironmaiden.jpg"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0006",
+        "title": "Slipknot - Iowa",
+        "description": "Un show caótico basado en el álbum 'Iowa' de Slipknot.",
+        "date": "2025-05-30",
+        "genre": "Nu-Metal",
+        "image": "https://tse1.mm.bing.net/th?id=OIP.pyhJDIrey_oyAjtRU8Z0DgHaHa&w=474&h=474&c=7",
+        "band": {
+            "_id": "5",
+            "name": "Slipknot",
+            "description": "Una banda de metal alternativo y nu-metal.",
+            "genre": "Nu-Metal",
+            "image": "https://example.com/slipknot.jpg"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0007",
+        "title": "Pantera - Vulgar Display of Power",
+        "description": "La potencia de Pantera en vivo.",
+        "date": "2025-06-05",
+        "genre": "Groove Metal",
+        "image": "https://tse2.mm.bing.net/th?id=OIP.29PNXE0gJtV5ScLjGZSW5wHaE8&w=316&h=316&c=7",
+        "band": {
+            "_id": "6",
+            "name": "Pantera",
+            "description": "Leyendas del groove metal.",
+            "genre": "Groove Metal",
+            "image": "https://example.com/pantera.jpg"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0008",
+        "title": "Avenged Sevenfold - City of Evil",
+        "description": "Concierto lleno de energía y metal progresivo.",
+        "date": "2025-08-01",
+        "genre": "Progressive Metal",
+        "image": "https://tse2.mm.bing.net/th?id=OIP.vZ1Z98CdF7tmh2Qc04ET-AHaHb&w=474&h=474&c=7",
+        "band": {
+            "_id": "7",
+            "name": "Avenged Sevenfold",
+            "description": "Una banda de metal progresivo.",
+            "genre": "Progressive Metal",
+            "image": "https://example.com/avengedsevenfold.jpg"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0009",
+        "title": "Megadeth - Rust in Peace",
+        "description": "Un show inolvidable de Megadeth.",
+        "date": "2025-07-20",
+        "genre": "Thrash Metal",
+        "image": "https://tse1.mm.bing.net/th?id=OIP.HUiQSaxvpQMOWDMKhbL7rwHaHX&w=471&h=471&c=7",
+        "band": {
+            "_id": "8",
+            "name": "Megadeth",
+            "description": "Pioneros del thrash metal.",
+            "genre": "Thrash Metal",
+            "image": "https://example.com/megadeth.jpg"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0010",
+        "title": "Judas Priest - Painkiller",
+        "description": "Concierto épico basado en el álbum 'Painkiller'.",
+        "date": "2025-05-18",
+        "genre": "Heavy Metal",
+        "image": "https://tse1.mm.bing.net/th?id=OIP.1jljSJEkp6xYJDWO3edFRwHaHa&w=474&h=474&c=7",
+        "band": {
+            "_id": "9",
+            "name": "Judas Priest",
+            "description": "Padres del heavy metal moderno.",
+            "genre": "Heavy Metal",
+            "image": "https://example.com/judaspriest.jpg"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0011",
+        "title": "Lamb of God - Ashes of the Wake",
+        "description": "Metalcore en su máxima expresión con Lamb of God.",
+        "date": "2025-04-12",
+        "genre": "Metalcore",
+        "image": "https://tse1.mm.bing.net/th?id=OIP.L_upcw6_xbyJQJCYu2bTCgHaHa&w=474&h=474&c=7",
+        "band": {
+            "_id": "10",
+            "name": "Lamb of God",
+            "description": "Líderes del metalcore.",
+            "genre": "Metalcore",
+            "image": "https://example.com/lambofgod.jpg"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0012",
+        "title": "Korn - Follow the Leader",
+        "description": "Un show poderoso con Korn y su álbum 'Follow the Leader'.",
+        "date": "2025-05-22",
+        "genre": "Nu-Metal",
+        "image": "https://tse3.mm.bing.net/th?id=OIP.lMvSA5Pke0JfA9_VhGkYCgHaHa&w=474&h=474&c=7",
+        "band": {
+            "_id": "11",
+            "name": "Korn",
+            "description": "Pioneros del nu-metal.",
+            "genre": "Nu-Metal",
+            "image": "https://example.com/korn.jpg"
+        }
+    },
+    {
+        "_id": "65a3f1a1e1b1c0013",
+        "title": "Rammstein - Mutter",
+        "description": "Rammstein interpretando su icónico álbum 'Mutter'.",
+        "date": "2025-06-27",
+        "genre": "Industrial Metal",
+        "image": "https://tse1.mm.bing.net/th?id=OIP.N0spQ8U9TSLSPeaFE5AJ7QHaEK&w=266&h=266&c=7",
+        "band": {
+            "_id": "12",
+            "name": "Rammstein",
+            "description": "Íconos del industrial metal.",
+            "genre": "Industrial Metal",
+            "image": "https://example.com/rammstein.jpg"
+        }
+    }
+]

@@ -1,0 +1,31 @@
+<div *ngIf="concert" class="concert-detail">
+    <!-- Imagen del concierto en la esquina superior izquierda -->
+    <div class="concert-image-container">
+        <img class="concert-image" [src]="concert.image" alt="{{ concert.title }}">
+    </div>
+
+    <!-- Línea horizontal debajo de la imagen del concierto -->
+    <div class="horizontal-line"></div>
+
+    <!-- Información del evento debajo de la imagen -->
+    <div class="event-info">
+        <h2>{{ concert.title }}</h2>
+        <p>{{ concert.date | date: 'fullDate' }}</p>
+        <p>Género: {{ concert.genre }}</p>
+    </div>
+
+    <!-- Línea vertical en el centro derecho -->
+    <div class="vertical-line"></div>
+
+    <!-- Imagen de la banda a la derecha -->
+    <div class="band-container">
+        <img class="band-image" [src]="concert.band.image" alt="{{ concert.band.name }}">
+        <p class="band-info"><strong>{{ concert.band.name }}</strong></p>
+        <p class="band-info"><strong>{{ concert.band.description }}</strong></p>
+        <p class="band-info"><strong>{{ concert.band.genre }}</strong></p>
+
+
+    </div>
+</div>
+
+<p *ngIf="!concert">Concierto no encontrado</p>

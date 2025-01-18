@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+
+main{
+    min-height: calc(100vh - 60px - 255.33px );
+    background-color: #121212;
+}
+
+.blue-neon {
+    color: #6AAAAA;
+}
+
+.active-neon-blue {
+    color: #9FFFFF !important;
+    filter: drop-shadow(0 0 15px #9FFFFF);
+}
+
+.pink-neon {
+    color: #A251A1;
+}
+
+.active-neon-pink {
+    color: #FD8BFC;
+    filter: drop-shadow(0 0 15px #FD8BFC);
+}

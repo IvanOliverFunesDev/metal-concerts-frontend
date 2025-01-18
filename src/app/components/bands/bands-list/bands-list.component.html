@@ -1,0 +1,8 @@
+<div class="bands">
+    <h2> {{title}} </h2>
+    <div class="bands-container">
+        <div>
+            <app-bands-card *ngFor="let band of bands" [band]="band"></app-bands-card>
+        </div>
+    </div>
+</div>
