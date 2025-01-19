@@ -8,8 +8,8 @@ import { Concert } from '../interfaces/concert';
   providedIn: 'root'
 })
 export class ConcertsService {
-  private concertsUrl = 'concerts.json';  // URL para obtener los conciertos
-  private bandsUrl = 'bands.json';        // URL para obtener las bandas
+  private concertsUrl = 'concerts.json';
+  private bandsUrl = 'bands.json';
 
   constructor(private http: HttpClient) { }
 
@@ -58,17 +58,27 @@ export class ConcertsService {
     );
   }
 
-  // Obtiene todas las bandas
-  getBandsAll(): Observable<Band[]> {
-    return this.http.get<Band[]>(this.bandsUrl).pipe(
-      catchError(error => {
-        console.error('Error cargando bandas:', error);
-        return of([]); // Devuelve un array vacío en caso de error
+  getConcertsByBandId(bandId: string): Observable<Concert[]> {
+    return this.getConcertsAll().pipe(
+      map(concerts => concerts.filter(concert => concert.band._id === bandId)),
+      catchError((error) => {
+        console.error(`Error al obtener conciertos de la banda con ID: ${bandId}`, error);
+        return of([]);
       })
     );
   }
 
-  // Obtiene un número limitado de bandas destacadas de forma aleatoria
+  // ------------------------------------------------------------------------------------------
+
+  getBandsAll(): Observable<Band[]> {
+    return this.http.get<Band[]>(this.bandsUrl).pipe(
+      catchError(error => {
+        console.error('Error cargando bandas:', error);
+        return of([]);
+      })
+    );
+  }
+
   getRandomFeaturedBands(limit: number): Observable<Band[]> {
     return this.getBandsAll().pipe(
       map(bands => {

@@ -5,6 +5,15 @@
     <p>{{ band.description }}</p>
 </div>
 
+<div *ngIf="concerts; else loading">
+    <h3>Conciertos Activos:</h3>
+    <div *ngFor="let concert of concerts">
+        <h2>{{ concert.title }}</h2>
+        <img [src]="concert.image" alt="{{ concert.title }}">
+        <p>{{ concert.description }}</p>
+    </div>
+</div>
+
 <ng-template #loading>
-    <p>Cargando detalles de la banda...</p>
+    <p>Cargando datos...</p>
 </ng-template>
