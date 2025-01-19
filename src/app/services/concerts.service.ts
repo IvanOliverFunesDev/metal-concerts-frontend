@@ -13,11 +13,9 @@ export class ConcertsService {
 
   constructor(private http: HttpClient) { }
 
-  // Obtiene todos los conciertos
   getConcertsAll(): Observable<Concert[]> {
     return this.http.get<Concert[]>(this.concertsUrl).pipe(
       map(concerts => {
-        // No es necesario convertir la fecha a Date aquí si solo se necesita para comparación de cadenas.
         return concerts;
       }),
       catchError(error => {
@@ -27,30 +25,28 @@ export class ConcertsService {
     );
   }
 
-  // Obtiene los conciertos más recientes
   getRecentConcerts(limit: number): Observable<Concert[]> {
     return this.getConcertsAll().pipe(
       map(concerts =>
         concerts
-          .filter(concert => concert.date >= new Date().toISOString().split('T')[0]) // Filtra conciertos futuros (compara como cadena)
-          .sort((a, b) => a.date.localeCompare(b.date)) // Ordena los conciertos por fecha como cadenas (en formato YYYY-MM-DD)
-          .slice(0, limit) // Limita los resultados al número que se solicita
+          .filter(concert => concert.date >= new Date().toISOString().split('T')[0])
+          .sort((a, b) => a.date.localeCompare(b.date))
+          .slice(0, limit)
       )
     );
   }
 
 
-  // Obtiene un número limitado de conciertos destacados de forma aleatoria
+
   getRandomFeaturedConcert(limit: number): Observable<Concert[]> {
     return this.getConcertsAll().pipe(
       map(concerts => {
-        const shuffled = concerts.sort(() => Math.random() - 0.5); // Mezcla aleatoriamente los conciertos
-        return shuffled.slice(0, limit); // Devuelve solo el número de conciertos que se necesita
+        const shuffled = concerts.sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, limit);
       })
     );
   }
 
-  // Obtiene un concierto por su ID
   getConcertById(id: string): Observable<Concert | null> {
     return this.getConcertsAll().pipe(
       map(concerts => concerts.find(concert => concert._id === id) || null)
@@ -81,12 +77,12 @@ export class ConcertsService {
   getRandomFeaturedBands(limit: number): Observable<Band[]> {
     return this.getBandsAll().pipe(
       map(bands => {
-        const shuffled = [...bands].sort(() => Math.random() - 0.5); // Mezcla aleatoriamente las bandas
-        return shuffled.slice(0, limit); // Devuelve solo `limit` bandas
+        const shuffled = [...bands].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, limit);
       }),
       catchError(error => {
         console.error('Error cargando bandas destacadas:', error);
-        return of([]); // Devuelve un array vacío si hay error
+        return of([]);
       })
     );
   }
@@ -96,7 +92,7 @@ export class ConcertsService {
       map(bands => bands.find(band => band._id === id) || null),
       catchError((error) => {
         console.error(`Error al obtener la banda con ID: ${id}`, error);
-        return of(null); // Devuelve null si no se encuentra la banda
+        return of(null);
       })
     );
   }
