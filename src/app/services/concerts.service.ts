@@ -18,7 +18,6 @@ export class ConcertsService {
     return this.http.get<Concert[]>(this.concertsUrl).pipe(
       map(concerts => {
         // No es necesario convertir la fecha a Date aquí si solo se necesita para comparación de cadenas.
-        console.log("Conciertos cargados:", concerts);
         return concerts;
       }),
       catchError(error => {

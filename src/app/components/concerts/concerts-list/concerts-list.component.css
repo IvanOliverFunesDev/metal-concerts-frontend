@@ -15,3 +15,9 @@ h2 {
     color: #6AAAAA;
     padding: 10px 0 0px;
 }
+
+.no-concerts {
+    font-size: 40px;
+    text-align: center;
+    color: red;
+}
