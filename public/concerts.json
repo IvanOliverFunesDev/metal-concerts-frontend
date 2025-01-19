@@ -179,20 +179,5 @@
             "genre": "Nu-Metal",
             "image": "https://example.com/korn.jpg"
         }
-    },
-    {
-        "_id": "65a3f1a1e1b1c0013",
-        "title": "Rammstein - Mutter",
-        "description": "Rammstein interpretando su icónico álbum 'Mutter'.",
-        "date": "2025-06-27",
-        "genre": "Industrial Metal",
-        "image": "https://tse1.mm.bing.net/th?id=OIP.N0spQ8U9TSLSPeaFE5AJ7QHaEK&w=266&h=266&c=7",
-        "band": {
-            "_id": "12",
-            "name": "Rammstein",
-            "description": "Íconos del industrial metal.",
-            "genre": "Industrial Metal",
-            "image": "https://example.com/rammstein.jpg"
-        }
     }
 ]

@@ -1,6 +1,14 @@
 <div class="concerts-list">
-    <h2> {{title}} </h2>
-    <div class="concerts-container">
-        <app-concerts-card *ngFor="let concert of concerts" [concert]="concert"></app-concerts-card>
+    <h2>{{ title }}</h2>
+    <!-- Mostrar los conciertos si existen -->
+    <div *ngIf="hasConcerts; else noConcerts">
+        <div class="concerts-container">
+            <app-concerts-card *ngFor="let concert of concerts" [concert]="concert"></app-concerts-card>
+        </div>
     </div>
+
+    <!-- Si no hay conciertos, mostrar el mensaje -->
+    <ng-template #noConcerts>
+        <p class="no-concerts">❌ No hay conciertos programados.</p>
+    </ng-template>
 </div>

@@ -1,19 +1,28 @@
-<div *ngIf="band; else loading">
-    <!-- Mostrar detalles de la banda aquí -->
-    <h2>{{ band.name }}</h2>
-    <img [src]="band.image" alt="{{ band.name }}">
-    <p>{{ band.description }}</p>
-</div>
+<div class="band-profile" *ngIf="band; else loading">
+    <!-- Hero Section con imagen de fondo -->
+    <div class="band-hero" [style.backgroundImage]="'url(' + band.image + ')'">
+        <div class="overlay">
+            <h1>{{ band.name }}</h1>
+            <p class="genre">{{ band.genre }}</p>
+        </div>
+    </div>
 
-<div *ngIf="concerts; else loading">
-    <h3>Conciertos Activos:</h3>
-    <div *ngFor="let concert of concerts">
-        <h2>{{ concert.title }}</h2>
-        <img [src]="concert.image" alt="{{ concert.title }}">
-        <p>{{ concert.description }}</p>
+    <div class="band-details">
+        <p class="description">{{ band.description }}</p>
     </div>
 </div>
 
+<section class="concerts-section" *ngIf="band?._id">
+    <app-concerts-list [fetchData]="concertsService.getConcertsByBandId.bind(concertsService, band?._id || '')"
+        [title]="'🎸Conciertos de ' + (band?.name || 'la banda')">
+    </app-concerts-list>
+</section>
+
 <ng-template #loading>
-    <p>Cargando datos...</p>
+    <p class="loading-text">⏳ Cargando datos...</p>
+</ng-template>
+
+<!-- Sin conciertos -->
+<ng-template #noConcerts>
+    <p class="no-concerts">❌ No hay conciertos programados.</p>
 </ng-template>
