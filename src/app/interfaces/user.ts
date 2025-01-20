@@ -7,5 +7,5 @@ export interface User {
     password: string,
     createdAt: Date;
     updatedAt: Date;
-    favoriteConcerts: Concert[];
+    savedConcerts: Concert[];
 }

@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import gsap from 'gsap';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-floating-mascot',
+  imports: [RouterLink],
   templateUrl: './floating-mascot.component.html',
   styleUrls: ['./floating-mascot.component.css']
 })
 export class FloatingMascotComponent implements OnInit {
-  @Input() redirectUrl: string = '/bands-page'; // URL destino al hacer clic
 
   constructor(private router: Router) { }
 
@@ -23,7 +23,4 @@ export class FloatingMascotComponent implements OnInit {
     });
   }
 
-  navigate(): void {
-    this.router.navigate([this.redirectUrl]);
-  }
 }

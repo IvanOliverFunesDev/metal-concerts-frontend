@@ -60,3 +60,9 @@
     color: #777;
     margin-top: 20px;
 }
+
+@media (max-width: 768px) {
+    .band-hero {
+        width: 90%;
+    }
+}

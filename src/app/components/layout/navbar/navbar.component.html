@@ -56,11 +56,15 @@
     .navbar-space {
         height: 160px;
     }
+
+    .dropdown-menu-dark {
+        background-color: #000;
+    }
 </style>
 
 <nav class="navbar navbar-dark bg-black fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" routerLink="home">Nombre APP</a>
+        <a class="navbar-brand" routerLink="home">SoulHaven</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
             aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -68,7 +72,7 @@
         <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
             aria-labelledby="offcanvasDarkNavbarLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Nombre APP</h5>
+                <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">SoulHaven</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
             </div>
@@ -86,7 +90,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Nombre User
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+                        <ul class="dropdown-menu dropdown-menu-dark " aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
