@@ -3,8 +3,7 @@
     <app-slider></app-slider>
     <app-concerts-list [fetchData]="concertsService.getConcertsUpcoming.bind(concertsService)"
         title="Concerts Recent"></app-concerts-list>
-    <app-concerts-list [fetchData]="concertsService.getConcertsHighlighted.bind(concertsService)"
-        title="Concerts Featured"></app-concerts-list>
+
     <!--<app-bands-list [fetchData]="concertsService.getRandomFeaturedBands.bind(concertsService, 4)"
         title="Bands Featured"></app-bands-list> -->
 </main>

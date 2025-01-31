@@ -1,10 +1,10 @@
-<!-- <div *ngIf="concert" class="concert-detail">
+<div *ngIf="concert" class="concert-detail">
     <div class="concert-image-container">
-        <img class="concert-image" [src]="concert.image" alt="{{ concert.title }}">
+        <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
 
         <div class="band-info-container" (click)="goToDetails()">
             <div class="band-image-container">
-                <img class="band-image" [src]="concert.band.image" alt="{{ concert.band.name }}">
+                <img class="band-image" [src]="concert.band.image" alt="{{ concert.band.bandName }}">
             </div>
 
         </div>
@@ -14,8 +14,7 @@
         <h1 class="concert-title">{{ concert.title }}</h1>
         <p class="concert-description">{{ concert.description }}</p>
         <p class="concert-date">{{ concert.date | date: 'fullDate' }}</p>
-        <p class="concert-genre">Género: <strong>{{ concert.genre }}</strong></p>
     </div>
 </div>
 
-<p *ngIf="!concert">Concierto no encontrado</p> -->
+<p *ngIf="!concert">Concierto no encontrado</p>
