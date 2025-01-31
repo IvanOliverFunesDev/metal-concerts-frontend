@@ -4,7 +4,15 @@
         "name": "Linkin Park",
         "description": "Una banda de nu-metal icónica.",
         "genre": "Nu-Metal",
-        "image": "https://tse2.mm.bing.net/th?id=OIP.Tz5RnqiG3P7gX_CweLsTlAHaHa&w=474&h=474&c=7"
+        "image": "https://tse2.mm.bing.net/th?id=OIP.Tz5RnqiG3P7gX_CweLsTlAHaHa&w=474&h=474&c=7",
+        "subscribers": {
+            "_id": "65a3f1a1e1b1c0001",
+            "name": "Ivan Oliver",
+            "email": "Ivan@gmail.com",
+            "password": "hashed_password",
+            "createdAt": "2025-01-01T00:00:00Z",
+            "updatedAt": "2025-01-18T00:00:00Z"
+        }
     },
     {
         "_id": "2",

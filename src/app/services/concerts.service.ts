@@ -36,8 +36,6 @@ export class ConcertsService {
     );
   }
 
-
-
   getRandomFeaturedConcert(limit: number): Observable<Concert[]> {
     return this.getConcertsAll().pipe(
       map(concerts => {

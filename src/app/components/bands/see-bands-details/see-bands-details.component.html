@@ -1,5 +1,4 @@
 <div class="band-profile" *ngIf="band; else loading">
-    <!-- Hero Section con imagen de fondo -->
     <div class="band-hero" [style.backgroundImage]="'url(' + band.image + ')'">
         <div class="overlay">
             <h1>{{ band.name }}</h1>
@@ -22,7 +21,6 @@
     <p class="loading-text">⏳ Cargando datos...</p>
 </ng-template>
 
-<!-- Sin conciertos -->
 <ng-template #noConcerts>
     <p class="no-concerts">❌ No hay conciertos programados.</p>
 </ng-template>

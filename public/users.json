@@ -4,38 +4,5 @@
     "email": "Ivan@gmail.com",
     "password": "hashed_password",
     "createdAt": "2025-01-01T00:00:00Z",
-    "updatedAt": "2025-01-18T00:00:00Z",
-    "favoriteEvents": [
-        {
-            "_id": "65a3f1a1e1b1c0001",
-            "title": "Meteora",
-            "description": "Un increíble concierto de Linkin Park",
-            "date": "2025-01-19",
-            "genre": "Nu-Metal",
-            "bandId": "1",
-            "image": "https://tse4.mm.bing.net/th?id=OIP.CkVSativ_3X5C9zcWbSY8QHaF7&w=379&h=379&c=7",
-            "band": {
-                "_id": "1",
-                "name": "Linkin Park",
-                "description": "Una banda de nu-metal icónica.",
-                "genre": "Nu-Metal",
-                "image": "https://tse2.mm.bing.net/th?id=OIP.Tz5RnqiG3P7gX_CweLsTlAHaHa&w=474&h=474&c=7"
-            }
-        },
-        {
-            "_id": "65a3f1a1e1b1c0002",
-            "title": "Hybrid Theory",
-            "description": "Concierto icónico de Linkin Park basado en su álbum debut.",
-            "date": "2025-02-20",
-            "genre": "Nu-Metal",
-            "image": "https://tse2.mm.bing.net/th?id=OIP.Tz5RnqiG3P7gX_CweLsTlAHaHa&w=474&h=474&c=7",
-            "band": {
-                "_id": "1",
-                "name": "Linkin Park",
-                "description": "Una banda de nu-metal icónica.",
-                "genre": "Nu-Metal",
-                "image": "https://tse2.mm.bing.net/th?id=OIP.Tz5RnqiG3P7gX_CweLsTlAHaHa&w=474&h=474&c=7"
-            }
-        }
-    ]
+    "updatedAt": "2025-01-18T00:00:00Z"
 }

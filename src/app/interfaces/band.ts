@@ -1,3 +1,4 @@
+import { User } from "./user";
 export interface Band {
     _id: string;
     name: string;
@@ -8,4 +9,5 @@ export interface Band {
     image: string;
     createdAt: Date;
     updatedAt: Date;
+    subscribers: User[];
 }

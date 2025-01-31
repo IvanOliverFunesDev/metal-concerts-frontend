@@ -1,3 +1,4 @@
+import { Band } from "./band";
 import { Concert } from "./concert";
 
 export interface User {
@@ -8,4 +9,5 @@ export interface User {
     createdAt: Date;
     updatedAt: Date;
     savedConcerts: Concert[];
+    subscribedBands: Band[];
 }
