@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConcertsService } from '../../../services/concerts.service';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { Concert, RelatedConcert } from '../../../interfaces/concert';
-import { ConcertsCardComponent } from "../concerts-card/concerts-card.component";
 
 @Component({
   selector: 'app-concert-details-page',
@@ -35,8 +34,8 @@ export class ConcertDetailsPageComponent implements OnInit {
     }
   }
   goToDetails() {
-    if (this.concert?.band?._id) {
-      this.router.navigate(['/band', this.concert.band._id]);
+    if (this.concert?.band?.id) {
+      this.router.navigate(['/band', this.concert.band.id]);
     } else {
       console.error('No se puede acceder a la banda o su ID');
     }
