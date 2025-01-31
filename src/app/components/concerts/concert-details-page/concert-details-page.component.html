@@ -13,7 +13,23 @@
     <div class="concert-info">
         <h1 class="concert-title">{{ concert.title }}</h1>
         <p class="concert-description">{{ concert.description }}</p>
+        <p class="concert-description">{{ concert.band.genre }}</p>
         <p class="concert-date">{{ concert.date | date: 'fullDate' }}</p>
+    </div>
+</div>
+
+<div *ngIf="relatedConcerts.length > 0" class="related-concerts">
+    <h2>🎸 Conciertos Relacionados</h2>
+    <div class="related-concerts-container">
+        <div class="related-concert-card" *ngFor="let related of relatedConcerts">
+            <img [src]="related.image || 'noImage.png'" alt="{{ related.title }}">
+            <div class="related-concert-info">
+                <h3>{{ related.title }}</h3>
+                <p>{{ related.date | date: 'fullDate' }}</p>
+                <p>{{ related.location }}</p>
+                <p>Banda: {{ related.band.bandName }}</p>
+            </div>
+        </div>
     </div>
 </div>
 

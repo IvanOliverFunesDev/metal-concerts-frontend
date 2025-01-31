@@ -9,4 +9,19 @@ export interface Concert {
     image?: string;
     band: Band;
     averageRating?: number;
+    relatedConcerts?: RelatedConcert[]; // Campo opcional porque solo aparece en getConcertById
+}
+
+export interface RelatedConcert {
+    id: string;
+    title: string;
+    date: string;
+    image?: string
+    location: string;
+    band: {
+        bandId: string;
+        bandName: string;
+        genre: string;
+        image?: string;
+    };
 }
