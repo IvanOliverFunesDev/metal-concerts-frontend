@@ -1,7 +1,7 @@
-<!-- <div class="band-profile" *ngIf="band; else loading">
+<div class="band-profile" *ngIf="band; else loading">
     <div class="band-hero" [style.backgroundImage]="'url(' + band.image + ')'">
         <div class="overlay">
-            <h1>{{ band.name }}</h1>
+            <h1>{{ band.bandName }}</h1>
             <p class="genre">{{ band.genre }}</p>
         </div>
     </div>
@@ -11,11 +11,11 @@
     </div>
 </div>
 
-<section class="concerts-section" *ngIf="band?._id">
+<!-- <section class="concerts-section" *ngIf="band?._id">
     <app-concerts-list [fetchData]="concertsService.getConcertsByBandId.bind(concertsService, band?._id || '')"
-        [title]="'🎸Conciertos de ' + (band?.name || 'la banda')">
+        [title]="'🎸Conciertos de ' + (band?.bandName || 'la banda')">
     </app-concerts-list>
-</section>
+</section> -->
 
 <ng-template #loading>
     <p class="loading-text">⏳ Cargando datos...</p>
@@ -23,4 +23,4 @@
 
 <ng-template #noConcerts>
     <p class="no-concerts">❌ No hay conciertos programados.</p>
-</ng-template> -->
+</ng-template>

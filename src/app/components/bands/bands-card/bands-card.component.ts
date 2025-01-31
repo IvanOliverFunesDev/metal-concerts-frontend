@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Band } from '../../../interfaces/band';
+import { Component, Input, OnInit } from '@angular/core';
+import { BandList } from '../../../interfaces/band';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,11 +8,21 @@ import { Router } from '@angular/router';
   templateUrl: './bands-card.component.html',
   styleUrl: './bands-card.component.css'
 })
-export class BandsCardComponent {
-  @Input() band!: Band;
+export class BandsCardComponent implements OnInit {
+  @Input() band!: BandList;
 
   constructor(private router: Router) { }
+
+  ngOnInit(): void {
+    console.log('Banda recibida en la tarjeta:', this.band);
+  }
+
   goToDetails() {
-    this.router.navigate(['/band', this.band._id])
+    if (this.band?.id) {
+      console.log(`Navegando a detalles de la banda: ${this.band.id}`);
+      this.router.navigate(['/band', this.band.id]);
+    } else {
+      console.error('Error: ID de la banda no disponible.');
+    }
   }
 }

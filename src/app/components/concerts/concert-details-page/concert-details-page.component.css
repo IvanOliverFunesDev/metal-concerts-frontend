@@ -1,3 +1,4 @@
+/* Contenedor principal */
 .concert-detail {
     display: flex;
     flex-direction: column;
@@ -9,100 +10,135 @@
     font-family: 'Arial', sans-serif;
 }
 
+/* Contenedor de la imagen principal del concierto */
 .concert-image-container {
-    width: 80%;
-    max-width: 600px;
-    margin-bottom: 30px;
-    position: relative;
+    width: 100%;
+    max-width: 400px;
+    /* Limita el tamaño máximo de la imagen */
+    margin: 0 auto;
+    /* Centra la imagen */
     text-align: center;
 }
 
-.concert-image {
+/* Imagen del concierto */
+.concert-image-container img {
     width: 100%;
-    height: auto;
+    max-height: 500px;
+    /* Evita que se agrande demasiado */
+    object-fit: cover;
+    /* Recorta la imagen sin deformarla */
     border-radius: 10px;
     border: 3px solid #333;
 }
 
+/* Contenedor de la información de la banda */
 .band-info-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 8px;
+    margin-top: 15px;
     cursor: pointer;
-    transition: transform 0.3s ease;
 }
 
-.band-info-container:hover {
-    transform: scale(1.05);
-}
-
+/* Imagen de la banda dentro de un círculo */
 .band-image-container {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
-    border: 3px solid #fff;
-
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .band-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
-}
-
-/* Información de la banda */
-.band-info {
-    color: #fff;
-    max-width: 150px;
-    font-size: 0.9rem;
-    text-align: left;
-}
-
-.band-description {
-    margin-top: 5px;
-    font-size: 0.8rem;
 }
 
 /* Información del concierto */
 .concert-info {
-    width: 80%;
-    max-width: 900px;
-    text-align: left;
-    margin-top: 40px;
+    text-align: center;
+    max-width: 600px;
 }
 
 .concert-title {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    color: #ff00ff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 .concert-description {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    line-height: 1.5;
+    font-size: 16px;
+    opacity: 0.9;
+    margin-top: 5px;
 }
 
 .concert-date {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+    font-size: 14px;
+    color: #ff9800;
+    margin-top: 5px;
 }
 
-.concert-genre {
-    font-size: 1.1rem;
-    color: #ffcc00;
+
+.related-concerts {
+    margin-top: 40px;
+    text-align: center;
 }
 
+.related-concerts h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #ff9800;
+}
+
+.related-concerts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.related-concert-card {
+    background: #222;
+    padding: 15px;
+    border-radius: 8px;
+    width: 250px;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.related-concert-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.related-concert-card:hover {
+    background: #333;
+}
+
+.related-concert-info h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #ff9800;
+}
+
+.related-concert-info p {
+    font-size: 14px;
+    margin: 2px 0;
+    opacity: 0.8;
+}
+
+/* Ajustes para móviles */
 @media (max-width: 768px) {
     .concert-image-container {
-        width: 90%;
+        max-width: 300px;
+        /* Tamaño más pequeño en móviles */
     }
 
     .band-image-container {
