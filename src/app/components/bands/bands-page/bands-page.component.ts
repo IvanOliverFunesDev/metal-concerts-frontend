@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ConcertsService } from '../../../services/concerts.service';
 import { BandsListComponent } from "../bands-list/bands-list.component";
+import { BandsService } from '../../../services/bands.service';
 
 @Component({
   selector: 'app-bands-page',
@@ -10,6 +10,6 @@ import { BandsListComponent } from "../bands-list/bands-list.component";
 })
 export class BandsPageComponent {
 
-  constructor(public consertsService: ConcertsService) { }
+  constructor(public bandsService: BandsService) { }
 
 }

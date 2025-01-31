@@ -24,8 +24,11 @@ export class ConcertsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.fetchData().subscribe({
       next: (data) => {
-        this.concerts = data;
+        this.concerts = data || [];
         this.hasConcerts = data.length > 0; // Si hay conciertos, true. Si no, false.
+        console.log('¿Hay conciertos?', this.hasConcerts);
+
+        console.log(this.concerts);
       },
       error: (err) => {
         console.error('Error cargando conciertos:', err);
