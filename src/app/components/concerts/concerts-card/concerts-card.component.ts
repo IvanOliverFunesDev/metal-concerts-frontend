@@ -15,8 +15,8 @@ export class ConcertsCardComponent {
 
   constructor(private router: Router) { }
 
-  goToDetails() {
-    this.router.navigate(['/concert', this.concert._id])
-  }
+  // goToDetails() {
+  //   this.router.navigate(['/concert', this.concert._id])
+  // }
 
 }

@@ -1,8 +1,0 @@
-{
-    "_id": "65a3f1a1e1b1c0001",
-    "name": "Ivan Oliver",
-    "email": "Ivan@gmail.com",
-    "password": "hashed_password",
-    "createdAt": "2025-01-01T00:00:00Z",
-    "updatedAt": "2025-01-18T00:00:00Z"
-}

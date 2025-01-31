@@ -16,14 +16,14 @@ export class SeeBandsDetailsComponent {
 
   constructor(private route: ActivatedRoute, public concertsService: ConcertsService) { }
 
-  ngOnInit(): void {
-    const bandId = this.route.snapshot.paramMap.get('id');
+  // ngOnInit(): void {
+  //   const bandId = this.route.snapshot.paramMap.get('id');
 
-    if (bandId) {
-      this.concertsService.getBandById(bandId).subscribe({
-        next: (data) => this.band = data,
-        error: (err) => console.error('Error cargando la banda:', err)
-      });
-    }
-  }
+  //   if (bandId) {
+  //     this.concertsService.getBandById(bandId).subscribe({
+  //       next: (data) => this.band = data,
+  //       error: (err) => console.error('Error cargando la banda:', err)
+  //     });
+  //   }
+  // }
 }
