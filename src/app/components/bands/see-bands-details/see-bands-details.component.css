@@ -1,3 +1,4 @@
+/* Estilos generales */
 .band-profile {
     display: flex;
     flex-direction: column;
@@ -61,8 +62,115 @@
     margin-top: 20px;
 }
 
-@media (max-width: 768px) {
-    .band-hero {
-        width: 90%;
+/* Sección de conciertos */
+.concerts-section {
+    margin: 40px 0;
+    text-align: center;
+
+    h2 {
+        color: #ff00ff;
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+}
+
+/* Contenedor de las tarjetas */
+.concerts-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 tarjetas por fila */
+    gap: 20px;
+    padding: 20px;
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 tarjetas por fila en pantallas más pequeñas */
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 tarjetas por fila en tablets */
+    }
+
+    @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+        /* 1 tarjeta por fila en móviles */
+    }
+}
+
+/* Tarjetas de conciertos */
+.concert-card {
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    /* Para que la imagen no sobresalga */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 15px rgba(255, 0, 255, 0.3);
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 6px 20px rgba(255, 0, 255, 0.5);
+        border-color: #ff00ff;
+    }
+
+    img {
+        width: 100%;
+        height: 200px;
+        /* Altura fija para todas las imágenes */
+        object-fit: cover;
+        /* Ajusta la imagen sin distorsionarla */
+        border-bottom: 2px solid #ff00ff;
+        /* Línea decorativa */
+    }
+
+    .card-content {
+        padding: 15px;
+        flex-grow: 1;
+        /* Para que el contenido ocupe el espacio restante */
+
+        h3 {
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #ddd;
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        .date {
+            font-weight: bold;
+            color: #ff00ff;
+        }
+
+        .location {
+            font-style: italic;
+        }
+    }
+
+    &.upcoming {
+        border-left: 5px solid #00ff00;
+        /* Verde para futuros */
+    }
+
+    &.past {
+        border-left: 5px solid #ff0000;
+        /* Rojo para pasados */
+        opacity: 0.7;
+
+        .ended-message {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #ff4444;
+            margin-top: 10px;
+        }
     }
 }
