@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { BandList } from '../interfaces/band';
-import { BandPublic } from '../interfaces/band-profil-public';
+import { BandPublic } from '../interfaces/band-profile-public';
 
 @Injectable({
   providedIn: 'root'

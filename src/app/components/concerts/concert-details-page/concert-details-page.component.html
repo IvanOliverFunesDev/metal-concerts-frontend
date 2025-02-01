@@ -2,9 +2,10 @@
     <div class="concert-image-container">
         <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
 
-        <div class="band-info-container" (click)="goToDetails()">
+        <div class="band-info-container" (click)="goToDetailsBand()">
             <div class="band-image-container">
-                <img class="band-image" [src]="concert.band.image" alt="{{ concert.band.bandName }}">
+                <img class="band-image" [src]="concert.band.image || 'noImageBand.png'"
+                    alt="{{ concert.band.bandName }}">
             </div>
 
         </div>
@@ -14,6 +15,8 @@
         <h1 class="concert-title">{{ concert.title }}</h1>
         <p class="concert-description">{{ concert.description }}</p>
         <p class="concert-description">{{ concert.band.genre }}</p>
+        <p class="concert-description">{{ concert.band.subscribersCount }}</p>
+
         <p class="concert-date">{{ concert.date | date: 'fullDate' }}</p>
     </div>
 </div>
@@ -21,12 +24,14 @@
 <div *ngIf="relatedConcerts.length > 0" class="related-concerts">
     <h2>🎸 Conciertos Relacionados</h2>
     <div class="related-concerts-container">
-        <div class="related-concert-card" *ngFor="let related of relatedConcerts">
+        <div class="related-concert-card" *ngFor="let related of relatedConcerts" (click)="goToDetails(related)">
             <img [src]="related.image || 'noImage.png'" alt="{{ related.title }}">
             <div class="related-concert-info">
                 <h3>{{ related.title }}</h3>
+                <h3>{{ related.id }}</h3>
                 <p>{{ related.date | date: 'fullDate' }}</p>
                 <p>{{ related.location }}</p>
+                <p>{{ related.description}}</p>
                 <p>Banda: {{ related.band.bandName }}</p>
             </div>
         </div>

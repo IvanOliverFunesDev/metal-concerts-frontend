@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { Concert } from '../interfaces/concert';
+import { Concert, ConcertDetails } from '../interfaces/concert';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +22,12 @@ export class ConcertsService {
     );
   }
 
-  getConcertById(id: string): Observable<Concert | null> {
-    return this.http.get<{ success: boolean, message: string, data: Concert }>(`${this.apiUrl}/${id}`).pipe(
+  getConcertById(id: string): Observable<ConcertDetails | null> {
+    return this.http.get<{ success: boolean, message: string, data: ConcertDetails }>(`${this.apiUrl}/${id}`).pipe(
       map(response => response.data),
       catchError(error => {
         console.error('Error obteniendo conciertos:', error);
-        return of(null);
+        return of(null); // 🔥 Devolvemos null en caso de error
       })
     );
   }
