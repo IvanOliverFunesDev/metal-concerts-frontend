@@ -1,8 +1,7 @@
 <style>
     .navbar {
         background-color: #000 !important;
-        padding: 60px 20px;
-
+        padding: 15px 20px;
     }
 
     .offcanvas {
@@ -11,6 +10,10 @@
 
     .navbar-nav .nav-link {
         color: #ff00ff !important;
+        font-size: 1.2rem;
+        /* Aumentamos tamaño */
+        padding: 10px 15px;
+        /* Más margen */
         transition: all 0.3s ease-in-out;
     }
 
@@ -31,7 +34,8 @@
 
     .navbar-brand {
         color: #ff00ff !important;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
+        /* Más grande */
         font-weight: bold;
         transition: all 0.3s ease-in-out;
     }
@@ -54,21 +58,95 @@
     }
 
     .navbar-space {
-        height: 160px;
+        height: 70px;
     }
 
     .dropdown-menu-dark {
         background-color: #000;
     }
+
+    /* Alineamos el usuario a la derecha en escritorio */
+    .navbar-user {
+        margin-left: auto;
+    }
+
+    /* Modo escritorio */
+    @media (min-width: 992px) {
+        .navbar-toggler {
+            display: none !important;
+        }
+
+        .offcanvas {
+            display: none !important;
+        }
+
+        .navbar-collapse {
+            display: flex !important;
+            justify-content: center;
+        }
+
+        .navbar-nav {
+            gap: 30px;
+            /* Espacio entre enlaces */
+        }
+    }
+
+    /* Modo responsive */
+    @media (max-width: 991px) {
+        .navbar-collapse {
+            display: none !important;
+        }
+
+        .navbar-user {
+            display: none !important;
+            /* Ocultamos el usuario en navbar normal */
+        }
+    }
 </style>
 
-<nav class="navbar navbar-dark bg-black fixed-top">
+<nav class="navbar navbar-dark bg-black fixed-top navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" routerLink="">SoulHaven</a>
+
+        <!-- Menú en escritorio -->
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="bands-page">Bands</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="concerts-page">Concerts</a>
+                </li>
+            </ul>
+
+            <!-- Usuario alineado a la derecha -->
+            <ul class="navbar-nav navbar-user">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Nombre User
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Guardados</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Botón hamburguesa en responsive -->
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
             aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Menú en móvil -->
         <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
             aria-labelledby="offcanvasDarkNavbarLabel">
             <div class="offcanvas-header">
@@ -83,14 +161,16 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" routerLink="bands-page">Bands</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" routerLink="concerts-page">Concerts</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton"
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButtonMobile"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Nombre User <!-- {{user.name}}   -->
+                            Nombre User
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark " aria-labelledby="dropdownMenuButton">
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButtonMobile">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
