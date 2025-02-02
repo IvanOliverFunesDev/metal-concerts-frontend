@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConcertsService } from '../../../services/concerts.service';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
-import { ConcertDetails, RelatedConcert } from '../../../interfaces/concert';
+import { ConcertDetails, RelatedConcert, ConcertsOfSameBand } from '../../../interfaces/concert';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,7 +13,8 @@ import { Subscription } from 'rxjs';
 })
 export class ConcertDetailsPageComponent implements OnInit {
   concert!: ConcertDetails | null;
-  relatedConcerts: RelatedConcert[] = []
+  relatedConcerts: RelatedConcert[] = [];
+  concertsOfSameBand: ConcertsOfSameBand[] = []
   isLoading: boolean = true;
   errorMessage: string | null = null;
   private routeSub!: Subscription; // 🔥 Guardamos la suscripción a la ruta
@@ -37,6 +38,7 @@ export class ConcertDetailsPageComponent implements OnInit {
         if (data) {
           this.concert = data;
           this.relatedConcerts = data.relatedConcerts;
+          this.concertsOfSameBand = data.concertsOfSameBand;
         } else {
           this.errorMessage = '❌ No se encontraron detalles del concierto.';
         }
@@ -73,7 +75,4 @@ export class ConcertDetailsPageComponent implements OnInit {
       this.routeSub.unsubscribe();
     }
   }
-
-
-
 }

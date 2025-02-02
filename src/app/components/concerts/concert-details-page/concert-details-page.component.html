@@ -7,7 +7,6 @@
                 <img class="band-image" [src]="concert.band.image || 'noImageBand.png'"
                     alt="{{ concert.band.bandName }}">
             </div>
-
         </div>
     </div>
 
@@ -28,7 +27,6 @@
             <img [src]="related.image || 'noImage.png'" alt="{{ related.title }}">
             <div class="related-concert-info">
                 <h3>{{ related.title }}</h3>
-                <h3>{{ related.id }}</h3>
                 <p>{{ related.date | date: 'fullDate' }}</p>
                 <p>{{ related.location }}</p>
                 <p>{{ related.description}}</p>
@@ -36,6 +34,13 @@
             </div>
         </div>
     </div>
+</div>
+<h2>Conciertos de la misma banda</h2>
+
+<div *ngFor="let sameBandConcert of concertsOfSameBand">
+    <h3>{{ sameBandConcert.title }}</h3>
+    <p>Fecha: {{ sameBandConcert.date | date }}</p>
+    <img [src]="sameBandConcert.image || 'noImage.png'" alt="{{ sameBandConcert.title }}" />
 </div>
 
 <p *ngIf="!concert">Concierto no encontrado</p>
