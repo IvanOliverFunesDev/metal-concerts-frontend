@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 100px;
+    gap: 40px;
     margin-top: 20px;
 }
 
@@ -26,7 +26,6 @@ h2 {
 }
 
 h2::before {
-    content: "";
     display: block;
     width: 50%;
     max-width: 500px;

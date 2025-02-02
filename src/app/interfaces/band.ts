@@ -8,3 +8,10 @@ export interface BandList {
     averageRating: number;
     totalReviews: number;
 }
+
+export interface BandPopulate {
+    id: string;
+    bandName: string;
+    genre: string;
+    subscribersCount: number;
+}
