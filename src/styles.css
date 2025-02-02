@@ -1,12 +1,10 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
-
-
-main{
-    min-height: calc(100vh - 60px - 255.33px );
+main {
+    min-height: calc(100vh - 60px - 255.33px);
     background-color: #121212;
 }
 

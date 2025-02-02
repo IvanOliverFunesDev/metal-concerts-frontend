@@ -12,11 +12,36 @@ export class ConcertsService {
 
   constructor(private http: HttpClient) { }
 
-  getConcertsAll(): Observable<Concert[]> {
-    return this.http.get<{ success: boolean, message: string, data: Concert[] }>(this.apiUrl).pipe(
-      map(response => response.data), // Aquí extraemos solo el array de conciertos
+  getConcertsAll(filters: { title?: string; location?: string; date?: string; bandName?: string; genre?: string } = {}): Observable<Concert[]> {
+    let params = new HttpParams();
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) params = params.set(key, value);
+    })
+    return this.http.get<{ success: boolean, message: string, data: Concert[] }>(`${this.apiUrl}`, { params }).pipe(
+      map(response => response.data),
       catchError(error => {
         console.error('Error obteniendo conciertos:', error);
+        return of([]);
+      })
+    );
+  }
+
+  getGenresConcerts(): Observable<string[]> {
+    return this.http.get<{ success: boolean, message: string, data: string[] }>(`${this.apiUrl}/genres`).pipe(
+      map(response => response.data),
+      catchError(error => {
+        console.error('Error obteniendo generos:', error);
+        return of([]);
+      })
+    );
+  }
+
+  getLocationsConcerts(): Observable<string[]> {
+    return this.http.get<{ success: boolean, message: string, data: string[] }>(`${this.apiUrl}/locations`).pipe(
+      map(response => response.data),
+      catchError(error => {
+        console.error('Error obteniendo localizaciones:', error);
         return of([]);
       })
     );
@@ -27,14 +52,14 @@ export class ConcertsService {
       map(response => response.data),
       catchError(error => {
         console.error('Error obteniendo conciertos:', error);
-        return of(null); // 🔥 Devolvemos null en caso de error
+        return of(null);
       })
     );
   }
 
   getConcertsUpcoming(): Observable<Concert[]> {
     return this.http.get<{ success: boolean, message: string, data: Concert[] }>(`${this.apiUrl}/recent`).pipe(
-      map(response => response.data), // Aquí extraemos solo el array de conciertos
+      map(response => response.data),
       catchError(error => {
         console.error('Error obteniendo conciertos:', error);
         return of([]);
@@ -44,7 +69,7 @@ export class ConcertsService {
 
   getConcertsHighlighted(): Observable<Concert[]> {
     return this.http.get<{ success: boolean, message: string, data: Concert[] }>(`${this.apiUrl}/highlighted`).pipe(
-      map(response => response.data), // Aquí extraemos solo el array de conciertos
+      map(response => response.data),
       catchError(error => {
         console.error('Error obteniendo conciertos:', error);
         return of([]);

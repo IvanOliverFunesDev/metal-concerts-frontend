@@ -19,6 +19,14 @@ export interface ConcertDetails {
     band: BandList;
     averageRating: number;
     relatedConcerts: RelatedConcert[];
+    concertsOfSameBand: ConcertsOfSameBand[];
+}
+
+export interface ConcertsOfSameBand {
+    id: string;
+    title: string;
+    date: Date;
+    image: string;
 }
 
 export interface RelatedConcert {
