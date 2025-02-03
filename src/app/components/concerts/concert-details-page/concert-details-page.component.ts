@@ -60,15 +60,15 @@ export class ConcertDetailsPageComponent implements OnInit {
     }
   }
 
-  goToDetails(concert: RelatedConcert) {
+  goToDetails(concert: RelatedConcert | ConcertsOfSameBand) { // para que le sirva los dos tipos de datos. PENSAR EN EXTENDER INTERFACES EN EL FUTURO
     if (!concert || !concert.id) {
       console.error('El objeto concert o su ID es undefined o null');
       return;
     }
-
     console.log('Navegando a:', `/concert/${concert.id}`);
     this.router.navigate([`/concert`, concert.id]).catch(err => console.error('Error en la navegación:', err));
   }
+
   // 🔥 Liberamos la suscripción cuando el componente se destruye
   ngOnDestroy(): void {
     if (this.routeSub) {
