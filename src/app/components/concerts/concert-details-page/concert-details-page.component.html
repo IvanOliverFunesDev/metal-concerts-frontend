@@ -35,7 +35,7 @@
 <div *ngIf="relatedConcerts.length > 0" class="related-concerts">
     <h2>
         Más de {{concert?.band?.bandName}}
-        <a class="view-discography" routerLink="/discography">Ver discografía</a>
+        <a class="view-discography" (click)="goToDetailsBand()">Ver discografía</a>
     </h2>
     <div class="related-concerts-container">
         <div class="related-concert-card" *ngFor="let sameBandConcert of concertsOfSameBand"
