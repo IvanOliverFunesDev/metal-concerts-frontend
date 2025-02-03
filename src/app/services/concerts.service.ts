@@ -67,8 +67,11 @@ export class ConcertsService {
     );
   }
 
-  getConcertsHighlighted(): Observable<Concert[]> {
-    return this.http.get<{ success: boolean, message: string, data: Concert[] }>(`${this.apiUrl}/highlighted`).pipe(
+  getMostPopularConcerts(limit: number = 0): Observable<Concert[]> {
+    const params = new HttpParams()
+      .set('limit', limit > 0 ? limit.toString() : 'all');
+
+    return this.http.get<{ success: boolean, message: string, data: Concert[] }>(`${this.apiUrl}/most-popular`, { params }).pipe(
       map(response => response.data),
       catchError(error => {
         console.error('Error obteniendo conciertos:', error);
@@ -77,6 +80,18 @@ export class ConcertsService {
     );
   }
 
+  getTopRatedConcerts(limit: number = 0): Observable<Concert[]> {
+    const params = new HttpParams()
+      .set('limit', limit > 0 ? limit.toString() : 'all');
+
+    return this.http.get<{ success: boolean, message: string, data: Concert[] }>(`${this.apiUrl}/top-rated`, { params }).pipe(
+      map(response => response.data),
+      catchError(error => {
+        console.error('Error obteniendo conciertos:', error);
+        return of([]);
+      })
+    );
+  }
 }
 
 

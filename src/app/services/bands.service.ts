@@ -43,6 +43,18 @@ export class BandsService {
       })
     );
   }
+  getBandsTopRated(limit: number = 0): Observable<BandList[]> {
+    const params = new HttpParams()
+      .set('limit', limit > 0 ? limit.toString() : 'all');
+
+    return this.http.get<{ success: boolean, message: string, data: BandList[] }>(`${this.apiUrl}/top-rated`, { params }).pipe(
+      map(response => response.data),
+      catchError(error => {
+        console.log('Error obteniendo bandas populares:', error);
+        return of([]);
+      })
+    );
+  }
 }
 
 

@@ -10,7 +10,6 @@
             <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
         </select>
     </form>
-
     <app-concerts-list [fetchData]="concertsService.getConcertsAll.bind(concertsService)" [filters]="filterForm.value">
     </app-concerts-list>
 </main>

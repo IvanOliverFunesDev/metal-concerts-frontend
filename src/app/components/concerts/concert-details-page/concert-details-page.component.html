@@ -1,22 +1,20 @@
+<br>
 <div *ngIf="concert" class="concert-detail">
     <div class="concert-image-container">
-        <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
-
-        <div class="band-info-container" (click)="goToDetailsBand()">
-            <div class="band-image-container">
-                <img class="band-image" [src]="concert.band.image || 'noImageBand.png'"
-                    alt="{{ concert.band.bandName }}">
-            </div>
-        </div>
+        <img [src]="concert.image || 'noImage.png'" alt="{{ concert.title }}">
     </div>
 
     <div class="concert-info">
+        <p>Concert</p>
         <h1 class="concert-title">{{ concert.title }}</h1>
-        <p class="concert-description">{{ concert.description }}</p>
-        <p class="concert-description">{{ concert.band.genre }}</p>
-        <p class="concert-description">{{ concert.band.subscribersCount }}</p>
 
-        <p class="concert-date">{{ concert.date | date: 'fullDate' }}</p>
+        <div class="concert-band-container">
+            <div class="band-image-container">
+                <img class="band-image" [src]="concert.band.image || 'noImageBand.png'"
+                    alt="{{ concert.band.bandName }}" (click)="goToDetailsBand()">
+            </div>
+            <p class="band-name" (click)="goToDetailsBand()">{{ concert.band.bandName }}</p>
+        </div>
     </div>
 </div>
 
@@ -29,18 +27,26 @@
                 <h3>{{ related.title }}</h3>
                 <p>{{ related.date | date: 'fullDate' }}</p>
                 <p>{{ related.location }}</p>
-                <p>{{ related.description}}</p>
                 <p>Banda: {{ related.band.bandName }}</p>
             </div>
         </div>
     </div>
 </div>
-<h2>Conciertos de la misma banda</h2>
-
-<div *ngFor="let sameBandConcert of concertsOfSameBand">
-    <h3>{{ sameBandConcert.title }}</h3>
-    <p>Fecha: {{ sameBandConcert.date | date }}</p>
-    <img [src]="sameBandConcert.image || 'noImage.png'" alt="{{ sameBandConcert.title }}" />
+<div *ngIf="relatedConcerts.length > 0" class="related-concerts">
+    <h2>
+        Más de {{concert?.band?.bandName}}
+        <a class="view-discography" routerLink="/discography">Ver discografía</a>
+    </h2>
+    <div class="related-concerts-container">
+        <div class="related-concert-card" *ngFor="let sameBandConcert of concertsOfSameBand"
+            (click)="goToDetails(sameBandConcert)">
+            <img [src]="sameBandConcert.image || 'noImage.png'" alt="{{ sameBandConcert.title }}">
+            <div class="related-concert-info">
+                <h3>{{ sameBandConcert.title }}</h3>
+                <p>{{ sameBandConcert.date | date: 'd MMM y' }}</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <p *ngIf="!concert">Concierto no encontrado</p>
