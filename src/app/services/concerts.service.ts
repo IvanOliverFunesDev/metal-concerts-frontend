@@ -8,7 +8,7 @@ import { Concert, ConcertDetails } from '../interfaces/concert';
 })
 export class ConcertsService {
 
-  private apiUrl = 'http://localhost:3000/api/concerts';
+  private apiUrl = 'https://metal-concerts-backend.onrender.com/api/concerts';
 
   constructor(private http: HttpClient) { }
 

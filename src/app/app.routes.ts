@@ -13,7 +13,7 @@ export const routes: Routes = [
     {
         path: '', component: MainComponent, children: [
             {
-                path: '', component: HomePageComponent
+                path: 'home', component: HomePageComponent
             },
             {
                 path: 'concerts-page', component: ConcertsPageComponent
@@ -27,6 +27,9 @@ export const routes: Routes = [
             {
                 path: 'band/:id', component: SeeBandsDetailsComponent
             },
+            {
+                path: '', redirectTo: 'home', pathMatch: 'full'
+            }
         ],
     },
     {
