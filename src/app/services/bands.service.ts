@@ -8,7 +8,7 @@ import { BandPublic } from '../interfaces/band-profile-public';
   providedIn: 'root'
 })
 export class BandsService {
-  private apiUrl = 'http://localhost:3000/api/bands';
+  private apiUrl = 'https://metal-concerts-backend.onrender.com/api/bands';
   constructor(private http: HttpClient) { }
 
   getBandsAll(): Observable<BandList[]> {
