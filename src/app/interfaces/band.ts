@@ -9,9 +9,9 @@ export interface BandList {
     totalReviews: number;
 }
 
-export interface BandPopulate {
-    id: string;
-    bandName: string;
-    genre: string;
-    subscribersCount: number;
-}
+// export interface BandPopulate {
+//     id: string;
+//     bandName: string;
+//     genre: string;
+//     subscribersCount: number;
+// }
