@@ -1,0 +1,31 @@
+<div class="body">
+    <div class="ring">
+        <i style="--clr: #00f0a;"></i>
+        <i style="--clr: #ff0057;"></i>
+        <i style="--clr: #fffd44;"></i>
+        <div class="login">
+            <h2>Login</h2>
+            <form [formGroup]="myForm" (ngSubmit)="login()">
+                <div class="inputBx">
+                    <input type="text" placeholder="Email" formControlName="email">
+                    @if (isNotValidField('email')) { <!-- para mostrar los errores -->
+                    <p class="error">El email es requerido y debe de tener un formato de email</p>
+                    }
+                </div>
+                <div class="inputBx">
+                    <input type="password" placeholder="Password" formControlName="password">
+                    @if (isNotValidField('password')) { <!-- para mostrar los errores -->
+                    <p class="error">La password es requerido y debe de tener un minimo de 6 caracteres</p>
+                    }
+                </div>
+                <div class=" inputBx">
+                    <input type="submit" value="Sign in" [disabled]="myForm.invalid">
+                </div>
+            </form>
+            <div class="links">
+                <a href="#">Forget Password</a>
+                <a href="#">Signup</a>
+            </div>
+        </div>
+    </div>
+</div>
