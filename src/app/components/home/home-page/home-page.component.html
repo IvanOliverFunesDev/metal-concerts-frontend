@@ -6,8 +6,8 @@
         title="Concerts of most popular bands"></app-concerts-list>
     <app-concerts-list [fetchData]="concertsService.getTopRatedConcerts.bind(concertsService,4)"
         title="Concerts of top rated bands"></app-concerts-list>
-    <app-bands-list [fetchData]="bandsService.getBandsPopular.bind(bandsService, 7)" title="Most popular bands">
+    <app-bands-list [fetchData]="bandsService.getBandsPopular.bind(bandsService, 5)" title="Most popular bands">
     </app-bands-list>
-    <app-bands-list [fetchData]="bandsService.getBandsTopRated.bind(bandsService,7)" title="Top rated bands">
+    <app-bands-list [fetchData]="bandsService.getBandsTopRated.bind(bandsService,5)" title="Top rated bands">
     </app-bands-list>
 </main>
