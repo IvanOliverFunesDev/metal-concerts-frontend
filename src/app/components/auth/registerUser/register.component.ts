@@ -1,46 +1,49 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
+
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   imports: [FormsModule, ReactiveFormsModule, RouterLink],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
-export class LoginComponent {
+export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     this.myForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      username: ['', [Validators.required]]
     })
   }
   myForm: FormGroup;
-  login() {
+  registerUser() {
     if (this.myForm.valid) {
-      this.authService.login(this.myForm.controls['email'].value, this.myForm.controls['password'].value).subscribe({
+      this.authService.registerUSer(this.myForm.controls['email'].value, this.myForm.controls['password'].value, this.myForm.controls['username'].value).subscribe({
         next: (res) => {
-          console.log("Respuesta backend:", res);
+          console.log("Respuesta del backend:", res);
           Swal.fire({
-            title: "Iniciar Sesion",
+            title: "Registrar Nuevo Usuario",
             icon: "success",
-            text: "Has iniciado sesión correctamente"
+            text: "Te has registrado correctamente"
           }).then(() => {
-            this.router.navigateByUrl("/home");
+            this.router.navigateByUrl("/login");
           });
         },
         error: (err) => {
           Swal.fire({
-            title: "ups",
+            title: "Ups",
             icon: "error",
             text: err.error.message
           })
         }
       })
-    } else {
-      this.myForm.markAllAsTouched();
+    }
+    else {
+      this.myForm.markAllAsTouched()
     }
   }
   isNotValidField(field: string) { //funcion que comprueba si un campo es valido

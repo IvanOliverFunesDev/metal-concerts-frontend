@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { User } from '../interfaces/user';
-import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/auth';
-  private apiUrl = 'http://localhost:3000/api/v1/auth';
+  private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/auth';
+  // private apiUrl = 'http://localhost:3000/api/v1/auth';
   private userSubject = new BehaviorSubject<User | null>(null);
   user$ = this.userSubject.asObservable();
 
@@ -33,6 +32,16 @@ export class AuthService {
       { withCredentials: true })
       .pipe(map(response => response.data), tap(user => {
         this.userSubject.next(user); console.log("✅ Usuario logueado:", user); // 🔥 PRUEBA
+      }));
+  }
+
+  registerUSer(email: string, password: string, username: string): Observable<User> {
+    return this.http.post<{ success: boolean; message: string; data: User }>(
+      `${this.apiUrl}/register/user`,
+      { email, password, username },
+      { withCredentials: true })
+      .pipe(map(response => response.data), tap(user => {
+        this.userSubject.next(user); console.log("✅ Usuario Registrado:", user); // 🔥 PRUEBA
       }));
   }
 

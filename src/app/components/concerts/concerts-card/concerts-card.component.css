@@ -1,6 +1,6 @@
 .card {
     position: relative;
-    width: 300px;
+    width: 200px;
     text-align: center;
     background-color: #222;
     overflow: hidden;
@@ -19,7 +19,7 @@
     position: absolute;
     width: 100%;
     color: transparent;
-    font-size: 16px;
+    font-size: 6px;
     font-weight: bold;
     transition: color 0.3s ease-in-out;
 }

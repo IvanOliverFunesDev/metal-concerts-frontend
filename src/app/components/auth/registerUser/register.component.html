@@ -4,8 +4,14 @@
         <i style="--clr: #ff00bb;"></i>
         <i style="--clr: #ff00bb;"></i>
         <div class="login">
-            <h2>Login</h2>
-            <form [formGroup]="myForm" (ngSubmit)="login()">
+            <h2>Register</h2>
+            <form [formGroup]="myForm" (ngSubmit)="registerUser()">
+                <div class="inputBx">
+                    <input type="text" placeholder="Username" formControlName="username">
+                    @if (isNotValidField('username')) { <!-- para mostrar los errores -->
+                    <p class="error">El username es requerido</p>
+                    }
+                </div>
                 <div class="inputBx">
                     <input type="text" placeholder="Email" formControlName="email">
                     @if (isNotValidField('email')) { <!-- para mostrar los errores -->
@@ -15,16 +21,15 @@
                 <div class="inputBx">
                     <input type="password" placeholder="Password" formControlName="password">
                     @if (isNotValidField('password')) { <!-- para mostrar los errores -->
-                    <p class="error">La password es requerido</p>
+                    <p class="error">La password es requerido y debe de tener un minimo de 6 caracteres</p>
                     }
                 </div>
                 <div class=" inputBx">
-                    <input type="submit" value="Sign in">
+                    <input type="submit" value="Sign Up">
                 </div>
             </form>
             <div class="links">
-                <a href="#">Forget Password</a>
-                <a routerLink="/register">Signup</a>
+                <a routerLink="/login">Sign In</a>
             </div>
         </div>
     </div>

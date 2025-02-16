@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BandPublic } from '../../../interfaces/band-profile-public';
+import { BandPublic } from '../../../interfaces/band';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { BandsService } from '../../../services/bands.service';
