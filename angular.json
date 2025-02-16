@@ -38,7 +38,7 @@
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
             "server": "src/main.server.ts",
-            "outputMode": "applications",
+            "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
             }
