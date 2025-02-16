@@ -1,9 +1,0 @@
-{
-    "routes": [
-        {
-            "src": "/concert/.*",
-            "dest": "/index.html",
-            "status": 404
-        }
-    ]
-}
