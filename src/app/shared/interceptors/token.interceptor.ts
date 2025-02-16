@@ -2,8 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const cookieService = inject(CookieService);
@@ -29,9 +28,9 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
         console.warn('⚠️ No hay token disponible. Continuando sin autenticación.');
-        return EMPTY; // Evita que el error rompa la app
+        return throwError(() => new Error('Unauthorized')); // ✅ Devuelve un error 401 personalizado
       }
-      return EMPTY;
+      return throwError(() => error); // ✅ Deja pasar los demás errores
     })
   );
 };
