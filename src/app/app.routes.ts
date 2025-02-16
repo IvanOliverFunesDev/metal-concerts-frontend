@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { HomePageComponent } from './components/home/home-page/home-page.component';
 import { MainComponent } from './components/main/main.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { RegisterComponent } from './components/auth/register/register.component';
+import { RegisterComponent } from './components/auth/registerUser/register.component';
 import { ConcertsPageComponent } from './components/concerts/concerts-page/concerts-page.component';
 import { BandsPageComponent } from './components/bands/bands-page/bands-page.component';
 import { ConcertDetailsPageComponent } from './components/concerts/concert-details-page/concert-details-page.component';
