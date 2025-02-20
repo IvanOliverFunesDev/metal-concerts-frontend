@@ -7,6 +7,7 @@ import { ConcertsPageComponent } from './components/concerts/concerts-page/conce
 import { BandsPageComponent } from './components/bands/bands-page/bands-page.component';
 import { ConcertDetailsPageComponent } from './components/concerts/concert-details-page/concert-details-page.component';
 import { SeeBandsDetailsComponent } from './components/bands/see-bands-details/see-bands-details.component';
+import { RegisterBandComponent } from './components/auth/register-band/register-band.component';
 
 
 export const routes: Routes = [
@@ -37,6 +38,10 @@ export const routes: Routes = [
     },
     {
         path: 'register', component: RegisterComponent
-    }
+    },
+    {
+        path: 'registerBand', component: RegisterBandComponent
+    },
+
 
 ];

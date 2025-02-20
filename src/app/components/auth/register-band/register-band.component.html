@@ -5,35 +5,43 @@
         <i style="--clr: #ff00bb;"></i>
         <div class="login">
             <h2>Register</h2>
-            <form [formGroup]="myForm" (ngSubmit)="registerUser()">
+            <form [formGroup]="myForm" (ngSubmit)="registerBand()">
                 <div class="inputBx">
-                    <input type="text" placeholder="Username" formControlName="username">
-                    @if (isNotValidField('username')) { <!-- para mostrar los errores -->
-                    <p class="error">El username es requerido</p>
+                    <input type="text" placeholder="bandName" formControlName="bandName">
+                    @if (isNotValidField('bandName')) { <!-- para mostrar los errores -->
+                    <p class="error">El bandName es requerido</p>
                     }
                 </div>
-                <br>
+                <div class="inputBx">
+                    <input type="text" placeholder="description" formControlName="description">
+                    @if (isNotValidField('description')) { <!-- para mostrar los errores -->
+                    <p class="error">El description es requerido</p>
+                    }
+                </div>
+                <div class="inputBx">
+                    <input type="text" placeholder="genre" formControlName="genre">
+                    @if (isNotValidField('genre')) { <!-- para mostrar los errores -->
+                    <p class="error">El genre es requerido</p>
+                    }
+                </div>
                 <div class="inputBx">
                     <input type="text" placeholder="Email" formControlName="email">
                     @if (isNotValidField('email')) { <!-- para mostrar los errores -->
                     <p class="error">El email es requerido y debe de tener un formato de email</p>
                     }
                 </div>
-                <br>
                 <div class="inputBx">
                     <input type="password" placeholder="Password" formControlName="password">
                     @if (isNotValidField('password')) { <!-- para mostrar los errores -->
                     <p class="error">La password es requerido y debe de tener un minimo de 6 caracteres</p>
                     }
                 </div>
-                <br>
                 <div class=" inputBx">
-                    <input type="submit" value="Create Account">
+                    <input type="submit" value="Sign Up">
                 </div>
             </form>
             <div class="links">
-                <a routerLink="/login">Log In</a>
-                <a routerLink="/registerBand">Are You a Band? Apply Here</a>
+                <a routerLink="/login">Sign In</a>
             </div>
         </div>
     </div>

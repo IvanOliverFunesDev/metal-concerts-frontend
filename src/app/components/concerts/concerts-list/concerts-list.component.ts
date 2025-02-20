@@ -42,8 +42,6 @@ export class ConcertsListComponent implements OnInit, OnDestroy, OnChanges {
       next: (data) => {
         this.concerts = data || [];
         this.hasConcerts = this.concerts.length > 0;
-        console.log('Conciertos recibidos:', data); // ✅ Ver qué conciertos nos devuelve el backend
-
       },
       error: (err) => {
         console.error('Error cargando conciertos:', err);

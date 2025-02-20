@@ -1,34 +1,47 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ConcertsService } from '../../../services/concerts.service';
 import { NgFor } from '@angular/common';
 import { BandsCardComponent } from "../bands-card/bands-card.component";
 import { BandList } from '../../../interfaces/band';
+import { BandsService } from '../../../services/bands.service';
 
 @Component({
   selector: 'app-bands-list',
+  standalone: true,
   imports: [NgFor, BandsCardComponent],
   templateUrl: './bands-list.component.html',
   styleUrl: './bands-list.component.css'
 })
-export class BandsListComponent implements OnInit, OnDestroy {
+export class BandsListComponent implements OnInit, OnChanges, OnDestroy {
   // Ahora `fetchData` devuelve un `Observable<>`, no un array directamente
-  @Input() fetchData!: () => Observable<BandList[]>; // Usa la interfaz Band
+  @Input() fetchData!: (filters?: any) => Observable<BandList[]>; // Usa la interfaz Band
+  @Input() filters: any = {};
   @Input() title: string = '';
 
   bands: BandList[] = [];
 
   private subscription!: Subscription;
 
-  constructor(private concertsService: ConcertsService) { }
+  constructor(private concertsService: ConcertsService, private bandsService: BandsService) { }
 
   ngOnInit(): void {
-    // Suscribirse al `Observable` que devuelve `fetchData()`
-    this.subscription = this.fetchData().subscribe({
+    this.loadBands();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['filters']) {
+      this.loadBands(); // 🔥 Si cambian los filtros, recarga los conciertos
+    }
+  }
+
+  loadBands(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe(); // 🔥 Evita múltiples suscripciones
+    }
+    this.subscription = this.fetchData(this.filters).subscribe({
       next: (data) => {
         this.bands = data;
-        console.log('Bandas en el listado:', this.bands);
-
       },
       error: (err) => {
         console.error('Error cargando conciertos:', err);
