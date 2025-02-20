@@ -12,19 +12,21 @@
                     <p class="error">El email es requerido y debe de tener un formato de email</p>
                     }
                 </div>
+                <br>
                 <div class="inputBx">
                     <input type="password" placeholder="Password" formControlName="password">
                     @if (isNotValidField('password')) { <!-- para mostrar los errores -->
                     <p class="error">La password es requerido</p>
                     }
                 </div>
+                <br>
                 <div class=" inputBx">
-                    <input type="submit" value="Sign in">
+                    <input type="submit" value="Log in">
                 </div>
             </form>
             <div class="links">
-                <a href="#">Forget Password</a>
-                <a routerLink="/register">Signup</a>
+                <a href="#">Forget Password?</a>
+                <a routerLink="/register">Create Account</a>
             </div>
         </div>
     </div>

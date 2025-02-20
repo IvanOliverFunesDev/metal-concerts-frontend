@@ -31,7 +31,7 @@ export class ConcertsPageComponent implements OnInit {
         this.genres = data;
         console.log(this.genres);
       },
-      error: (err) => console.error('Error cargando géneros:', err.message),
+      error: (err) => console.error('Error cargando géneros:', err.message)
     });
     this.concertsService.getLocationsConcerts().subscribe({
       next: (data) => {

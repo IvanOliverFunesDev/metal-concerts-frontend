@@ -91,7 +91,22 @@
 .login .links a {
     color: #fff;
     text-decoration: none;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    transition: color 0.3s ease;
+    background-image: linear-gradient(90deg, #fff, #ff00bb);
+    /* Blanco a azul */
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.5s ease-in-out;
 }
+
+.login .links a:hover {
+    background-position: -100%;
+}
+
 
 p {
     color: white;
