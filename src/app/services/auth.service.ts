@@ -80,8 +80,24 @@ export class AuthService {
     );
   }
 
-  verifyResetCode(email: string, code: number): Observable<any> {
+  verifyResetCode(email: string, code: string): Observable<any> {
+    return this.http.post<{ success: boolean, message: string }>(
+      `${this.apiUrl}/verify-reset-code`,
+      { email, code },
+      { withCredentials: true }
+    ).pipe(
+      tap(() => {
+        console.log("🚫 email enviado correctamente"); // 🔥 PRUEBA
+      })
+    );
+  }
 
+  resetPassword(email: string, code: string, newPassword: string, confirmPassword: string): Observable<any> {
+    return this.http.post<{ success: boolean, message: string }>(
+      `${this.apiUrl}/reset-password`,
+      { email, code, newPassword, confirmPassword },
+      { withCredentials: true }
+    )
   }
 
   getUser(): User | null {
