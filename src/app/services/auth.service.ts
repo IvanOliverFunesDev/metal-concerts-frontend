@@ -68,7 +68,37 @@ export class AuthService {
     );
   }
 
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post<{ success: boolean, message: string }>(
+      `${this.apiUrl}/forgot-password`,
+      { email },
+      { withCredentials: true }
+    ).pipe(
+      tap(() => {
+        console.log("🚫 email enviado correctamente"); // 🔥 PRUEBA
+      })
+    );
+  }
 
+  verifyResetCode(email: string, code: string): Observable<any> {
+    return this.http.post<{ success: boolean, message: string }>(
+      `${this.apiUrl}/verify-reset-code`,
+      { email, code },
+      { withCredentials: true }
+    ).pipe(
+      tap(() => {
+        console.log("🚫 email enviado correctamente"); // 🔥 PRUEBA
+      })
+    );
+  }
+
+  resetPassword(email: string, code: string, newPassword: string, confirmPassword: string): Observable<any> {
+    return this.http.post<{ success: boolean, message: string }>(
+      `${this.apiUrl}/reset-password`,
+      { email, code, newPassword, confirmPassword },
+      { withCredentials: true }
+    )
+  }
 
   getUser(): User | null {
     return this.userSubject.value; // Permite obtener el usuario sin suscribirse

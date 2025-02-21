@@ -4,12 +4,10 @@ import { ConcertsListComponent } from "../../concerts/concerts-list/concerts-lis
 import { ConcertsService } from '../../../services/concerts.service';
 import { BandsListComponent } from "../../bands/bands-list/bands-list.component";
 import { BandsService } from '../../../services/bands.service';
-import { NavbarComponent } from '../../layout/navbar/navbar.component';
-
 
 @Component({
   selector: 'app-home-page',
-  imports: [SliderComponent, ConcertsListComponent, BandsListComponent, NavbarComponent],
+  imports: [SliderComponent, ConcertsListComponent, BandsListComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
