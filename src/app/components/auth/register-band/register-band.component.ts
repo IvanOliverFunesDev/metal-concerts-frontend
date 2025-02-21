@@ -26,7 +26,6 @@ export class RegisterBandComponent {
     if (this.myForm.valid) {
       this.authService.registerBand(this.myForm.controls['email'].value, this.myForm.controls['password'].value, this.myForm.controls['bandName'].value, this.myForm.controls['description'].value, this.myForm.controls['genre'].value,).subscribe({
         next: (res) => {
-          console.log("Respuesta del backend:", res);
           Swal.fire({
             title: "Registro Completado",
             icon: "success",

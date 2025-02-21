@@ -24,7 +24,6 @@ export class RegisterComponent {
     if (this.myForm.valid) {
       this.authService.registerUSer(this.myForm.controls['email'].value, this.myForm.controls['password'].value, this.myForm.controls['username'].value).subscribe({
         next: (res) => {
-          console.log("Respuesta del backend:", res);
           Swal.fire({
             title: "Registrar Nuevo Usuario",
             icon: "success",

@@ -24,14 +24,12 @@ export class BandsPageComponent implements OnInit {
     this.concertsService.getGenresConcerts().subscribe({
       next: (data) => {
         this.genres = data;
-        console.log(this.genres);
       },
       error: (err) => console.error('Error cargando generos', err.message)
     });
   }
   applyFilters() {
     const filters = this.filterForm.value;
-    console.log('Filtros antes de limpiar:', filters);
 
     const cleanedFilters: any = {};
     if (filters.bandName) cleanedFilters.bandName = filters.bandName.trim();

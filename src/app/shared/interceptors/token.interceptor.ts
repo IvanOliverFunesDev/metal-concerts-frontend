@@ -22,7 +22,6 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
     });
   }
 
-  console.log('⏩ Interceptando petición:', modifiedReq);
 
   return next(modifiedReq).pipe(
     catchError((error: HttpErrorResponse) => {

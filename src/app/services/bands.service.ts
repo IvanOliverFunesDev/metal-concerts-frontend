@@ -15,16 +15,6 @@ export class BandsService {
 
   constructor(private http: HttpClient) { }
 
-  // getBandsAll(): Observable<BandList[]> {
-  //   return this.http.get<{ success: boolean, message: string, data: BandList[] }>(this.apiUrl).pipe(
-  //     map(response => response.data),
-  //     catchError(error => {
-  //       console.log('Error obtenido concierto:', error);
-  //       return of([])
-  //     })
-  //   )
-  // }
-
   getBandsAll(filters: { bandName?: string; genre?: string } = {}): Observable<BandList[]> {
     let params = new HttpParams;
 
@@ -56,7 +46,6 @@ export class BandsService {
     return this.http.get<{ success: boolean, message: string, data: BandList[] }>(`${this.apiUrl}/popular`, { params }).pipe(
       map(response => response.data),
       catchError(error => {
-        console.log('Error obteniendo bandas populares:', error);
         return of([]);
       })
     );
@@ -68,7 +57,6 @@ export class BandsService {
     return this.http.get<{ success: boolean, message: string, data: BandList[] }>(`${this.apiUrl}/top-rated`, { params }).pipe(
       map(response => response.data),
       catchError(error => {
-        console.log('Error obteniendo bandas populares:', error);
         return of([]);
       })
     );

@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
 import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
+export function passwordMatchValidator(): ValidatorFn {
+  return (form: AbstractControl): ValidationErrors | null => {
+    const newPassword = form.get('newPassword')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    return newPassword === confirmPassword ? null : { passwordsNotMatching: true };
+  };
+}
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
@@ -16,7 +24,7 @@ export class ForgotPasswordComponent {
   emailStored = '';
   codeStored = '';
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {
     this.myForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
     })
@@ -36,7 +44,7 @@ export class ForgotPasswordComponent {
           });
           this.myForm = this.fb.group({
             code: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
-          });
+          })
           this.currentStep++
         },
         error: (err) => {
@@ -63,7 +71,7 @@ export class ForgotPasswordComponent {
           this.myForm = this.fb.group({
             newPassword: ['', [Validators.required]],
             confirmPassword: ['', [Validators.required]],
-          });
+          }, { validators: passwordMatchValidator() });
           this.currentStep++
         },
         error: (err) => {
@@ -85,6 +93,8 @@ export class ForgotPasswordComponent {
             icon: "success",
             title: "Contraseña cambiada correctamente",
             text: response.message,
+          }).then(() => {
+            this.router.navigateByUrl("/home");
           });
         },
         error: (err) => {
@@ -98,7 +108,10 @@ export class ForgotPasswordComponent {
     }
   }
 
+
+
   isNotValidField(field: string) {
     return !this.myForm.controls[field].valid && this.myForm.controls[field].touched
   }
+
 }

@@ -22,7 +22,6 @@ export class AuthService {
       { withCredentials: true })
       .pipe(map(response => response.data), tap(user => {
         this.userSubject.next(user);
-        console.log("✅ Usuario verificado desde el token:", user); // 🔥 PRUEBA
       }));
   }
 
@@ -32,7 +31,7 @@ export class AuthService {
       { email, password },
       { withCredentials: true })
       .pipe(map(response => response.data), tap(user => {
-        this.userSubject.next(user); console.log("✅ Usuario logueado:", user); // 🔥 PRUEBA
+        this.userSubject.next(user);
       }));
   }
 
@@ -42,7 +41,7 @@ export class AuthService {
       { email, password, username },
       { withCredentials: true })
       .pipe(map(response => response.data), tap(user => {
-        this.userSubject.next(user); console.log("✅ Usuario Registrado:", user); // 🔥 PRUEBA
+        this.userSubject.next(user);
       }));
   }
 
@@ -52,7 +51,7 @@ export class AuthService {
       { email, password, bandName, description, genre },
       { withCredentials: true })
       .pipe(map(response => response.data), tap(user => {
-        this.userSubject.next(user); console.log("✅ En espera :", user); // 🔥 PRUEBA
+        this.userSubject.next(user);
       }));
   }
 

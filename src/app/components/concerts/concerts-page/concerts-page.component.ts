@@ -29,14 +29,12 @@ export class ConcertsPageComponent implements OnInit {
     this.concertsService.getGenresConcerts().subscribe({
       next: (data) => {
         this.genres = data;
-        console.log(this.genres);
       },
       error: (err) => console.error('Error cargando géneros:', err.message)
     });
     this.concertsService.getLocationsConcerts().subscribe({
       next: (data) => {
         this.locations = data;
-        console.log(this.locations);
       },
       error: (err) => console.error('Error cargando ubicaciones:', err)
     });
@@ -47,7 +45,6 @@ export class ConcertsPageComponent implements OnInit {
     const filters = this.filterForm.value; // 🔥 Obtenemos los valores del formulario
 
     // 🔥 Verificamos en consola qué valores estamos enviando
-    console.log('Filtros antes de limpiar:', filters);
 
     // 🔥 Validamos que solo enviamos los filtros con valores válidos
     const cleanedFilters: any = {};
@@ -55,7 +52,6 @@ export class ConcertsPageComponent implements OnInit {
     if (filters.location) cleanedFilters.location = filters.location.trim();
     if (filters.genre) cleanedFilters.genre = filters.genre.trim();
 
-    console.log('Filtros aplicados después de limpiar:', cleanedFilters); // ✅ Revisión final antes de enviar
 
     this.concertsService.getConcertsAll(cleanedFilters).subscribe({
       next: (data) => {
