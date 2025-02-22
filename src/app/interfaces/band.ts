@@ -1,5 +1,5 @@
 import { Concert } from "./concert";
-export interface BandList {
+export interface Band {
     id: string;
     bandName: string;
     image?: string
@@ -9,15 +9,13 @@ export interface BandList {
     averageRating: number;
     totalReviews: number;
 }
-export interface BandPublic {
-    id: string;
-    bandName: string;
-    image?: string;
-    genre: string;
-    description: string;
-    subscribersCount: number;
+export interface BandPublic extends Band {
     upcomingConcerts: Concert[];
-    averageRating: number;
-    totalReviews: number;
     pastConcerts: Concert[];
+}
+
+export interface SubscribedBand {
+    _id: string;
+    bandName: string;
+    genre: string;
 }

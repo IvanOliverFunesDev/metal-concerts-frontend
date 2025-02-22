@@ -1,1 +1,27 @@
-<p>profile works!</p>
+<div class="profile-container">
+    <div class="sidebar">
+        <h1>{{ user.username }}</h1>
+        <div class="profile-actions">
+            <button class="btn">
+                <i class="fas fa-user-edit"></i> Actualizar Información
+            </button>
+            <button class="btn">
+                <i class="fas fa-heart"></i> Conciertos Favoritos
+            </button>
+            <button class="btn">
+                <i class="fas fa-users"></i> Bandas Suscritas
+            </button>
+            <button class="btn" (click)="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            <button routerLink="/forgot-password" class="btn">
+                <i class="fas fa-key"></i> Forgot Password
+            </button>
+        </div>
+    </div>
+    <div class="profile-content">
+        <h2>Bienvenido, {{ user.username }}</h2>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Cuenta creada el:</strong> {{ user.createdAt | date:'longDate' }}</p>
+    </div>
+</div>

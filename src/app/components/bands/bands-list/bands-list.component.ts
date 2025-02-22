@@ -3,7 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { ConcertsService } from '../../../services/concerts.service';
 import { NgFor } from '@angular/common';
 import { BandsCardComponent } from "../bands-card/bands-card.component";
-import { BandList } from '../../../interfaces/band';
+import { Band } from '../../../interfaces/band';
 import { BandsService } from '../../../services/bands.service';
 
 @Component({
@@ -15,11 +15,11 @@ import { BandsService } from '../../../services/bands.service';
 })
 export class BandsListComponent implements OnInit, OnChanges, OnDestroy {
   // Ahora `fetchData` devuelve un `Observable<>`, no un array directamente
-  @Input() fetchData!: (filters?: any) => Observable<BandList[]>; // Usa la interfaz Band
+  @Input() fetchData!: (filters?: any) => Observable<Band[]>; // Usa la interfaz Band
   @Input() filters: any = {};
   @Input() title: string = '';
 
-  bands: BandList[] = [];
+  bands: Band[] = [];
 
   private subscription!: Subscription;
 

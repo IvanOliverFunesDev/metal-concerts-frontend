@@ -6,4 +6,10 @@ export interface User {
     email: string;
     createdAt: Date;
 }
-
+export interface ProfileUser {
+    id: string;
+    username: string;
+    email: string;
+    createdAt: Date;
+    updatedAt: Date;
+}

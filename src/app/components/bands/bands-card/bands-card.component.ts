@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BandList } from '../../../interfaces/band';
+import { Band } from '../../../interfaces/band';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './bands-card.component.css'
 })
 export class BandsCardComponent implements OnInit {
-  @Input() band!: BandList;
+  @Input() band!: Band;
 
   constructor(private router: Router) { }
 

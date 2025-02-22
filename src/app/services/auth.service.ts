@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
-import { User } from '../interfaces/user';
+import { ProfileUser, User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -97,6 +97,14 @@ export class AuthService {
       { email, code, newPassword, confirmPassword },
       { withCredentials: true }
     )
+  }
+
+  profileUser(): Observable<ProfileUser> {
+    return this.http.get<{ success: boolean, message: string, data: ProfileUser }>(`${this.apiUrl}/profile/user`,
+      { withCredentials: true }
+    ).pipe(
+      map(response => response.data)
+    );
   }
 
   getUser(): User | null {

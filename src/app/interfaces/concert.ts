@@ -1,4 +1,4 @@
-import { BandList } from "./band";
+import { Band } from "./band";
 
 export interface Concert {
     id: string;
@@ -7,16 +7,9 @@ export interface Concert {
     description: string;
     date: string;
     location: string;
-    band: BandList;
+    band: Band;
 }
-export interface ConcertDetails {
-    id: string;
-    title: string;
-    description: string;
-    date: string;
-    location: string;
-    image?: string;
-    band: BandList;
+export interface ConcertDetails extends Concert {
     averageRating: number;
     relatedConcerts: RelatedConcert[];
     concertsOfSameBand: ConcertsOfSameBand[];
@@ -43,4 +36,10 @@ export interface RelatedConcert {
         image?: string;
     };
 }
-
+export interface FavoriteConcert {
+    _id: string;
+    title: string;
+    date: Date;
+    location: string;
+    band: string;
+}

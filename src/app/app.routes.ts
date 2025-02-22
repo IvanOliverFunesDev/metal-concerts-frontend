@@ -9,6 +9,7 @@ import { ConcertDetailsPageComponent } from './components/concerts/concert-detai
 import { SeeBandsDetailsComponent } from './components/bands/see-bands-details/see-bands-details.component';
 import { RegisterBandComponent } from './components/auth/register-band/register-band.component';
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
+import { ProfileComponent } from './components/users/profile/profile.component';
 
 
 export const routes: Routes = [
@@ -31,7 +32,10 @@ export const routes: Routes = [
             },
             {
                 path: '', redirectTo: 'home', pathMatch: 'full'
-            }
+            },
+            {
+                path: 'profile', component: ProfileComponent
+            },
         ],
     },
     {

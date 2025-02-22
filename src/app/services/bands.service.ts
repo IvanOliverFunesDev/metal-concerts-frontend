@@ -1,10 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { BandList, BandPublic } from '../interfaces/band';
-import { Concert } from '../interfaces/concert';
-import { response } from 'express';
-import { error } from 'console';
+import { Band, BandPublic } from '../interfaces/band';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +12,13 @@ export class BandsService {
 
   constructor(private http: HttpClient) { }
 
-  getBandsAll(filters: { bandName?: string; genre?: string } = {}): Observable<BandList[]> {
+  getBandsAll(filters: { bandName?: string; genre?: string } = {}): Observable<Band[]> {
     let params = new HttpParams;
 
     Object.entries(filters).forEach(([key, value]) => {
       if (value) params = params.set(key, value);
     })
-    return this.http.get<{ success: boolean, message: string, data: BandList[] }>(`${this.apiUrl}`, { params }).pipe(
+    return this.http.get<{ success: boolean, message: string, data: Band[] }>(`${this.apiUrl}`, { params }).pipe(
       map(response => response.data),
       catchError(error => {
         console.error('Error obtenido bandas', error);
@@ -39,22 +36,22 @@ export class BandsService {
       })
     )
   }
-  getBandsPopular(limit: number = 0): Observable<BandList[]> {
+  getBandsPopular(limit: number = 0): Observable<Band[]> {
     const params = new HttpParams()
       .set('limit', limit > 0 ? limit.toString() : 'all');
 
-    return this.http.get<{ success: boolean, message: string, data: BandList[] }>(`${this.apiUrl}/popular`, { params }).pipe(
+    return this.http.get<{ success: boolean, message: string, data: Band[] }>(`${this.apiUrl}/popular`, { params }).pipe(
       map(response => response.data),
       catchError(error => {
         return of([]);
       })
     );
   }
-  getBandsTopRated(limit: number = 0): Observable<BandList[]> {
+  getBandsTopRated(limit: number = 0): Observable<Band[]> {
     const params = new HttpParams()
       .set('limit', limit > 0 ? limit.toString() : 'all');
 
-    return this.http.get<{ success: boolean, message: string, data: BandList[] }>(`${this.apiUrl}/top-rated`, { params }).pipe(
+    return this.http.get<{ success: boolean, message: string, data: Band[] }>(`${this.apiUrl}/top-rated`, { params }).pipe(
       map(response => response.data),
       catchError(error => {
         return of([]);
