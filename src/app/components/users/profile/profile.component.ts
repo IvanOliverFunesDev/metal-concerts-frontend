@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileUser } from '../../../interfaces/user';
 import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe, RouterLink, NgIf],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
     this.authService.profileUser().subscribe({
       next: (data) => {
         this.user = data;
+        console.log("usuario cargado:", this.user);
       },
       error: (err) => {
         Swal.fire({

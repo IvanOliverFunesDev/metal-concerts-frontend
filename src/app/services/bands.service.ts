@@ -7,8 +7,8 @@ import { Band, BandPublic } from '../interfaces/band';
   providedIn: 'root'
 })
 export class BandsService {
-  private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/bands';
-  // private apiUrl = 'http://localhost:3000/api/v1/bands';
+  // private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/bands';
+  private apiUrl = 'http://localhost:3000/api/v1/bands';
 
   constructor(private http: HttpClient) { }
 

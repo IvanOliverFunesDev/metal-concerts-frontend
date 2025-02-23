@@ -10,6 +10,7 @@ import { SeeBandsDetailsComponent } from './components/bands/see-bands-details/s
 import { RegisterBandComponent } from './components/auth/register-band/register-band.component';
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 import { ProfileComponent } from './components/users/profile/profile.component';
+import { FavoritesConcertsPageComponent } from './components/users/favorites-concerts-page/favorites-concerts-page.component';
 
 
 export const routes: Routes = [
@@ -35,6 +36,9 @@ export const routes: Routes = [
             },
             {
                 path: 'profile', component: ProfileComponent
+            },
+            {
+                path: 'favorites-concerts', component: FavoritesConcertsPageComponent
             },
         ],
     },

@@ -7,8 +7,8 @@ import { ProfileUser, User } from '../interfaces/user';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/auth';
-  // private apiUrl = 'http://localhost:3000/api/v1/auth';
+  // private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/auth';
+  private apiUrl = 'http://localhost:3000/api/v1/auth';
 
   private userSubject = new BehaviorSubject<User | null>(null);
   user$ = this.userSubject.asObservable();

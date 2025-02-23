@@ -1,14 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { Concert, ConcertDetails } from '../interfaces/concert';
+import { Concert, ConcertDetails, FavoriteConcert } from '../interfaces/concert';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConcertsService {
-  private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/concerts';
-  // private apiUrl = 'http://localhost:3000/api/v1/concerts';
+  // private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/concerts';
+  private apiUrl = 'http://localhost:3000/api/v1/concerts';
+  private apiUrlUser = 'http://localhost:3000/api/v1/users';
+
 
   constructor(private http: HttpClient) { }
 
@@ -92,6 +94,18 @@ export class ConcertsService {
       })
     );
   }
+
+  getFavoriteConcerts(): Observable<FavoriteConcert[]> {
+    return this.http.get<{ success: boolean, message: string, data: { favoriteConcerts: FavoriteConcert[] } }>(
+      `${this.apiUrlUser}/favorites`).pipe(
+        map(response => response.data.favoriteConcerts),
+        catchError(error => {
+          console.error('Error obteniendo conciertos favoritos:', error);
+          return of([]);
+        })
+      );
+  }
+
 }
 
 

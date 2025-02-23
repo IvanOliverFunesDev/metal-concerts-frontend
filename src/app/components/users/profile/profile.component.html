@@ -1,11 +1,11 @@
-<div class="profile-container">
+<div class="profile-container" *ngIf="user">
     <div class="sidebar">
         <h1>{{ user.username }}</h1>
         <div class="profile-actions">
             <button class="btn">
                 <i class="fas fa-user-edit"></i> Actualizar Información
             </button>
-            <button class="btn">
+            <button routerLink="/favorites-concerts" class="btn">
                 <i class="fas fa-heart"></i> Conciertos Favoritos
             </button>
             <button class="btn">

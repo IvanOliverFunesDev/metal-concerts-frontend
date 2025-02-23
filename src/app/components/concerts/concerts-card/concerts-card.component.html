@@ -1,7 +1,7 @@
 <div class="card" (click)="goToDetails()">
     <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
     <p>{{ concert.title }}</p>
-    <p>{{ concert.date | date: 'fullDate'}}</p>
+    <p>{{ concert.date | date: 'd MMM y'}}</p>
     <p>Banda: {{ concert.band.bandName }}</p>
     <!-- <p>Description: {{ concert.description }}</p>s -->
     <!-- <p>Genero: {{ concert.band.genre }}</p> -->
