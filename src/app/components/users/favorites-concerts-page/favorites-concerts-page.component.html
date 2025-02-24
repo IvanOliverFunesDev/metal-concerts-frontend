@@ -1,3 +1,24 @@
-<div *ngFor="let concert of concertsFavorites">
-    <h1> {{concert.title}} </h1>
+<div class="profile-container">
+    <div class="sidebar">
+        <div class="profile-actions">
+            <button class="btn">
+                <i class="fas fa-user-edit"></i> Actualizar Información
+            </button>
+            <button routerLink="/favorites-concerts" class="btn">
+                <i class="fas fa-heart"></i> Conciertos Favoritos
+            </button>
+            <button class="btn">
+                <i class="fas fa-users"></i> Bandas Suscritas
+            </button>
+            <button class="btn" (click)="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            <button routerLink="/forgot-password" class="btn">
+                <i class="fas fa-key"></i> Forgot Password
+            </button>
+        </div>
+    </div>
+    <div *ngFor="let concert of concertsFavorites" class="profile-content">
+        <app-concerts-list [fetchData]="concertsService.getFavoriteConcerts.bind(concertsService)"></app-concerts-list>
+    </div>
 </div>

@@ -1,14 +1,27 @@
 <div class="concerts-list">
+
     <h2>{{ title }}</h2>
-    <!-- Mostrar los conciertos si existen -->
-    <div *ngIf="hasConcerts; else noConcerts">
+
+    <!-- Mostrar skeleton loaders mientras está cargando -->
+    <div *ngIf="isLoading; else showConcerts">
         <div class="concerts-container">
-            <app-concerts-card *ngFor="let concert of concerts" [concert]="concert"></app-concerts-card>
+            <div class="skeleton-card" *ngFor="let _ of [1,2,3,4,5]">
+                <div class="skeleton-animation"></div>
+            </div>
         </div>
     </div>
 
-    <!-- Si no hay conciertos, mostrar el mensaje -->
+    <!-- Mostrar conciertos cuando esten disponibles-->
+    <ng-template #showConcerts>
+        <div *ngIf="hasConcerts; else noConcerts">
+            <div class="concerts-container">
+                <app-concerts-card *ngFor="let concert of concerts" [concert]="concert"></app-concerts-card>
+            </div>
+        </div>
+    </ng-template>
+
+    <!-- Si no hay conciertos y no está cargando, mostrar mensaje -->
     <ng-template #noConcerts>
-        <p class="no-concerts">❌ No hay conciertos programados.</p>
+        <p *ngIf="!isLoading" class="no-concerts">❌ No hay conciertos programados.</p>
     </ng-template>
 </div>
