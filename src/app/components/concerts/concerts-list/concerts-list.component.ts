@@ -19,6 +19,7 @@ export class ConcertsListComponent implements OnInit, OnDestroy, OnChanges {
 
   concerts: Concert[] = [];
   hasConcerts: boolean | null = null;
+  isLoading: boolean = true;
   private subscription!: Subscription;
 
   constructor(private concertsService: ConcertsService) { }
@@ -37,15 +38,18 @@ export class ConcertsListComponent implements OnInit, OnDestroy, OnChanges {
     if (this.subscription) {
       this.subscription.unsubscribe(); // 🔥 Evita múltiples suscripciones
     }
+    this.isLoading = true;
 
     this.subscription = this.fetchData(this.filters).subscribe({
       next: (data) => {
         this.concerts = data || [];
         this.hasConcerts = this.concerts.length > 0;
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error cargando conciertos:', err);
         this.hasConcerts = false;
+        this.isLoading = false;
       }
     });
   }
@@ -55,4 +59,5 @@ export class ConcertsListComponent implements OnInit, OnDestroy, OnChanges {
       this.subscription.unsubscribe();
     }
   }
+
 }

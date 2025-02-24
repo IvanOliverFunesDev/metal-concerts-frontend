@@ -2,7 +2,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Concert } from '../../../interfaces/concert';
-
 @Component({
   selector: 'app-concerts-card',
   standalone: true,
@@ -22,4 +21,9 @@ export class ConcertsCardComponent {
     this.router.navigate(['/concert', this.concert.id]);
     console.log(this.concert.id);
   }
+
+  addFavorite() {
+
+  }
+
 }

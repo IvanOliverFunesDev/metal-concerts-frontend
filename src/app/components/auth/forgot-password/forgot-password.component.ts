@@ -108,8 +108,6 @@ export class ForgotPasswordComponent {
     }
   }
 
-
-
   isNotValidField(field: string) {
     return !this.myForm.controls[field].valid && this.myForm.controls[field].touched
   }
