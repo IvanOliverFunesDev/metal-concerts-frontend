@@ -36,11 +36,11 @@ export class ForgotPasswordComponent {
     if (this.myForm.valid) {
       this.emailStored = this.myForm.controls['email'].value
       this.authService.forgotPassword(this.myForm.controls['email'].value).subscribe({
-        next: (response) => {
+        next: (res) => {
           Swal.fire({
             icon: "success",
             title: "Codigo enviado al email",
-            text: response.message,
+            text: res.message,
           });
           this.myForm = this.fb.group({
             code: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
@@ -62,11 +62,11 @@ export class ForgotPasswordComponent {
     if (this.myForm.valid) {
       this.codeStored = this.myForm.controls['code'].value
       this.authService.verifyResetCode(this.emailStored, this.codeStored).subscribe({
-        next: (response) => {
+        next: (res) => {
           Swal.fire({
             icon: "success",
             title: "Codigo enviado al email",
-            text: response.message,
+            text: res.message,
           });
           this.myForm = this.fb.group({
             newPassword: ['', [Validators.required]],
@@ -88,11 +88,11 @@ export class ForgotPasswordComponent {
   resetPassword() {
     if (this.myForm.valid) {
       this.authService.resetPassword(this.emailStored, this.codeStored, this.myForm.controls['newPassword'].value, this.myForm.controls['confirmPassword'].value).subscribe({
-        next: (response) => {
+        next: (res) => {
           Swal.fire({
             icon: "success",
             title: "Contraseña cambiada correctamente",
-            text: response.message,
+            text: res.message,
           }).then(() => {
             this.router.navigateByUrl("/home");
           });

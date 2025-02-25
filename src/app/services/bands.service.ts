@@ -26,7 +26,6 @@ export class BandsService {
       })
     );
   }
-
   getBandById(id: string): Observable<BandPublic | null> {
     return this.http.get<{ success: boolean, message: string, data: BandPublic }>(`${this.apiUrl}/${id}`).pipe(
       map(response => response.data),

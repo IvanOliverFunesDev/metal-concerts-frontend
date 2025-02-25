@@ -9,7 +9,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-favorites-concerts-page',
-  imports: [NgFor, ConcertsListComponent, RouterLink],
+  imports: [ConcertsListComponent, RouterLink],
   templateUrl: './favorites-concerts-page.component.html',
   styleUrl: './favorites-concerts-page.component.css'
 })

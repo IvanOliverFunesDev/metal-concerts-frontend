@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { Concert, ConcertDetails, FavoriteConcert } from '../interfaces/concert';
-
+import { response } from 'express';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,8 +11,6 @@ export class ConcertsService {
   // private apiUrl = 'http://localhost:3000/api/v1/concerts';
   // private apiUrlUser = 'http://localhost:3000/api/v1/users';
   private apiUrlUser = 'https://metal-concerts-backend.onrender.com/api/v1/users';
-
-
 
   constructor(private http: HttpClient) { }
 
@@ -30,7 +28,6 @@ export class ConcertsService {
       })
     );
   }
-
   getGenresConcerts(): Observable<string[]> {
     return this.http.get<{ success: boolean, message: string, data: string[] }>(`${this.apiUrl}/genres`).pipe(
       map(response => response.data),
@@ -40,7 +37,6 @@ export class ConcertsService {
       })
     );
   }
-
   getLocationsConcerts(): Observable<string[]> {
     return this.http.get<{ success: boolean, message: string, data: string[] }>(`${this.apiUrl}/locations`).pipe(
       map(response => response.data),
@@ -50,7 +46,6 @@ export class ConcertsService {
       })
     );
   }
-
   getConcertById(id: string): Observable<ConcertDetails | null> {
     return this.http.get<{ success: boolean, message: string, data: ConcertDetails }>(`${this.apiUrl}/${id}`).pipe(
       map(response => response.data),
@@ -60,7 +55,6 @@ export class ConcertsService {
       })
     );
   }
-
   getConcertsUpcoming(): Observable<Concert[]> {
     return this.http.get<{ success: boolean, message: string, data: Concert[] }>(`${this.apiUrl}/recent`).pipe(
       map(response => response.data),
@@ -70,7 +64,6 @@ export class ConcertsService {
       })
     );
   }
-
   getMostPopularConcerts(limit: number = 0): Observable<Concert[]> {
     const params = new HttpParams()
       .set('limit', limit > 0 ? limit.toString() : 'all');
@@ -83,7 +76,6 @@ export class ConcertsService {
       })
     );
   }
-
   getTopRatedConcerts(limit: number = 0): Observable<Concert[]> {
     const params = new HttpParams()
       .set('limit', limit > 0 ? limit.toString() : 'all');
@@ -96,7 +88,6 @@ export class ConcertsService {
       })
     );
   }
-
   getFavoriteConcerts(): Observable<FavoriteConcert[]> {
     return this.http.get<{ success: boolean, message: string, data: { favoriteConcerts: FavoriteConcert[] } }>(
       `${this.apiUrlUser}/favorites`).pipe(
@@ -106,6 +97,29 @@ export class ConcertsService {
           return of([]);
         })
       );
+  }
+  addFavoriteConcert(concertId: string): Observable<FavoriteConcert> {
+    return this.http.post<{ success: boolean, message: string, data: FavoriteConcert }>(
+      `${this.apiUrlUser}/favorites/${concertId}`,
+      {},
+      { withCredentials: true }
+    ).pipe(map(response => response.data),
+      catchError(error => {
+        console.error('Error al eliminar favorito:', error);
+        return throwError(() => new Error(error.error?.message || 'Error removing favorite concert'));
+      })
+    );
+  }
+  removeFavoriteConcert(concertId: string): Observable<string> {
+    return this.http.delete<{ success: boolean, message: string }>(
+      `${this.apiUrlUser}/favorites/${concertId}`,
+      { withCredentials: true }
+    ).pipe(map(response => response.message),
+      catchError(error => {
+        console.error('Error al eliminar favorito:', error);
+        return throwError(() => new Error(error.error?.message || 'Error removing favorite concert'));
+      })
+    );
   }
 
 }
