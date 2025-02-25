@@ -24,7 +24,6 @@ export class AuthService {
         this.userSubject.next(user);
       }));
   }
-
   login(email: string, password: string): Observable<User> {
     return this.http.post<{ success: boolean; message: string; data: User }>(
       `${this.apiUrl}/login`,
@@ -34,7 +33,6 @@ export class AuthService {
         this.userSubject.next(user);
       }));
   }
-
   registerUSer(email: string, password: string, username: string): Observable<User> {
     return this.http.post<{ success: boolean; message: string; data: User }>(
       `${this.apiUrl}/register/user`,
@@ -44,7 +42,6 @@ export class AuthService {
         this.userSubject.next(user);
       }));
   }
-
   registerBand(email: string, password: string, bandName: string, description: string, genre: string): Observable<User> {
     return this.http.post<{ success: boolean; message: string; data: User }>(
       `${this.apiUrl}/register/band`,
@@ -54,7 +51,6 @@ export class AuthService {
         this.userSubject.next(user);
       }));
   }
-
   logout(): Observable<any> {
     return this.http.post<{ success: boolean, message: string }>(
       `${this.apiUrl}/logout`,
@@ -66,7 +62,6 @@ export class AuthService {
       })
     );
   }
-
   forgotPassword(email: string): Observable<any> {
     return this.http.post<{ success: boolean, message: string }>(
       `${this.apiUrl}/forgot-password`,
@@ -78,7 +73,6 @@ export class AuthService {
       })
     );
   }
-
   verifyResetCode(email: string, code: string): Observable<any> {
     return this.http.post<{ success: boolean, message: string }>(
       `${this.apiUrl}/verify-reset-code`,
@@ -90,7 +84,6 @@ export class AuthService {
       })
     );
   }
-
   resetPassword(email: string, code: string, newPassword: string, confirmPassword: string): Observable<any> {
     return this.http.post<{ success: boolean, message: string }>(
       `${this.apiUrl}/reset-password`,
@@ -98,7 +91,6 @@ export class AuthService {
       { withCredentials: true }
     )
   }
-
   profileUser(): Observable<ProfileUser> {
     return this.http.get<{ success: boolean, message: string, data: ProfileUser }>(`${this.apiUrl}/profile/user`,
       { withCredentials: true }

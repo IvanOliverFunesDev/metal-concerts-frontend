@@ -18,7 +18,7 @@
             </button>
         </div>
     </div>
-    <div *ngFor="let concert of concertsFavorites" class="profile-content">
+    <div class="profile-content">
         <app-concerts-list [fetchData]="concertsService.getFavoriteConcerts.bind(concertsService)"></app-concerts-list>
     </div>
 </div>
