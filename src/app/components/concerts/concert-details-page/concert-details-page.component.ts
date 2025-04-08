@@ -6,10 +6,11 @@ import { ConcertDetails, RelatedConcert, ConcertsOfSameBand } from '../../../int
 import { Subscription } from 'rxjs';
 import { ReviewsService } from '../../../services/reviews.service';
 import { Review } from '../../../interfaces/review';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-concert-details-page',
-  imports: [NgIf, DatePipe, NgFor],
+  imports: [NgIf, DatePipe, NgFor, FormsModule],
   templateUrl: './concert-details-page.component.html',
   styleUrl: './concert-details-page.component.css'
 })
@@ -20,12 +21,22 @@ export class ConcertDetailsPageComponent implements OnInit {
   concertsOfSameBand: ConcertsOfSameBand[] = []
   isLoading: boolean = true;
   errorMessage: string | null = null;
-  private routeSub!: Subscription; // 🔥 Guardamos la suscripción a la ruta
+  private routeSub!: Subscription;
 
-  constructor(private route: ActivatedRoute, private router: Router, private concertsService: ConcertsService, private reviewsService: ReviewsService) { }
+  // 🆕 Modelo del formulario para la nueva review
+  newReview = {
+    rating: 5,
+    comment: ''
+  };
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private concertsService: ConcertsService,
+    private reviewsService: ReviewsService
+  ) { }
+
   ngOnInit(): void {
-
-    // 🔥 Escuchamos cambios en la URL para recargar datos sin refrescar la página
     this.routeSub = this.route.paramMap.subscribe(params => {
       const concertId = params.get('id');
       if (concertId) {
@@ -47,13 +58,28 @@ export class ConcertDetailsPageComponent implements OnInit {
     })
   }
 
+  // 🆕 Método para enviar la review
+  submitReview() {
+    if (!this.newReview.comment || !this.newReview.rating || !this.concert?.id) return;
+
+    this.reviewsService.postReviews(this.concert.id, this.newReview).subscribe({
+      next: (createdReview) => {
+        this.reviews.push(createdReview);
+        this.newReview = { rating: 5, comment: '' }; // reset form
+        console.log("hola")
+      },
+      error: (err) => {
+        console.error('Error enviando la review:', err);
+      }
+    });
+  }
+
   isPastConcert(date: Date): boolean {
     const concertDate = new Date(date);
     const currentDate = new Date();
-    return concertDate < currentDate;  // Si la fecha del concierto es pasada
+    return concertDate < currentDate;
   }
 
-  // 🔥 Función para cargar los detalles del concierto
   private loadConcertDetails(concertId: string) {
     this.isLoading = true;
     this.concertsService.getConcertById(concertId).subscribe({
@@ -83,7 +109,7 @@ export class ConcertDetailsPageComponent implements OnInit {
     }
   }
 
-  goToDetails(concert: RelatedConcert | ConcertsOfSameBand) { // para que le sirva los dos tipos de datos. PENSAR EN EXTENDER INTERFACES EN EL FUTURO
+  goToDetails(concert: RelatedConcert | ConcertsOfSameBand) {
     if (!concert || !concert.id) {
       console.error('El objeto concert o su ID es undefined o null');
       return;
@@ -92,7 +118,6 @@ export class ConcertDetailsPageComponent implements OnInit {
     this.router.navigate([`/concert`, concert.id]).catch(err => console.error('Error en la navegación:', err));
   }
 
-  // 🔥 Liberamos la suscripción cuando el componente se destruye
   ngOnDestroy(): void {
     if (this.routeSub) {
       this.routeSub.unsubscribe();
