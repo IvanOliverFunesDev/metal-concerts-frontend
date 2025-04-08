@@ -60,11 +60,11 @@
                     <p style="color: white;">{{ review.comment }}</p>
                 </div>
             </div>
-            <form>
+            <form (ngSubmit)="submitReview()">
                 <label for=" rating">Rating:</label>
-                <!-- <input type="number" id="rating" min="1" max="5" required [(ngModel)]="newReview.rating" name="rating"> -->
+                <input type="number" id="rating" min="1" max="5" required [(ngModel)]="newReview.rating" name="rating">
                 <label for="comment">Comment:</label>
-                <!-- <textarea id="comment" required [(ngModel)]="newReview.comment" name="comment"></textarea> -->
+                <textarea id="comment" required [(ngModel)]="newReview.comment" name="comment"></textarea>
                 <button type="submit">Submit Review</button>
             </form>
         </div>
