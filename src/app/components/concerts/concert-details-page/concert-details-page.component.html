@@ -1,13 +1,10 @@
-<br>
 <div *ngIf="concert" class="concert-detail">
     <div class="concert-image-container">
         <img [src]="concert.image || 'noImage.png'" alt="{{ concert.title }}">
     </div>
-
     <div class="concert-info">
         <p>Concert</p>
         <h1 class="concert-title">{{ concert.title }}</h1>
-
         <div class="concert-band-container">
             <div class="band-image-container">
                 <img class="band-image" [src]="concert.band.image || 'noImageBand.png'"
@@ -16,6 +13,7 @@
             <p class="band-name" (click)="goToDetailsBand()">{{ concert.band.bandName }}</p>
         </div>
     </div>
+
 </div>
 
 <div *ngIf="relatedConcerts.length > 0" class="related-concerts">
@@ -29,7 +27,6 @@
                 <p>{{ related.location }}</p>
                 <p>Banda: {{ related.band.bandName }}</p>
                 <p>Banda: {{ related.band.id }}</p>
-
             </div>
         </div>
     </div>
@@ -48,6 +45,28 @@
                 <h3>{{ sameBandConcert.title }}</h3>
                 <p>{{ sameBandConcert.date | date: 'd MMM y' }}</p>
             </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="concert">
+    <div *ngIf="isPastConcert(concert.date)">
+        <div class="review-section">
+            <h3>Reviews</h3>
+            <div class="reviews">
+                <div *ngFor="let review of reviews">
+                    <span style="color: white;">{{ review.user.username }} hola</span>
+                    <span style="color: white;">:{{ review.rating }}</span>
+                    <p style="color: white;">{{ review.comment }}</p>
+                </div>
+            </div>
+            <form>
+                <label for=" rating">Rating:</label>
+                <!-- <input type="number" id="rating" min="1" max="5" required [(ngModel)]="newReview.rating" name="rating"> -->
+                <label for="comment">Comment:</label>
+                <!-- <textarea id="comment" required [(ngModel)]="newReview.comment" name="comment"></textarea> -->
+                <button type="submit">Submit Review</button>
+            </form>
         </div>
     </div>
 </div>

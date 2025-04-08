@@ -17,18 +17,22 @@ h2 {
 }
 
 .no-concerts {
-    font-size: 40px;
+    font-size: 18px;
+    color: #ff0000;
+    font-weight: bold;
     text-align: center;
-    color: red;
+    padding: 10px;
+    background-color: rgba(255, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-top: 20px;
 }
 
 .skeleton-card {
     background-color: #222;
     /* Fondo oscuro */
     border-radius: 8px;
-    width: 100%;
-    max-width: 300px;
-    height: 180px;
+    width: 250px;
+    height: 300px;
     /* Ajustar al tamaño de la card real */
     margin: 10px;
     position: relative;

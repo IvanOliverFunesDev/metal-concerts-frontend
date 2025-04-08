@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
-import { Band, BandPublic } from '../interfaces/band';
+import { catchError, map, Observable, of, retry, tap, throwError } from 'rxjs';
+import { Band, BandPublic, VeryBasicBand } from '../interfaces/band';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ import { Band, BandPublic } from '../interfaces/band';
 export class BandsService {
   private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/bands';
   // private apiUrl = 'http://localhost:3000/api/v1/bands';
+  // private apiUrlUser = 'http://localhost:3000/api/v1/subscriptions';
+  private apiUrlUser = 'https://metal-concerts-backend.onrender.com/api/v1/subscriptions';
 
   constructor(private http: HttpClient) { }
 
@@ -54,6 +57,44 @@ export class BandsService {
       map(response => response.data),
       catchError(error => {
         return of([]);
+      })
+    );
+  }
+  getUserSubscription(): Observable<VeryBasicBand[]> {
+    return this.http.get<{ success: boolean, message: string, data: VeryBasicBand[] }>(
+      `${this.apiUrlUser}/subscriptions`
+    ).pipe(
+      tap(response => {
+        console.log('Respuesta completa del servicio:', response);  // Verifica la estructura completa de la respuesta
+      }),
+      map(response => response.data),
+      catchError(error => {
+        console.error('Error obteniendo conciertos favoritos:', error);
+        return of([]);
+      })
+    );
+  }
+  addSubcriptionsBand(bandId: string): Observable<string> {
+    return this.http.post<{ success: boolean, message: string }>(
+      `${this.apiUrlUser}/subscribe/${bandId}`,
+      {},
+      { withCredentials: true }
+    ).pipe(map(response => response.message),
+      catchError(error => {
+        console.error('Error al suscribirse a la banda:', error);
+        return throwError(() => new Error(error.error?.message || error.message || 'Error removing favorite concert'));
+      })
+    );
+  }
+
+  removeSubcriptionsBand(bandId: string): Observable<string> {
+    return this.http.delete<{ success: boolean, message: string }>(
+      `${this.apiUrlUser}/unsubscribe/${bandId}`,
+      { withCredentials: true }
+    ).pipe(map(response => response.message),
+      catchError(error => {
+        console.error('Error al eliminar la suscripción a la banda:', error);
+        return throwError(() => new Error(error.error?.message || 'Error removing favorite concert'));
       })
     );
   }

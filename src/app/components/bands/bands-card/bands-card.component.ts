@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Band } from '../../../interfaces/band';
+import { BaseBand } from '../../../interfaces/band';
 import { Router } from '@angular/router';
+import { BandsService } from '../../../services/bands.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-bands-card',
@@ -9,17 +11,16 @@ import { Router } from '@angular/router';
   styleUrl: './bands-card.component.css'
 })
 export class BandsCardComponent implements OnInit {
-  @Input() band!: Band;
+  @Input() band!: BaseBand;
 
-  constructor(private router: Router) { }
+  constructor(public bandsService: BandsService, private router: Router) { }
 
   ngOnInit(): void {
     console.log(this.band);
-
   }
 
   goToDetails() {
-    if (this.band?.id) {
+    if (this.band.id) {
       this.router.navigate(['/band', this.band.id]);
     } else {
       console.error('Error: ID de la banda no disponible.');

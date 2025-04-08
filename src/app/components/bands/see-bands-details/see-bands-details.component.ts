@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { BandPublic } from '../../../interfaces/band';
+import { BandPublic, BaseBand } from '../../../interfaces/band';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { BandsService } from '../../../services/bands.service';
+import Swal from 'sweetalert2';
+import { BaseConcert } from '../../../interfaces/concert';
 
 @Component({
   selector: 'app-see-bands-details',
@@ -45,8 +47,69 @@ export class SeeBandsDetailsComponent {
       this.isLoading = false;
     }
   }
-  goToConcert(concert: { id?: string; _id?: string }): void {
-    const concertId = concert._id || concert.id;
+
+  toggleSubcriptions(band: BaseBand): void {
+    if (band.isSubscribed) {
+      this.removeFromSubcriptionsBand(band)
+    } else {
+      this.addToSubcriptions(band)
+    }
+  }
+
+  addToSubcriptions(band: BaseBand) {
+    if (!this.band) return;
+    this.bandsService.addSubcriptionsBand(this.band.id).subscribe({
+      next: (res) => {
+        console.log("añadido");
+        band.isSubscribed = true; // Cambia el estado en el frontend
+      },
+      error: (error) => {
+        if (error.message === 'Unauthorized') {
+          Swal.fire({
+            icon: "error",
+            title: "You must be logged in",
+            text: "To subscribe to this band, please log in or register.",
+            showCancelButton: true,
+            confirmButtonText: "Login",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['/login']);
+            }
+          });
+        } else {
+          // Para otros errores, mostramos el mensaje genérico
+          Swal.fire({
+            icon: "error",
+            title: "Oops! Something went wrong",
+            text: error.message,
+            confirmButtonText: "Got it"
+          });
+        }
+      }
+    });
+  }
+
+
+  removeFromSubcriptionsBand(band: BaseBand) {
+    if (!this.band) return
+    this.bandsService.removeSubcriptionsBand(this.band.id).subscribe({
+      next: (res) => {
+        console.log("eliminado");
+        band.isSubscribed = false;
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops! Something went wrong",
+          text: err.message,
+          confirmButtonText: "Got it"
+        });
+      }
+    });
+  }
+
+  goToConcert(concert: BaseConcert): void {
+    const concertId = concert.id;
     if (concertId) {
       this.router.navigate(['/concert', concertId]);
     } else {

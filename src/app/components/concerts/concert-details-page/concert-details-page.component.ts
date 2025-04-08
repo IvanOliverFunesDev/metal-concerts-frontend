@@ -4,6 +4,8 @@ import { ConcertsService } from '../../../services/concerts.service';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { ConcertDetails, RelatedConcert, ConcertsOfSameBand } from '../../../interfaces/concert';
 import { Subscription } from 'rxjs';
+import { ReviewsService } from '../../../services/reviews.service';
+import { Review } from '../../../interfaces/review';
 
 @Component({
   selector: 'app-concert-details-page',
@@ -13,21 +15,42 @@ import { Subscription } from 'rxjs';
 })
 export class ConcertDetailsPageComponent implements OnInit {
   concert!: ConcertDetails | null;
+  reviews: Review[] = [];
   relatedConcerts: RelatedConcert[] = [];
   concertsOfSameBand: ConcertsOfSameBand[] = []
   isLoading: boolean = true;
   errorMessage: string | null = null;
   private routeSub!: Subscription; // 🔥 Guardamos la suscripción a la ruta
 
-  constructor(private route: ActivatedRoute, private router: Router, private concertsService: ConcertsService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private concertsService: ConcertsService, private reviewsService: ReviewsService) { }
   ngOnInit(): void {
+
     // 🔥 Escuchamos cambios en la URL para recargar datos sin refrescar la página
     this.routeSub = this.route.paramMap.subscribe(params => {
       const concertId = params.get('id');
       if (concertId) {
         this.loadConcertDetails(concertId);
+        this.loadReviews(concertId);
       }
     });
+  }
+
+  private loadReviews(concertId: string) {
+    this.reviewsService.getReviews(concertId).subscribe({
+      next: (data) => {
+        console.log('Reviews esperadas:', data);
+        this.reviews = data;
+      },
+      error(err) {
+        console.error('Error cargando reviews:', err);
+      },
+    })
+  }
+
+  isPastConcert(date: Date): boolean {
+    const concertDate = new Date(date);
+    const currentDate = new Date();
+    return concertDate < currentDate;  // Si la fecha del concierto es pasada
   }
 
   // 🔥 Función para cargar los detalles del concierto

@@ -59,5 +59,4 @@ export class ConcertsListComponent implements OnInit, OnDestroy, OnChanges {
       this.subscription.unsubscribe();
     }
   }
-
 }

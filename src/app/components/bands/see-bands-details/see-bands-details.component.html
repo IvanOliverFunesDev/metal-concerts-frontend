@@ -4,6 +4,10 @@
         <div class="overlay">
             <h1>{{ band.bandName }}</h1>
             <p class="genre">{{ band.genre }}</p>
+            <button (click)="toggleSubcriptions(band)"
+                [class]="band.isSubscribed ? 'subscribed-button' : 'subscribe-button'" style="cursor: pointer;">
+                {{ band.isSubscribed ? 'Subscribed' : 'Subscribe' }}
+            </button>
         </div>
     </div>
 
@@ -12,7 +16,6 @@
         <p class="description">⭐ Rating: {{ band.averageRating || 'Sin valoraciones' }}</p>
         <p class="description">💬 Total Reviews: {{ band.totalReviews || 0 }}</p>
         <p class="description">💬 Subscritores: {{ band.subscribersCount || 0 }}</p>
-
     </div>
 
     <!-- Conciertos Futuros -->

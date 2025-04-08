@@ -1,8 +1,22 @@
 <div class="bands">
     <h2> {{title}} </h2>
-    <div class="bands-container">
-        <div>
-            <app-bands-card *ngFor="let band of bands" [band]="band"></app-bands-card>
+
+    <div *ngIf="isLoading; else showBands">
+        <div class="bands-container">
+            <div class="skeleton-card" *ngFor="let _ of [1,2,3,4,5]">
+                <div class="skeleton-animation"></div>
+            </div>
         </div>
     </div>
+
+    <ng-template #showBands>
+        <div *ngIf="hasBands; else noBands">
+            <div class="bands-container">
+                <app-bands-card *ngFor="let band of bands" [band]="band"></app-bands-card>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #noBands>
+        <p *ngIf="!isLoading" class="no-bands">❌ No hay bandas programados.</p>
+    </ng-template>
 </div>
