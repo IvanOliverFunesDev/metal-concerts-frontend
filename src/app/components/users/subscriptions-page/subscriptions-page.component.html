@@ -1,6 +1,5 @@
-<div class="profile-container" *ngIf="user">
+<div class="profile-container">
     <div class="sidebar">
-        <h1>{{ user.username }}</h1>
         <div class="profile-actions">
             <button class="btn">
                 <i class="fas fa-user-edit"></i> Actualizar Información
@@ -8,7 +7,7 @@
             <button routerLink="/favorites-concerts" class="btn">
                 <i class="fas fa-heart"></i> Conciertos Favoritos
             </button>
-            <button routerLink="/subcriptions" class="btn">
+            <button class="btn">
                 <i class="fas fa-users"></i> Bandas Suscritas
             </button>
             <button class="btn" (click)="logout()">
@@ -20,8 +19,6 @@
         </div>
     </div>
     <div class="profile-content">
-        <h2>Bienvenido, {{ user.username }}</h2>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Cuenta creada el:</strong> {{ user.createdAt | date:'longDate' }}</p>
+        <app-bands-list [fetchData]="bandsService.getUserSubscription.bind(bandsService)"></app-bands-list>
     </div>
 </div>

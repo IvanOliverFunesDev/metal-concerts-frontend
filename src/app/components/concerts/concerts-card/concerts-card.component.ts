@@ -25,37 +25,50 @@ export class ConcertsCardComponent {
     console.log(this.concert.id);
   }
 
-  addToFavorites() {
-    if (!this.concert) return
+  toggleFavorite(concert: Concert): void {
+    if (concert.isFavorite) {
+      this.removeFromFavorites(concert);
+    } else {
+      this.addToFavorites(concert);
+    }
+  }
+
+  addToFavorites(concert: Concert) {
+    if (!this.concert) return;
     this.concertsService.addFavoriteConcert(this.concert.id).subscribe({
       next: (res) => {
-        Swal.fire({
-          icon: "success",
-          title: "Added to Favorites",
-          text: "This concert has been successfully added to your favorites.",
-          confirmButtonText: "OK"
-        });
+        concert.isFavorite = true; // Cambia el estado en el frontend
       },
-      error: (err) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops! Something went wrong",
-          text: err.message,
-          confirmButtonText: "Got it"
-        });
+      error: (error) => {
+        if (error.message === 'Unauthorized') {
+          Swal.fire({
+            icon: "error",
+            title: "You must be logged in",
+            text: "To add a concert to your favorites, please log in.",
+            showCancelButton: true,
+            confirmButtonText: "Login",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['/login']);
+            }
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops! Something went wrong",
+            text: error.message,
+            confirmButtonText: "Got it"
+          });
+        }
       }
     });
   }
-  removeToFavorites() {
+
+  removeFromFavorites(concert: Concert) {
     if (!this.concert) return
     this.concertsService.removeFavoriteConcert(this.concert.id).subscribe({
       next: (res) => {
-        Swal.fire({
-          icon: "success",
-          title: "Removed from Favorites",
-          text: "This concert has been successfully removed from your favorites.",
-          confirmButtonText: "OK"
-        });
+        concert.isFavorite = false;
       },
       error: (err) => {
         Swal.fire({

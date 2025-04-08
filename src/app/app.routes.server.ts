@@ -6,6 +6,10 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Server
   },
   {
+    path: 'home',
+    renderMode: RenderMode.Server
+  },
+  {
     path: 'band/:id',
     renderMode: RenderMode.Server
   },

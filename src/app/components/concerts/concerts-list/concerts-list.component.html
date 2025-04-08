@@ -2,7 +2,6 @@
 
     <h2>{{ title }}</h2>
 
-    <!-- Mostrar skeleton loaders mientras está cargando -->
     <div *ngIf="isLoading; else showConcerts">
         <div class="concerts-container">
             <div class="skeleton-card" *ngFor="let _ of [1,2,3,4,5]">

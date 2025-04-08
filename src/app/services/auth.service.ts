@@ -27,9 +27,9 @@ export class AuthService {
   login(email: string, password: string): Observable<User> {
     return this.http.post<{ success: boolean; message: string; data: User }>(
       `${this.apiUrl}/login`,
-      { email, password },
-      { withCredentials: true })
+      { email, password })
       .pipe(map(response => response.data), tap(user => {
+        localStorage.setItem('token', user.token || '');
         this.userSubject.next(user);
       }));
   }
@@ -51,17 +51,14 @@ export class AuthService {
         this.userSubject.next(user);
       }));
   }
-  logout(): Observable<any> {
-    return this.http.post<{ success: boolean, message: string }>(
-      `${this.apiUrl}/logout`,
-      { withCredentials: true }
-    ).pipe(
-      tap(() => {
-        this.userSubject.next(null);
-        console.log("🚫 Usuario deslogueado, estado limpiado"); // 🔥 PRUEBA
-      })
-    );
+  logout(): void {
+    localStorage.removeItem('token');
+
+    this.userSubject.next(null);
+
+    console.log("🚫 Usuario deslogueado, estado limpiado"); // 🔥 PRUEBA
   }
+
   forgotPassword(email: string): Observable<any> {
     return this.http.post<{ success: boolean, message: string }>(
       `${this.apiUrl}/forgot-password`,
@@ -98,7 +95,6 @@ export class AuthService {
       map(response => response.data)
     );
   }
-
   getUser(): User | null {
     return this.userSubject.value; // Permite obtener el usuario sin suscribirse
   }

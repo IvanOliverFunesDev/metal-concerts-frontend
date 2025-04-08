@@ -1,4 +1,3 @@
-/* ===== Estilos Generales ===== */
 .header {
     position: fixed;
     top: 0;
@@ -15,7 +14,6 @@
     transition: 0.3s ease-in-out;
 }
 
-/* Animación del efecto de brillo en el header */
 .header::before {
     content: "";
     position: absolute;
@@ -34,7 +32,6 @@
     left: 100%;
 }
 
-/* ===== Logo ===== */
 .logo {
     font-size: 24px;
     font-weight: bold;
@@ -58,18 +55,15 @@
     /* Para que quede encima */
 }
 
-/* Animación del icono de hamburguesa a "X" */
 #menu-icon.active {
     transform: rotate(180deg);
 }
 
-/* ===== Estilos del Navbar ===== */
 .navbar {
     display: flex;
     gap: 20px;
 }
 
-/* Links del navbar */
 .navbar a {
     text-decoration: none;
     color: white;
@@ -77,14 +71,12 @@
     transition: 0.3s;
     position: relative;
     z-index: 101;
-    /* Para que quede encima */
 }
 
 .navbar a:hover {
-    color: #ff9800;
+    color: #ff00ff;
 }
 
-/* ===== Fondo borroso del menú desplegable ===== */
 .nav-bg {
     position: fixed;
     width: 100%;

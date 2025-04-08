@@ -102,18 +102,16 @@ export class ConcertsService {
     return this.http.post<{ success: boolean, message: string, data: FavoriteConcert }>(
       `${this.apiUrlUser}/favorites/${concertId}`,
       {},
-      { withCredentials: true }
     ).pipe(map(response => response.data),
       catchError(error => {
         console.error('Error al eliminar favorito:', error);
-        return throwError(() => new Error(error.error?.message || 'Error removing favorite concert'));
+        return throwError(() => new Error(error.error?.message || error.message || 'Error removing favorite concert'));
       })
     );
   }
   removeFavoriteConcert(concertId: string): Observable<string> {
     return this.http.delete<{ success: boolean, message: string }>(
       `${this.apiUrlUser}/favorites/${concertId}`,
-      { withCredentials: true }
     ).pipe(map(response => response.message),
       catchError(error => {
         console.error('Error al eliminar favorito:', error);

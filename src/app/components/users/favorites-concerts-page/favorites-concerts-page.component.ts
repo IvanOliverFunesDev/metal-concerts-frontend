@@ -27,11 +27,7 @@ export class FavoritesConcertsPageComponent implements OnInit {
     })
   }
   logout(): void {
-    this.authService.logout().subscribe({
-      next: () => {
-        this.router.navigateByUrl('/home');
-      },
-      error: (err) => console.error('Error al cerrar sesión:', err)
-    });
+    this.authService.logout(); // Ahora es una función sin Observable
+    this.router.navigateByUrl('/home'); // 🔥 Redirigir a Home tras cerrar sesión
   }
 }

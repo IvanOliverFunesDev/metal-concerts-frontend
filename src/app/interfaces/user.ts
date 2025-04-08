@@ -5,6 +5,7 @@ export interface User {
     username: string;
     email: string;
     createdAt: Date;
+    token?: string;
 }
 export interface ProfileUser {
     id: string;
@@ -12,4 +13,10 @@ export interface ProfileUser {
     email: string;
     createdAt: Date;
     updatedAt: Date;
+}
+
+
+export interface UserReview {
+    _id: string;
+    username: string;
 }
