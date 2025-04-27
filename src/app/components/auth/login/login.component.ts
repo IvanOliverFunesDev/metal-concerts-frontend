@@ -22,6 +22,8 @@ export class LoginComponent {
     if (this.myForm.valid) {
       this.authService.login(this.myForm.controls['email'].value, this.myForm.controls['password'].value).subscribe({
         next: (res) => {
+          console.log('Login completado:', res); // este también debería salir
+
           Swal.fire({
             title: "Iniciar Sesion",
             icon: "success",

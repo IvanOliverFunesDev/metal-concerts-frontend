@@ -141,3 +141,141 @@
     color: #aaa;
     margin: 0;
 }
+
+
+
+/* ___________________________________________________________ */
+
+/* 🗨️ Sección de reviews */
+.review-section {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    color: white;
+}
+
+.review-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.5rem;
+}
+
+/* 🧑‍🤝‍🧑 Cada review */
+.review {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+}
+
+.review span {
+    font-weight: bold;
+    color: #ff66cc;
+}
+
+.review p {
+    margin: 0.25rem 0;
+}
+
+/* 🧽 Formulario de nueva review */
+.review-form {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.review-form label {
+    font-weight: bold;
+    color: #ccc;
+}
+
+.review-form input,
+.review-form textarea {
+    padding: 0.5rem;
+    background-color: #2a2a2a;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 4px;
+}
+
+.review-form input:focus,
+.review-form textarea:focus {
+    outline: none;
+    border-color: #ff66cc;
+}
+
+/* ✅ Botón de enviar review */
+.review-form button {
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.review-form button:hover {
+    background-color: #e60073;
+}
+
+/* 🗑️ Botón de eliminar */
+.delete-review-btn {
+    margin-top: 0.5rem;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.delete-review-btn:hover {
+    background-color: #cc0000;
+}
+
+.review-form {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.review-form select,
+.review-form textarea {
+    padding: 0.5rem;
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.review-form select:focus,
+.review-form textarea:focus {
+    outline: none;
+    border-color: #ff66cc;
+    box-shadow: 0 0 0 2px rgba(255, 102, 204, 0.3);
+}
+
+.review-form button {
+    align-self: start;
+    padding: 0.5rem 1rem;
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.review-form button:hover {
+    background-color: #e60073;
+}

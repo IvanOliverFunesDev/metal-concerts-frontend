@@ -31,4 +31,14 @@ export class ReviewsService {
     )
   }
 
+  deleteReview(concertId: string): Observable<string> {
+    return this.http.delete<{ success: boolean; message: string }>(`${this.apiUrl}/${concertId}`).pipe(
+      map(response => response.message),
+      catchError(error => {
+        console.error('Error al eliminar la review:', error);
+        return throwError(() => new Error(error.error?.message || 'Error al eliminar la review'));
+      })
+    );
+  }
+
 }
