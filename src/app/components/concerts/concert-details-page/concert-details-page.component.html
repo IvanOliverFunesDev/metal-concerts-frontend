@@ -54,19 +54,38 @@
         <div class="review-section">
             <h3>Reviews</h3>
             <div class="reviews">
-                <div *ngFor="let review of reviews">
-                    <span style="color: white;">{{ review.user.username }} hola</span>
-                    <span style="color: white;">:{{ review.rating }}</span>
+                <div *ngFor="let review of reviews" class="review">
+                    <span style="color: white;">{{ review.user.username }}</span>
+                    <span style="color: #ff66cc;">
+                        <ng-container *ngFor="let skull of [].constructor(review.rating)">
+                            💀
+                        </ng-container>
+                    </span>
                     <p style="color: white;">{{ review.comment }}</p>
+
+                    <!-- Solo se muestra si es la review del usuario actual -->
+                    <button *ngIf="review.user._id === currentUserId" (click)="deleteReview()"
+                        class="delete-review-btn">
+                        Eliminar
+                    </button>
                 </div>
+
             </div>
-            <form (ngSubmit)="submitReview()">
-                <label for=" rating">Rating:</label>
-                <input type="number" id="rating" min="1" max="5" required [(ngModel)]="newReview.rating" name="rating">
+            <form (ngSubmit)="submitReview()" class="review-form">
+                <label for="rating">Rating:</label>
+                <select [(ngModel)]="newReview.rating" name="rating" required>
+                    <option [ngValue]="1">1 💀</option>
+                    <option [ngValue]="2">2 💀💀</option>
+                    <option [ngValue]="3">3 💀💀💀</option>
+                    <option [ngValue]="4">4 💀💀💀💀</option>
+                    <option [ngValue]="5">5 💀💀💀💀💀</option>
+                </select>
                 <label for="comment">Comment:</label>
-                <textarea id="comment" required [(ngModel)]="newReview.comment" name="comment"></textarea>
-                <button type="submit">Submit Review</button>
+                <textarea id="comment" required [(ngModel)]="newReview.comment" name="comment" rows="3"></textarea>
+
+                <button type="submit">Enviar Reseña</button>
             </form>
+
         </div>
     </div>
 </div>

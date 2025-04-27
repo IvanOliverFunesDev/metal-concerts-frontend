@@ -29,7 +29,9 @@ export class AuthService {
       `${this.apiUrl}/login`,
       { email, password })
       .pipe(map(response => response.data), tap(user => {
+        console.log('Usuario recibido:', user); // 👀
         localStorage.setItem('token', user.token || '');
+        localStorage.setItem('userId', user.id || '');
         this.userSubject.next(user);
       }));
   }

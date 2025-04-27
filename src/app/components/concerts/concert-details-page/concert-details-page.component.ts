@@ -22,6 +22,7 @@ export class ConcertDetailsPageComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string | null = null;
   private routeSub!: Subscription;
+  currentUserId: string = localStorage.getItem('userId') || '';
 
   // 🆕 Modelo del formulario para la nueva review
   newReview = {
@@ -64,6 +65,13 @@ export class ConcertDetailsPageComponent implements OnInit {
 
     this.reviewsService.postReviews(this.concert.id, this.newReview).subscribe({
       next: (createdReview) => {
+        //------------------------------------------- ESTO ES UN PARCHE, EL BACKEND DEBE DEVOLVER EL DATA POPULADO ACUERDATE CABEZA
+        createdReview.user = {
+          _id: this.currentUserId!,
+          username: 'Tú'
+        };
+        //-------------------------------------------
+
         this.reviews.push(createdReview);
         this.newReview = { rating: 5, comment: '' }; // reset form
         console.log("hola")
@@ -73,6 +81,22 @@ export class ConcertDetailsPageComponent implements OnInit {
       }
     });
   }
+
+  deleteReview() {
+    const concertId = this.concert?.id;
+    if (!concertId) return;
+
+    this.reviewsService.deleteReview(concertId).subscribe({
+      next: (message) => {
+        console.log(message);
+        this.reviews = this.reviews.filter(r => r.user._id !== this.currentUserId);
+      },
+      error: (err) => {
+        console.error('Error al eliminar la review:', err);
+      }
+    });
+  }
+
 
   isPastConcert(date: Date): boolean {
     const concertDate = new Date(date);
