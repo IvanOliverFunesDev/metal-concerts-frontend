@@ -2,16 +2,16 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, retry, tap, throwError } from 'rxjs';
 import { Band, BandPublic, VeryBasicBand } from '../interfaces/band';
-import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BandsService {
   private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/bands';
-  // private apiUrl = 'http://localhost:3000/api/v1/bands';
-  // private apiUrlUser = 'http://localhost:3000/api/v1/subscriptions';
   private apiUrlUser = 'https://metal-concerts-backend.onrender.com/api/v1/subscriptions';
+
+  // private apiUrlUser = 'http://localhost:3000/api/v1/subscriptions';
+  // private apiUrl = 'http://localhost:3000/api/v1/bands';
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +29,7 @@ export class BandsService {
       })
     );
   }
+
   getBandById(id: string): Observable<BandPublic | null> {
     return this.http.get<{ success: boolean, message: string, data: BandPublic }>(`${this.apiUrl}/${id}`).pipe(
       map(response => response.data),
@@ -38,6 +39,7 @@ export class BandsService {
       })
     )
   }
+
   getBandsPopular(limit: number = 0): Observable<Band[]> {
     const params = new HttpParams()
       .set('limit', limit > 0 ? limit.toString() : 'all');
@@ -49,6 +51,7 @@ export class BandsService {
       })
     );
   }
+
   getBandsTopRated(limit: number = 0): Observable<Band[]> {
     const params = new HttpParams()
       .set('limit', limit > 0 ? limit.toString() : 'all');
@@ -60,6 +63,7 @@ export class BandsService {
       })
     );
   }
+
   getUserSubscription(): Observable<VeryBasicBand[]> {
     return this.http.get<{ success: boolean, message: string, data: VeryBasicBand[] }>(
       `${this.apiUrlUser}/subscriptions`
@@ -74,6 +78,7 @@ export class BandsService {
       })
     );
   }
+
   addSubcriptionsBand(bandId: string): Observable<string> {
     return this.http.post<{ success: boolean, message: string }>(
       `${this.apiUrlUser}/subscribe/${bandId}`,

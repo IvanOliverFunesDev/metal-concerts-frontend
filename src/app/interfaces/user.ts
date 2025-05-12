@@ -15,7 +15,6 @@ export interface ProfileUser {
     updatedAt: Date;
 }
 
-
 export interface UserReview {
     _id: string;
     username: string;

@@ -12,8 +12,7 @@ import { ForgotPasswordComponent } from './components/auth/forgot-password/forgo
 import { ProfileComponent } from './components/users/profile/profile.component';
 import { FavoritesConcertsPageComponent } from './components/users/favorites-concerts-page/favorites-concerts-page.component';
 import { SubscriptionsPageComponent } from './components/users/subscriptions-page/subscriptions-page.component';
-
-
+import { BandPanel } from './components/bands/band-panel/band-panel.component';
 export const routes: Routes = [
     {
         path: '', component: MainComponent, children: [
@@ -31,6 +30,9 @@ export const routes: Routes = [
             },
             {
                 path: 'band/:id', component: SeeBandsDetailsComponent
+            },
+            {
+                path: 'band/:id', component: BandPanel
             },
             {
                 path: '', redirectTo: 'home', pathMatch: 'full'
@@ -58,6 +60,5 @@ export const routes: Routes = [
     {
         path: 'forgot-password', component: ForgotPasswordComponent
     },
-
 
 ];

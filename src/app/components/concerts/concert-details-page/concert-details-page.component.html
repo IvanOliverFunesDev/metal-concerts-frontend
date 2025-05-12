@@ -74,11 +74,11 @@
             <form (ngSubmit)="submitReview()" class="review-form">
                 <label for="rating">Rating:</label>
                 <select [(ngModel)]="newReview.rating" name="rating" required>
-                    <option [ngValue]="1">1 💀</option>
-                    <option [ngValue]="2">2 💀💀</option>
-                    <option [ngValue]="3">3 💀💀💀</option>
-                    <option [ngValue]="4">4 💀💀💀💀</option>
-                    <option [ngValue]="5">5 💀💀💀💀💀</option>
+                    <option [ngValue]="1">💀</option>
+                    <option [ngValue]="2">💀💀</option>
+                    <option [ngValue]="3">💀💀💀</option>
+                    <option [ngValue]="4">💀💀💀💀</option>
+                    <option [ngValue]="5">💀💀💀💀💀</option>
                 </select>
                 <label for="comment">Comment:</label>
                 <textarea id="comment" required [(ngModel)]="newReview.comment" name="comment" rows="3"></textarea>

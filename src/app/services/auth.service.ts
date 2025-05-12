@@ -8,6 +8,7 @@ import { ProfileUser, User } from '../interfaces/user';
 })
 export class AuthService {
   private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/auth';
+
   // private apiUrl = 'http://localhost:3000/api/v1/auth';
 
   private userSubject = new BehaviorSubject<User | null>(null);
@@ -24,6 +25,7 @@ export class AuthService {
         this.userSubject.next(user);
       }));
   }
+
   login(email: string, password: string): Observable<User> {
     return this.http.post<{ success: boolean; message: string; data: User }>(
       `${this.apiUrl}/login`,
@@ -35,6 +37,7 @@ export class AuthService {
         this.userSubject.next(user);
       }));
   }
+
   registerUSer(email: string, password: string, username: string): Observable<User> {
     return this.http.post<{ success: boolean; message: string; data: User }>(
       `${this.apiUrl}/register/user`,
@@ -44,6 +47,7 @@ export class AuthService {
         this.userSubject.next(user);
       }));
   }
+
   registerBand(email: string, password: string, bandName: string, description: string, genre: string): Observable<User> {
     return this.http.post<{ success: boolean; message: string; data: User }>(
       `${this.apiUrl}/register/band`,
@@ -53,6 +57,7 @@ export class AuthService {
         this.userSubject.next(user);
       }));
   }
+
   logout(): void {
     localStorage.removeItem('token');
 
@@ -72,6 +77,7 @@ export class AuthService {
       })
     );
   }
+
   verifyResetCode(email: string, code: string): Observable<any> {
     return this.http.post<{ success: boolean, message: string }>(
       `${this.apiUrl}/verify-reset-code`,
@@ -83,6 +89,7 @@ export class AuthService {
       })
     );
   }
+
   resetPassword(email: string, code: string, newPassword: string, confirmPassword: string): Observable<any> {
     return this.http.post<{ success: boolean, message: string }>(
       `${this.apiUrl}/reset-password`,
@@ -90,6 +97,7 @@ export class AuthService {
       { withCredentials: true }
     )
   }
+
   profileUser(): Observable<ProfileUser> {
     return this.http.get<{ success: boolean, message: string, data: ProfileUser }>(`${this.apiUrl}/profile/user`,
       { withCredentials: true }
@@ -97,6 +105,7 @@ export class AuthService {
       map(response => response.data)
     );
   }
+
   getUser(): User | null {
     return this.userSubject.value; // Permite obtener el usuario sin suscribirse
   }

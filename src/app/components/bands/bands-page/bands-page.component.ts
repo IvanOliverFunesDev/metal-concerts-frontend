@@ -6,7 +6,7 @@ import { ConcertsService } from '../../../services/concerts.service';
 import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-bands-page',
+  selector: 'app-bands-panel',
   imports: [BandsListComponent, ReactiveFormsModule, NgFor],
   templateUrl: './bands-page.component.html',
   styleUrl: './bands-page.component.css'

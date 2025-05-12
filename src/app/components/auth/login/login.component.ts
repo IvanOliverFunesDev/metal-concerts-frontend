@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
 export class LoginComponent {
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     this.myForm = this.fb.group({
@@ -17,19 +18,29 @@ export class LoginComponent {
       password: ['', [Validators.required]]
     })
   }
+
   myForm: FormGroup;
   login() {
     if (this.myForm.valid) {
       this.authService.login(this.myForm.controls['email'].value, this.myForm.controls['password'].value).subscribe({
         next: (res) => {
-          console.log('Login completado:', res); // este también debería salir
-
+          const role = res.role;
           Swal.fire({
             title: "Iniciar Sesion",
             icon: "success",
             text: "Has iniciado sesión correctamente"
           }).then(() => {
-            this.router.navigateByUrl("/home");
+            const roleRoutes: { [key: string]: string } = {
+              user: '/home',
+              //band: '/home', crear ruta corresta
+              //admin: '/home' crear ruta corresta
+            };
+
+            const route = roleRoutes[role];
+
+            if (route) {
+              this.router.navigateByUrl(route);
+            }
           });
         },
         error: (err) => {

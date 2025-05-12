@@ -1,0 +1,62 @@
+<!-- Mostrar solo cuando la banda está cargada -->
+<div class="band-profile" *ngIf="band; else loading">
+    <div class="band-hero" [style.backgroundImage]="'url(' + (band.image || 'noImageBand.png') + ')'">
+        <div class="overlay">
+            <h1>{{ band.bandName }}</h1>
+            <p class="genre">{{ band.genre }}</p>
+            <button (click)="toggleSubcriptions(band)"
+                [class]="band.isSubscribed ? 'subscribed-button' : 'subscribe-button'" style="cursor: pointer;">
+                {{ band.isSubscribed ? 'Subscribed' : 'Subscribe' }}
+            </button>
+        </div>
+    </div>
+
+    <div class="band-details">
+        <p class="description">Descripción: {{ band.description }}</p>
+        <p class="description">⭐ Rating: {{ band.averageRating || 'Sin valoraciones' }}</p>
+        <p class="description">💬 Total Reviews: {{ band.totalReviews || 0 }}</p>
+        <p class="description">💬 Subscritores: {{ band.subscribersCount || 0 }}</p>
+    </div>
+
+    <!-- Conciertos Futuros -->
+    <div class="concerts-section">
+        <h2>🎤 Próximos Conciertos</h2>
+        <div *ngIf="band.upcomingConcerts.length > 0; else noUpcomingConcerts" class="concerts-container">
+            <div class="concert-card upcoming" *ngFor="let concert of band.upcomingConcerts"
+                (click)="goToConcert(concert)">
+                <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
+                <h3>{{ concert.title }}</h3>
+                <p class="date">{{ concert.date | date: 'fullDate' }}</p>
+                <p class="location">{{ concert.location }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conciertos Pasados -->
+    <div class="concerts-section">
+        <h2>🎸 Conciertos Pasados</h2>
+        <div *ngIf="band.pastConcerts.length > 0; else noPastConcerts" class="concerts-container">
+            <div class="concert-card past" *ngFor="let concert of band.pastConcerts " (click)="goToConcert(concert)">
+                <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
+                <h3>{{ concert.title }}</h3>
+                <p class="date">{{ concert.date | date: 'fullDate' }}</p>
+                <p class="location">{{ concert.location }}</p>
+                <p class="ended-message">🚫 Este concierto ha finalizado</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensajes si no hay conciertos -->
+    <ng-template #noUpcomingConcerts>
+        <p class="no-concerts">❌ No hay conciertos futuros programados.</p>
+    </ng-template>
+
+    <ng-template #noPastConcerts>
+        <p class="no-concerts">❌ No hay conciertos pasados.</p>
+    </ng-template>
+</div>
+
+<!-- Si la banda aún no está cargada -->
+<ng-template #loading>
+    <p class="loading-text">⏳ Cargando datos...</p>
+</ng-template>
