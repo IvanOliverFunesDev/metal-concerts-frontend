@@ -2,7 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, retry, tap, throwError } from 'rxjs';
 import { Band, BandPublic, VeryBasicBand } from '../interfaces/band';
-import axios from 'axios';
 @Injectable({
   providedIn: 'root'
 })

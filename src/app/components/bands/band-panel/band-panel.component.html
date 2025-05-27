@@ -16,7 +16,18 @@
             </div>
 
             <!-- Género -->
-            <p class="genre">{{ band.genre }}</p>
+            <p class="genre" *ngIf="!editingGenre">
+                Género: {{ band.genre }}
+                <button class="edit-button" (click)="enableGenreEdit()">✏️</button>
+            </p>
+            <div *ngIf="editingGenre" class="edit-genre-form">
+                <select [(ngModel)]="temporaryGenre" name="genre" class="filter-select">
+                    <option value="" disabled>Selecciona un género</option>
+                    <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+                </select>
+                <button (click)="saveGenre()" class="save-button">💾</button>
+                <button (click)="cancelGenreEdit()" class="cancel-button">❌</button>
+            </div>
 
             <!-- Imagen de la banda -->
             <div class="image-edit-container" *ngIf="!editingImage">

@@ -130,6 +130,20 @@ export class ConcertsService {
     );
   }
 
+  createConcert(concertData: FormData): Observable<any> {
+    return this.http.post<{ success: boolean; message: string; data: any }>(
+      this.apiUrl,
+      concertData
+    ).pipe(
+      map(response => response.data),
+      catchError(error => {
+        console.error('❌ Error creando el concierto:', error);
+        return throwError(() => new Error('Error al crear el concierto'));
+      })
+    );
+  }
+
+
 }
 
 

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { BandPublic, BaseBand } from '../../../interfaces/band';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { BandsService } from '../../../services/bands.service';
+import { ConcertsService } from '../../../services/concerts.service';
 import { BaseConcert } from '../../../interfaces/concert';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-band-panel',
   standalone: true,
-  imports: [NgIf, NgFor, DatePipe, FormsModule],
+  imports: [NgIf, NgFor, DatePipe, FormsModule, ReactiveFormsModule],
   templateUrl: './band-panel.component.html',
   styleUrl: './band-panel.component.css'
 })
@@ -24,11 +25,20 @@ export class BandPanel implements OnInit {
   editingDescription = false;
   temporaryDescription = '';
 
+  genres: string[] = [];
+  editingGenre = false;
+  temporaryGenre = '';
+
   editingImage = false;
   selectedImageFile: File | null = null;
   previewImageUrl: string | null = null;
 
-  constructor(private router: Router, public bandsService: BandsService) { }
+  constructor(
+    private router: Router,
+    public bandsService: BandsService,
+    private fb: FormBuilder,
+    public concertsService: ConcertsService
+  ) { }
 
   ngOnInit(): void {
     this.bandsService.getOwBand().subscribe({
@@ -39,6 +49,7 @@ export class BandPanel implements OnInit {
             pastConcerts: data.pastConcerts || [],
             upcomingConcerts: data.upcomingConcerts || []
           };
+          this.temporaryGenre = this.band.genre;
         } else {
           this.errorMessage = '❌ Banda no encontrada';
         }
@@ -49,6 +60,11 @@ export class BandPanel implements OnInit {
         this.errorMessage = '❌ Error al cargar la banda.';
         this.isLoading = false;
       }
+    });
+
+    this.concertsService.getGenresConcerts().subscribe({
+      next: (data) => this.genres = data,
+      error: (err) => console.error('❌ Error cargando géneros:', err)
     });
   }
 
@@ -109,6 +125,30 @@ export class BandPanel implements OnInit {
     });
   }
 
+  enableGenreEdit(): void {
+    this.temporaryGenre = this.band.genre;
+    this.editingGenre = true;
+  }
+
+  cancelGenreEdit(): void {
+    this.editingGenre = false;
+    this.temporaryGenre = '';
+  }
+
+  saveGenre(): void {
+    if (!this.temporaryGenre.trim()) return;
+
+    this.bandsService.updateBandGenre(this.temporaryGenre).subscribe({
+      next: (updatedBand) => {
+        this.band.genre = updatedBand.genre;
+        this.editingGenre = false;
+      },
+      error: (err) => {
+        console.error('❌ Error actualizando el género:', err);
+      }
+    });
+  }
+
   handleImageFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -136,5 +176,4 @@ export class BandPanel implements OnInit {
       }
     });
   }
-
 }
