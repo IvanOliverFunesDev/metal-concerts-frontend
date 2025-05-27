@@ -32,7 +32,7 @@ export const routes: Routes = [
                 path: 'band/:id', component: SeeBandsDetailsComponent
             },
             {
-                path: 'band/:id', component: BandPanel
+                path: 'band-panel', component: BandPanel
             },
             {
                 path: '', redirectTo: 'home', pathMatch: 'full'

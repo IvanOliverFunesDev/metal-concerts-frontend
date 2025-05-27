@@ -19,8 +19,7 @@ export class AuthService {
   }
 
   verifyToken(): Observable<User> {
-    return this.http.get<{ success: boolean, message: string, data: User }>(`${this.apiUrl}/verify`,
-      { withCredentials: true })
+    return this.http.get<{ success: boolean, message: string, data: User }>(`${this.apiUrl}/verify`)
       .pipe(map(response => response.data), tap(user => {
         this.userSubject.next(user);
       }));
@@ -41,8 +40,7 @@ export class AuthService {
   registerUSer(email: string, password: string, username: string): Observable<User> {
     return this.http.post<{ success: boolean; message: string; data: User }>(
       `${this.apiUrl}/register/user`,
-      { email, password, username },
-      { withCredentials: true })
+      { email, password, username })
       .pipe(map(response => response.data), tap(user => {
         this.userSubject.next(user);
       }));
@@ -51,8 +49,7 @@ export class AuthService {
   registerBand(email: string, password: string, bandName: string, description: string, genre: string): Observable<User> {
     return this.http.post<{ success: boolean; message: string; data: User }>(
       `${this.apiUrl}/register/band`,
-      { email, password, bandName, description, genre },
-      { withCredentials: true })
+      { email, password, bandName, description, genre })
       .pipe(map(response => response.data), tap(user => {
         this.userSubject.next(user);
       }));
@@ -69,8 +66,7 @@ export class AuthService {
   forgotPassword(email: string): Observable<any> {
     return this.http.post<{ success: boolean, message: string }>(
       `${this.apiUrl}/forgot-password`,
-      { email },
-      { withCredentials: true }
+      { email }
     ).pipe(
       tap(() => {
         console.log("🚫 email enviado correctamente"); // 🔥 PRUEBA
@@ -99,9 +95,7 @@ export class AuthService {
   }
 
   profileUser(): Observable<ProfileUser> {
-    return this.http.get<{ success: boolean, message: string, data: ProfileUser }>(`${this.apiUrl}/profile/user`,
-      { withCredentials: true }
-    ).pipe(
+    return this.http.get<{ success: boolean, message: string, data: ProfileUser }>(`${this.apiUrl}/profile/user`).pipe(
       map(response => response.data)
     );
   }

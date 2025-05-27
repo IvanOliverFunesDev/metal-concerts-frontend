@@ -48,10 +48,13 @@
     max-width: 700px;
     padding: 20px;
 
-    .description {
-        font-size: 1.1rem;
-        line-height: 1.6;
-    }
+
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: white;
 }
 
 .loading-text,
@@ -208,4 +211,84 @@
             margin-top: 10px;
         }
     }
+}
+
+/* Estilo general del contenedor de edición */
+.edit-name-container,
+.edit-description-container,
+.edit-image-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Input de nombre */
+.edit-name-input {
+    padding: 0.4rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Textarea de descripción */
+.edit-description-input {
+    padding: 0.4rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+/* Botones de guardar y cancelar */
+.save-button,
+.cancel-button,
+.edit-button {
+    padding: 0.3rem 0.6rem;
+    margin-right: 0.4rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Colores específicos */
+.save-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.cancel-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.edit-button {
+    margin-left: 0.5rem;
+    background-color: #2196F3;
+    color: white;
+}
+
+/* Imagen previa al subir */
+.preview-image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-top: 0.5rem;
+}
+
+/* Contenedor de acciones de imagen */
+.image-edit-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Mejora visual del input de archivo */
+.edit-image-container input[type="file"] {
+    border: none;
+    font-size: 0.9rem;
 }

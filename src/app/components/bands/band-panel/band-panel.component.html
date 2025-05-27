@@ -1,18 +1,51 @@
 <!-- Mostrar solo cuando la banda está cargada -->
 <div class="band-profile" *ngIf="band; else loading">
+    <!-- Imagen principal editable -->
     <div class="band-hero" [style.backgroundImage]="'url(' + (band.image || 'noImageBand.png') + ')'">
         <div class="overlay">
-            <h1>{{ band.bandName }}</h1>
+            <!-- Nombre con botón de edición -->
+            <h1 *ngIf="!editingName">
+                {{ band.bandName }}
+                <button class="edit-button" (click)="enableNameEdit()">✏️</button>
+            </h1>
+
+            <div *ngIf="editingName" class="edit-name-container">
+                <input type="text" [(ngModel)]="temporaryName" class="edit-name-input">
+                <button (click)="saveName()" class="save-button">💾</button>
+                <button (click)="cancelNameEdit()" class="cancel-button">❌</button>
+            </div>
+
+            <!-- Género -->
             <p class="genre">{{ band.genre }}</p>
-            <button (click)="toggleSubcriptions(band)"
-                [class]="band.isSubscribed ? 'subscribed-button' : 'subscribe-button'" style="cursor: pointer;">
-                {{ band.isSubscribed ? 'Subscribed' : 'Subscribe' }}
-            </button>
+
+            <!-- Imagen de la banda -->
+            <div class="image-edit-container" *ngIf="!editingImage">
+                <button class="edit-button" (click)="editingImage = true">🖼️ Cambiar imagen</button>
+            </div>
+
+            <div *ngIf="editingImage" class="edit-image-container">
+                <input type="file" accept="image/*" (change)="handleImageFileChange($event)" />
+                <img *ngIf="previewImageUrl" [src]="previewImageUrl" class="preview-image" />
+                <div class="image-edit-actions">
+                    <button (click)="saveImage()" class="save-button">💾</button>
+                    <button (click)="editingImage = false; selectedImageFile = null" class="cancel-button">❌</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="band-details">
-        <p class="description">Descripción: {{ band.description }}</p>
+        <p class="description" *ngIf="!editingDescription">
+            Descripción: {{ band.description }}
+            <button class="edit-button" (click)="enableDescriptionEdit()">✏️</button>
+        </p>
+
+        <div *ngIf="editingDescription" class="edit-description-container">
+            <textarea [(ngModel)]="temporaryDescription" rows="3" class="edit-description-input"></textarea>
+            <button (click)="saveDescription()" class="save-button">💾</button>
+            <button (click)="cancelDescriptionEdit()" class="cancel-button">❌</button>
+        </div>
+
         <p class="description">⭐ Rating: {{ band.averageRating || 'Sin valoraciones' }}</p>
         <p class="description">💬 Total Reviews: {{ band.totalReviews || 0 }}</p>
         <p class="description">💬 Subscritores: {{ band.subscribersCount || 0 }}</p>
@@ -36,7 +69,7 @@
     <div class="concerts-section">
         <h2>🎸 Conciertos Pasados</h2>
         <div *ngIf="band.pastConcerts.length > 0; else noPastConcerts" class="concerts-container">
-            <div class="concert-card past" *ngFor="let concert of band.pastConcerts " (click)="goToConcert(concert)">
+            <div class="concert-card past" *ngFor="let concert of band.pastConcerts" (click)="goToConcert(concert)">
                 <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
                 <h3>{{ concert.title }}</h3>
                 <p class="date">{{ concert.date | date: 'fullDate' }}</p>

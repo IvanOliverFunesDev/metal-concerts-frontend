@@ -1,109 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BandPublic, BaseBand } from '../../../interfaces/band';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { BandsService } from '../../../services/bands.service';
-import Swal from 'sweetalert2';
 import { BaseConcert } from '../../../interfaces/concert';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-band-panel',
-  imports: [NgIf, NgFor, DatePipe],
+  standalone: true,
+  imports: [NgIf, NgFor, DatePipe, FormsModule],
   templateUrl: './band-panel.component.html',
   styleUrl: './band-panel.component.css'
 })
-export class BandPanel {
+export class BandPanel implements OnInit {
   band!: BandPublic;
-  isLoading: boolean = true; // 🔥 Nuevo: Controla la carga
-  errorMessage: string | null = null; // 🔥 Nuevo: Si hay error, mostramos mensaje
+  isLoading: boolean = true;
+  errorMessage: string | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router, public bandsService: BandsService) { }
+  editingName = false;
+  temporaryName = '';
+
+  editingDescription = false;
+  temporaryDescription = '';
+
+  editingImage = false;
+  selectedImageFile: File | null = null;
+  previewImageUrl: string | null = null;
+
+  constructor(private router: Router, public bandsService: BandsService) { }
 
   ngOnInit(): void {
-    const bandId = this.route.snapshot.paramMap.get('id');
-
-    if (bandId) {
-      this.bandsService.getBandById(bandId).subscribe({
-        next: (data) => {
-          if (data) {
-            this.band = {
-              ...data,
-              pastConcerts: data.pastConcerts || [],
-              upcomingConcerts: data.upcomingConcerts || []
-            };
-          } else {
-            this.errorMessage = '❌ Banda no encontrada';
-          }
-          this.isLoading = false; // 🔥 Deja de cargar
-        },
-        error: (err) => {
-          console.error('Error cargando la banda:', err);
-          this.errorMessage = '❌ Error al cargar la banda.';
-          this.isLoading = false;
-        }
-      });
-    } else {
-      this.errorMessage = '❌ Banda no encontrada';
-      this.isLoading = false;
-    }
-  }
-
-  toggleSubcriptions(band: BaseBand): void {
-    if (band.isSubscribed) {
-      this.removeFromSubcriptionsBand(band)
-    } else {
-      this.addToSubcriptions(band)
-    }
-  }
-
-  addToSubcriptions(band: BaseBand) {
-    if (!this.band) return;
-    this.bandsService.addSubcriptionsBand(this.band.id).subscribe({
-      next: (res) => {
-        console.log("añadido");
-        band.isSubscribed = true; // Cambia el estado en el frontend
-      },
-      error: (error) => {
-        if (error.message === 'Unauthorized') {
-          Swal.fire({
-            icon: "error",
-            title: "You must be logged in",
-            text: "To subscribe to this band, please log in or register.",
-            showCancelButton: true,
-            confirmButtonText: "Login",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.router.navigate(['/login']);
-            }
-          });
+    this.bandsService.getOwBand().subscribe({
+      next: (data) => {
+        if (data) {
+          this.band = {
+            ...data,
+            pastConcerts: data.pastConcerts || [],
+            upcomingConcerts: data.upcomingConcerts || []
+          };
         } else {
-          // Para otros errores, mostramos el mensaje genérico
-          Swal.fire({
-            icon: "error",
-            title: "Oops! Something went wrong",
-            text: error.message,
-            confirmButtonText: "Got it"
-          });
+          this.errorMessage = '❌ Banda no encontrada';
         }
-      }
-    });
-  }
-
-
-  removeFromSubcriptionsBand(band: BaseBand) {
-    if (!this.band) return
-    this.bandsService.removeSubcriptionsBand(this.band.id).subscribe({
-      next: (res) => {
-        console.log("eliminado");
-        band.isSubscribed = false;
+        this.isLoading = false;
       },
       error: (err) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops! Something went wrong",
-          text: err.message,
-          confirmButtonText: "Got it"
-        });
+        console.error('Error cargando la banda:', err);
+        this.errorMessage = '❌ Error al cargar la banda.';
+        this.isLoading = false;
       }
     });
   }
@@ -116,4 +60,81 @@ export class BandPanel {
       console.error('Error: No se encontró el ID del concierto.');
     }
   }
+
+  enableNameEdit(): void {
+    this.temporaryName = this.band.bandName;
+    this.editingName = true;
+  }
+
+  cancelNameEdit(): void {
+    this.editingName = false;
+    this.temporaryName = '';
+  }
+
+  saveName(): void {
+    if (!this.temporaryName.trim()) return;
+
+    this.bandsService.updateBandName(this.temporaryName).subscribe({
+      next: (updatedBand) => {
+        this.band.bandName = updatedBand.bandName;
+        this.editingName = false;
+      },
+      error: (err) => {
+        console.error('❌ Error actualizando el nombre:', err);
+      }
+    });
+  }
+
+  enableDescriptionEdit(): void {
+    this.temporaryDescription = this.band.description;
+    this.editingDescription = true;
+  }
+
+  cancelDescriptionEdit(): void {
+    this.editingDescription = false;
+    this.temporaryDescription = '';
+  }
+
+  saveDescription(): void {
+    if (!this.temporaryDescription.trim()) return;
+
+    this.bandsService.updateBandDescription(this.temporaryDescription).subscribe({
+      next: (updatedBand) => {
+        this.band.description = updatedBand.description;
+        this.editingDescription = false;
+      },
+      error: (err) => {
+        console.error('❌ Error actualizando la descripción:', err);
+      }
+    });
+  }
+
+  handleImageFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedImageFile = input.files[0];
+      this.previewImageUrl = URL.createObjectURL(this.selectedImageFile);
+    }
+  }
+
+  saveImage(): void {
+    if (!this.selectedImageFile) return;
+
+    const formData = new FormData();
+    formData.append('image', this.selectedImageFile);
+
+    console.log('🧠 Enviando imagen al backend...');
+
+    this.bandsService.updateBandImage(formData).subscribe({
+      next: (updatedBand) => {
+        this.band.image = updatedBand.image;
+        this.editingImage = false;
+        this.selectedImageFile = null;
+      },
+      error: (err) => {
+        console.error('❌ Error guardando imagen:', err);
+      }
+    });
+  }
+
 }

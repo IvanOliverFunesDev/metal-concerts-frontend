@@ -32,7 +32,7 @@ export class LoginComponent {
           }).then(() => {
             const roleRoutes: { [key: string]: string } = {
               user: '/home',
-              //band: '/home', crear ruta corresta
+              band: '/band-panel'
               //admin: '/home' crear ruta corresta
             };
 

@@ -48,10 +48,13 @@
     max-width: 700px;
     padding: 20px;
 
-    .description {
-        font-size: 1.1rem;
-        line-height: 1.6;
-    }
+
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: white;
 }
 
 .loading-text,
