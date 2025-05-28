@@ -5,7 +5,7 @@ import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { BandsService } from '../../../services/bands.service';
 import { ConcertsService } from '../../../services/concerts.service';
 import { BaseConcert } from '../../../interfaces/concert';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-band-panel',
@@ -33,6 +33,11 @@ export class BandPanel implements OnInit {
   selectedImageFile: File | null = null;
   previewImageUrl: string | null = null;
 
+  // 🎵 Crear concierto
+  creatingConcert = false;
+  concertForm!: FormGroup;
+  concertImageFile: File | null = null;
+
   constructor(
     private router: Router,
     public bandsService: BandsService,
@@ -41,6 +46,13 @@ export class BandPanel implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.concertForm = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      date: ['', Validators.required],
+      location: ['', Validators.required]
+    });
+
     this.bandsService.getOwBand().subscribe({
       next: (data) => {
         if (data) {
@@ -173,6 +185,44 @@ export class BandPanel implements OnInit {
       },
       error: (err) => {
         console.error('❌ Error guardando imagen:', err);
+      }
+    });
+  }
+
+  openConcertModal(): void {
+    this.creatingConcert = true;
+  }
+
+  closeConcertModal(): void {
+    this.creatingConcert = false;
+    this.concertForm.reset();
+    this.concertImageFile = null;
+  }
+
+  onConcertImageChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.concertImageFile = input.files[0];
+    }
+  }
+
+  submitConcert(): void {
+    if (!this.concertForm.valid || !this.concertImageFile) return;
+
+    const formData = new FormData();
+    formData.append('file', this.concertImageFile);
+    formData.append('title', this.concertForm.value.title!);
+    formData.append('description', this.concertForm.value.description!);
+    formData.append('date', this.concertForm.value.date!);
+    formData.append('location', this.concertForm.value.location!);
+
+    this.concertsService.createConcert(formData).subscribe({
+      next: (concert) => {
+        this.band.upcomingConcerts.push(concert);
+        this.closeConcertModal();
+      },
+      error: (err) => {
+        console.error('❌ Error creando concierto:', err);
       }
     });
   }
