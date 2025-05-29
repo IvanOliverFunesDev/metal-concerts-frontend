@@ -143,6 +143,29 @@ export class ConcertsService {
     );
   }
 
+  deleteConcert(concertId: string): Observable<any> {
+    return this.http.delete<{ success: boolean; message: string }>(
+      `${this.apiUrl}/${concertId}`
+    ).pipe(
+      catchError(error => {
+        console.error('❌ Error eliminando el concierto:', error);
+        return throwError(() => new Error('Error al eliminar el concierto'));
+      })
+    );
+  }
+
+  updateConcert(concertId: string, data: FormData): Observable<any> {
+    return this.http.put<{ success: boolean; message: string; data: any }>(
+      `${this.apiUrl}/${concertId}`,
+      data
+    ).pipe(
+      map(response => response.data),
+      catchError(error => {
+        console.error('❌ Error actualizando el concierto:', error);
+        return throwError(() => new Error('Error al actualizar el concierto'));
+      })
+    );
+  }
 
 }
 

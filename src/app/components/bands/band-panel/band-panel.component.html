@@ -1,148 +1,158 @@
-<!-- Mostrar solo cuando la banda está cargada -->
-<div class="band-profile" *ngIf="band; else loading">
-    <!-- Imagen principal editable -->
-    <div class="band-hero" [style.backgroundImage]="'url(' + (band.image || 'noImageBand.png') + ')'">
-        <div class="overlay">
-            <!-- Nombre con botón de edición -->
-            <h1 *ngIf="!editingName">
-                {{ band.bandName }}
-                <button class="edit-button" (click)="enableNameEdit()">✏️</button>
-            </h1>
+<main>
+    <app-navbarbands></app-navbarbands>
+    <br><br><br>
 
-            <div *ngIf="editingName" class="edit-name-container">
-                <input type="text" [(ngModel)]="temporaryName" class="edit-name-input">
-                <button (click)="saveName()" class="save-button">💾</button>
-                <button (click)="cancelNameEdit()" class="cancel-button">❌</button>
+    <!-- Mostrar solo cuando la banda está cargada -->
+    <div class="band-profile" *ngIf="band; else loading">
+        <!-- Imagen principal editable -->
+        <div class="band-hero" [style.backgroundImage]="'url(' + (band.image || 'noImageBand.png') + ')'">
+            <div class="overlay">
+                <!-- Nombre con botón de edición -->
+                <h1 *ngIf="!editingName">
+                    {{ band.bandName }}
+                    <button class="edit-button" (click)="enableNameEdit()">✏️</button>
+                </h1>
+
+                <div *ngIf="editingName" class="edit-name-container">
+                    <input type="text" [(ngModel)]="temporaryName" class="edit-name-input">
+                    <button (click)="saveName()" class="save-button">💾</button>
+                    <button (click)="cancelNameEdit()" class="cancel-button">❌</button>
+                </div>
+
+                <!-- Género -->
+                <p class="genre" *ngIf="!editingGenre">
+                    Género: {{ band.genre }}
+                    <button class="edit-button" (click)="enableGenreEdit()">✏️</button>
+                </p>
+                <div *ngIf="editingGenre" class="edit-genre-form">
+                    <select [(ngModel)]="temporaryGenre" name="genre" class="filter-select">
+                        <option value="" disabled>Selecciona un género</option>
+                        <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+                    </select>
+                    <button (click)="saveGenre()" class="save-button">💾</button>
+                    <button (click)="cancelGenreEdit()" class="cancel-button">❌</button>
+                </div>
+
+                <!-- Imagen de la banda -->
+                <div class="image-edit-container" *ngIf="!editingImage">
+                    <button class="edit-button" (click)="editingImage = true">🖼️ Cambiar imagen</button>
+                </div>
+
+                <div *ngIf="editingImage" class="edit-image-container">
+                    <input type="file" accept="image/*" (change)="handleImageFileChange($event)" />
+                    <img *ngIf="previewImageUrl" [src]="previewImageUrl" class="preview-image" />
+                    <div class="image-edit-actions">
+                        <button (click)="saveImage()" class="save-button">💾</button>
+                        <button (click)="editingImage = false; selectedImageFile = null"
+                            class="cancel-button">❌</button>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <!-- Género -->
-            <p class="genre" *ngIf="!editingGenre">
-                Género: {{ band.genre }}
-                <button class="edit-button" (click)="enableGenreEdit()">✏️</button>
+        <div class="band-details">
+            <p class="description" *ngIf="!editingDescription">
+                Descripción: {{ band.description }}
+                <button class="edit-button" (click)="enableDescriptionEdit()">✏️</button>
             </p>
-            <div *ngIf="editingGenre" class="edit-genre-form">
-                <select [(ngModel)]="temporaryGenre" name="genre" class="filter-select">
-                    <option value="" disabled>Selecciona un género</option>
-                    <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
-                </select>
-                <button (click)="saveGenre()" class="save-button">💾</button>
-                <button (click)="cancelGenreEdit()" class="cancel-button">❌</button>
+
+            <div *ngIf="editingDescription" class="edit-description-container">
+                <textarea [(ngModel)]="temporaryDescription" rows="3" class="edit-description-input"></textarea>
+                <button (click)="saveDescription()" class="save-button">💾</button>
+                <button (click)="cancelDescriptionEdit()" class="cancel-button">❌</button>
             </div>
 
-            <!-- Imagen de la banda -->
-            <div class="image-edit-container" *ngIf="!editingImage">
-                <button class="edit-button" (click)="editingImage = true">🖼️ Cambiar imagen</button>
-            </div>
-
-            <div *ngIf="editingImage" class="edit-image-container">
-                <input type="file" accept="image/*" (change)="handleImageFileChange($event)" />
-                <img *ngIf="previewImageUrl" [src]="previewImageUrl" class="preview-image" />
-                <div class="image-edit-actions">
-                    <button (click)="saveImage()" class="save-button">💾</button>
-                    <button (click)="editingImage = false; selectedImageFile = null" class="cancel-button">❌</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="band-details">
-        <p class="description" *ngIf="!editingDescription">
-            Descripción: {{ band.description }}
-            <button class="edit-button" (click)="enableDescriptionEdit()">✏️</button>
-        </p>
-
-        <div *ngIf="editingDescription" class="edit-description-container">
-            <textarea [(ngModel)]="temporaryDescription" rows="3" class="edit-description-input"></textarea>
-            <button (click)="saveDescription()" class="save-button">💾</button>
-            <button (click)="cancelDescriptionEdit()" class="cancel-button">❌</button>
+            <p cla1s="description">⭐ Rating: {{ band.averageRating || 'Sin valoraciones' }}</p>
+            <p class="description">💬 Total Reviews: {{ band.totalReviews || 0 }}</p>
+            <p class="description">💬 Subscritores: {{ band.subscribersCount || 0 }}</p>
         </div>
 
-        <p class="description">⭐ Rating: {{ band.averageRating || 'Sin valoraciones' }}</p>
-        <p class="description">💬 Total Reviews: {{ band.totalReviews || 0 }}</p>
-        <p class="description">💬 Subscritores: {{ band.subscribersCount || 0 }}</p>
-    </div>
+        <!-- Botón para abrir el modal de creación de conciertos -->
+        <button class="btn btn-primary" (click)="openConcertModal()">➕ Nuevo Concierto</button>
 
-    <!-- Botón para abrir el modal de creación de conciertos -->
-    <button class="btn btn-primary" (click)="openConcertModal()">➕ Nuevo Concierto</button>
+        <!-- 🎵 MODAL CREAR CONCIERTO -->
+        <div *ngIf="creatingConcert" class="modal-overlay">
+            <div class="modal-content">
+                <h2>Crear nuevo concierto</h2>
+                <form [formGroup]="concertForm" (ngSubmit)="submitConcert()">
+                    <div class="form-group">
+                        <label for="title">Título</label>
+                        <input id="title" formControlName="title" type="text" class="form-control" required>
+                    </div>
 
-    <!-- 🎵 MODAL CREAR CONCIERTO -->
-    <div *ngIf="creatingConcert" class="modal-overlay">
-        <div class="modal-content">
-            <h2>Crear nuevo concierto</h2>
-            <form [formGroup]="concertForm" (ngSubmit)="submitConcert()">
-                <div class="form-group">
-                    <label for="title">Título</label>
-                    <input id="title" formControlName="title" type="text" class="form-control" required>
-                </div>
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <textarea id="description" formControlName="description" class="form-control"
+                            required></textarea>
+                    </div>
 
-                <div class="form-group">
-                    <label for="description">Descripción</label>
-                    <textarea id="description" formControlName="description" class="form-control" required></textarea>
-                </div>
+                    <div class="form-group">
+                        <label for="date">Fecha</label>
+                        <input id="date" formControlName="date" type="date" class="form-control" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="date">Fecha</label>
-                    <input id="date" formControlName="date" type="date" class="form-control" required>
-                </div>
+                    <div class="form-group">
+                        <label for="location">Ubicación</label>
+                        <input id="location" formControlName="location" type="text" class="form-control" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="location">Ubicación</label>
-                    <input id="location" formControlName="location" type="text" class="form-control" required>
-                </div>
+                    <div class="form-group">
+                        <label for="image">Imagen</label>
+                        <input id="image" type="file" class="form-control" (change)="onConcertImageChange($event)"
+                            required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="image">Imagen</label>
-                    <input id="image" type="file" class="form-control" (change)="onConcertImageChange($event)" required>
-                </div>
-
-                <div class="modal-actions">
-                    <button type="submit" class="btn btn-success" [disabled]="concertForm.invalid">Crear</button>
-                    <button type="button" class="btn btn-secondary" (click)="closeConcertModal()">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Conciertos Futuros -->
-    <div class="concerts-section">
-        <h2>🎤 Próximos Conciertos</h2>
-        <div *ngIf="band.upcomingConcerts.length > 0; else noUpcomingConcerts" class="concerts-container">
-            <div class="concert-card upcoming" *ngFor="let concert of band.upcomingConcerts"
-                (click)="goToConcert(concert)">
-                <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
-                <h1>{{concert.id}}</h1>
-                <h3>{{ concert.title }}</h3>
-                <p class="date">{{ concert.date | date: 'fullDate' }}</p>
-                <p class="location">{{ concert.location }}</p>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-success" [disabled]="concertForm.invalid">Crear</button>
+                        <button type="button" class="btn btn-secondary" (click)="closeConcertModal()">Cancelar</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
 
-    <!-- Conciertos Pasados -->
-    <div class="concerts-section">
-        <h2>🎸 Conciertos Pasados</h2>
-        <div *ngIf="band.pastConcerts.length > 0; else noPastConcerts" class="concerts-container">
-            <div class="concert-card past" *ngFor="let concert of band.pastConcerts" (click)="goToConcert(concert)">
-                <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
-                <h3>{{ concert.title }}</h3>
-                <p class="date">{{ concert.date | date: 'fullDate' }}</p>
-                <p class="location">{{ concert.location }}</p>
-                <p class="ended-message">🚫 Este concierto ha finalizado</p>
+        <!-- Conciertos Futuros -->
+        <div class="concerts-section">
+            <h2>🎤 Próximos Conciertos</h2>
+            <div *ngIf="band.upcomingConcerts.length > 0; else noUpcomingConcerts" class="concerts-container">
+                <div class="concert-card upcoming" *ngFor="let concert of band.upcomingConcerts"
+                    (click)="goToConcert(concert)">
+                    <button class="btn btn-danger btn-sm" (click)="deleteConcert(concert.id)">🗑 Eliminar</button>
+
+                    <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
+                    <h1>{{concert.id}}</h1>
+                    <h3>{{ concert.title }}</h3>
+                    <p class="date">{{ concert.date | date: 'fullDate' }}</p>
+                    <p class="location">{{ concert.location }}</p>
+                </div>
             </div>
         </div>
+
+        <!-- Conciertos Pasados -->
+        <div class="concerts-section">
+            <h2>🎸 Conciertos Pasados</h2>
+            <div *ngIf="band.pastConcerts.length > 0; else noPastConcerts" class="concerts-container">
+                <div class="concert-card past" *ngFor="let concert of band.pastConcerts" (click)="goToConcert(concert)">
+                    <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
+                    <h3>{{ concert.title }}</h3>
+                    <p class="date">{{ concert.date | date: 'fullDate' }}</p>
+                    <p class="location">{{ concert.location }}</p>
+                    <p class="ended-message">🚫 Este concierto ha finalizado</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensajes si no hay conciertos -->
+        <ng-template #noUpcomingConcerts>
+            <p class="no-concerts">❌ No hay conciertos futuros programados.</p>
+        </ng-template>
+
+        <ng-template #noPastConcerts>
+            <p class="no-concerts">❌ No hay conciertos pasados.</p>
+        </ng-template>
     </div>
 
-    <!-- Mensajes si no hay conciertos -->
-    <ng-template #noUpcomingConcerts>
-        <p class="no-concerts">❌ No hay conciertos futuros programados.</p>
+    <!-- Si la banda aún no está cargada -->
+    <ng-template #loading>
+        <p class="loading-text">⏳ Cargando datos...</p>
     </ng-template>
-
-    <ng-template #noPastConcerts>
-        <p class="no-concerts">❌ No hay conciertos pasados.</p>
-    </ng-template>
-</div>
-
-<!-- Si la banda aún no está cargada -->
-<ng-template #loading>
-    <p class="loading-text">⏳ Cargando datos...</p>
-</ng-template>
+</main>

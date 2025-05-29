@@ -6,11 +6,13 @@ import { BandsService } from '../../../services/bands.service';
 import { ConcertsService } from '../../../services/concerts.service';
 import { BaseConcert } from '../../../interfaces/concert';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
+import { NavbarbandsComponent } from "../../layout/navbarbands/navbarbands.component";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-band-panel',
   standalone: true,
-  imports: [NgIf, NgFor, DatePipe, FormsModule, ReactiveFormsModule],
+  imports: [NgIf, NgFor, DatePipe, FormsModule, ReactiveFormsModule, NavbarbandsComponent],
   templateUrl: './band-panel.component.html',
   styleUrl: './band-panel.component.css'
 })
@@ -226,4 +228,31 @@ export class BandPanel implements OnInit {
       }
     });
   }
+
+  deleteConcert(concertId: string): void {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el concierto permanentemente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.concertsService.deleteConcert(concertId).subscribe({
+          next: () => {
+            // Eliminar de la lista local
+            this.band.upcomingConcerts = this.band.upcomingConcerts.filter(c => c.id !== concertId);
+
+            Swal.fire('¡Eliminado!', 'El concierto ha sido eliminado.', 'success');
+          },
+          error: (err) => {
+            console.error('❌ Error al eliminar el concierto:', err);
+            Swal.fire('Error', 'No se pudo eliminar el concierto.', 'error');
+          }
+        });
+      }
+    });
+  }
+
 }

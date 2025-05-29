@@ -33,6 +33,8 @@ export class AuthService {
         console.log('Usuario recibido:', user); // 👀
         localStorage.setItem('token', user.token || '');
         localStorage.setItem('userId', user.id || '');
+        localStorage.setItem('role', user.role || '');
+
         this.userSubject.next(user);
       }));
   }
@@ -57,6 +59,8 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('userId');
 
     this.userSubject.next(null);
 

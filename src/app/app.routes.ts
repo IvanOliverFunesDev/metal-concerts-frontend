@@ -13,40 +13,41 @@ import { ProfileComponent } from './components/users/profile/profile.component';
 import { FavoritesConcertsPageComponent } from './components/users/favorites-concerts-page/favorites-concerts-page.component';
 import { SubscriptionsPageComponent } from './components/users/subscriptions-page/subscriptions-page.component';
 import { BandPanel } from './components/bands/band-panel/band-panel.component';
+import { bandOnlyGuard, redirectPanelGuard } from './shared/guards/auth.guard';
 export const routes: Routes = [
     {
         path: '', component: MainComponent, children: [
             {
-                path: 'home', component: HomePageComponent
+                path: 'home', component: HomePageComponent, canMatch: [redirectPanelGuard]
             },
             {
-                path: 'concerts-page', component: ConcertsPageComponent
+                path: 'concerts-page', component: ConcertsPageComponent, canMatch: [redirectPanelGuard]
             },
             {
-                path: 'bands-page', component: BandsPageComponent
+                path: 'bands-page', component: BandsPageComponent, canMatch: [redirectPanelGuard]
             },
             {
-                path: 'concert/:id', component: ConcertDetailsPageComponent
+                path: 'concert/:id', component: ConcertDetailsPageComponent, canMatch: [redirectPanelGuard]
             },
             {
-                path: 'band/:id', component: SeeBandsDetailsComponent
-            },
-            {
-                path: 'band-panel', component: BandPanel
+                path: 'band/:id', component: SeeBandsDetailsComponent, canMatch: [redirectPanelGuard]
             },
             {
                 path: '', redirectTo: 'home', pathMatch: 'full'
             },
             {
-                path: 'profile', component: ProfileComponent
+                path: 'profile', component: ProfileComponent, canMatch: [redirectPanelGuard]
             },
             {
-                path: 'favorites-concerts', component: FavoritesConcertsPageComponent
+                path: 'favorites-concerts', component: FavoritesConcertsPageComponent, canMatch: [redirectPanelGuard]
             },
             {
-                path: 'subcriptions', component: SubscriptionsPageComponent
+                path: 'subcriptions', component: SubscriptionsPageComponent, canMatch: [redirectPanelGuard]
             },
         ],
+    },
+    {
+        path: 'band-panel', component: BandPanel, canMatch: [bandOnlyGuard]
     },
     {
         path: 'login', component: LoginComponent

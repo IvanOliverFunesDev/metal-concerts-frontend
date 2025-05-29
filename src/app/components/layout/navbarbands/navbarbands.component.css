@@ -1,0 +1,133 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 18px 100px;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  z-index: 100;
+  transition: 0.3s ease-in-out;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent);
+  transition: 0.5s;
+}
+
+.header:hover::before {
+  left: 100%;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  position: relative;
+  z-index: 101;
+  /* Para que quede encima del efecto */
+}
+
+/* ===== Icono del menú hamburguesa ===== */
+#menu-icon {
+  font-size: 32px;
+  color: white;
+  cursor: pointer;
+  display: none;
+  /* Oculto en escritorio */
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+  z-index: 101;
+  /* Para que quede encima */
+}
+
+#menu-icon.active {
+  transform: rotate(180deg);
+}
+
+.navbar {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: 0.3s;
+  position: relative;
+  z-index: 101;
+}
+
+.navbar a:hover {
+  color: #ff00ff;
+}
+
+.nav-bg {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+/* ===== RESPONSIVE: Móviles y Tablets ===== */
+@media (max-width: 768px) {
+  #menu-icon {
+    display: block;
+    /* Mostrar en móviles */
+  }
+
+  /* Menú desplegable más grande y mejor estructurado */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    font-size: 24px;
+    transition: left 0.3s ease-in-out;
+  }
+
+  /* Cuando el menú está activo */
+  .navbar.active {
+    left: 0;
+  }
+
+  /* Efecto de fondo oscuro al abrir el menú */
+  .nav-bg.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Efecto de transformación del menú hamburguesa */
+  #menu-icon.active::before {
+    content: "\f00d";
+    /* Código Unicode de FontAwesome para el icono "X" */
+  }
+}
