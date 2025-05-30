@@ -5,6 +5,7 @@
     <!-- Mostrar solo cuando la banda está cargada -->
     <div class="band-profile" *ngIf="band; else loading">
         <!-- Imagen principal editable -->
+
         <div class="band-hero" [style.backgroundImage]="'url(' + (band.image || 'noImageBand.png') + ')'">
             <div class="overlay">
                 <!-- Nombre con botón de edición -->
@@ -69,6 +70,22 @@
 
         <!-- Botón para abrir el modal de creación de conciertos -->
         <button class="buttonEditConcert" (click)="openConcertModal()">➕ Nuevo Concierto</button>
+
+        <!-- ver subcriptores -->
+        <button (click)="loadSubscribers()">👥 Ver suscriptores</button>
+
+        <div *ngIf="showSubscribersModal" class="modal-subscribers-overlay">
+            <div class="modal-subscribers">
+                <h2>👥 Lista de suscriptores</h2>
+                <ul>
+                    <li *ngFor="let user of subscribers">
+                        <strong>{{ user.username }}</strong> – {{ user.email }}
+                    </li>
+                </ul>
+                <button (click)="closeSubscribersModal()">Cerrar</button>
+            </div>
+        </div>
+        <!--  -->
 
         <!-- 🎵 MODAL CREAR CONCIERTO -->
         <div *ngIf="creatingConcert" class="modal-overlay">

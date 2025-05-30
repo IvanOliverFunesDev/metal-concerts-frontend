@@ -40,6 +40,9 @@ export class BandPanel implements OnInit {
   concertForm!: FormGroup;
   concertImageFile: File | null = null;
 
+  subscribers: any[] = [];
+  showSubscribersModal = false;
+
   constructor(
     private router: Router,
     public bandsService: BandsService,
@@ -254,5 +257,20 @@ export class BandPanel implements OnInit {
       }
     });
   }
+  loadSubscribers(): void {
+    this.bandsService.getSubscribers().subscribe({
+      next: (res) => {
+        this.subscribers = res.data;
+        console.log(res.data)
+        this.showSubscribersModal = true;
+      },
+      error: (err) => {
+        console.error('Error cargando suscriptores:', err);
+      }
+    });
+  }
 
+  closeSubscribersModal(): void {
+    this.showSubscribersModal = false;
+  }
 }

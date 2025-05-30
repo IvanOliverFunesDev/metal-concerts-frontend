@@ -163,7 +163,9 @@ export class BandsService {
     );
   }
 
-
+  getSubscribers() {
+    return this.http.get<{ data: any[] }>('https://metal-concerts-backend.onrender.com/api/v1/subscriptions/subscribers');
+  }
 
 
 }
