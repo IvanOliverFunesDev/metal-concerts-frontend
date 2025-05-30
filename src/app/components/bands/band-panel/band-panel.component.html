@@ -62,13 +62,13 @@
                 <button (click)="cancelDescriptionEdit()" class="cancel-button">❌</button>
             </div>
 
-            <p cla1s="description">⭐ Rating: {{ band.averageRating || 'Sin valoraciones' }}</p>
+            <p class="description">⭐ Rating: {{ band.averageRating || 'Sin valoraciones' }}</p>
             <p class="description">💬 Total Reviews: {{ band.totalReviews || 0 }}</p>
             <p class="description">💬 Subscritores: {{ band.subscribersCount || 0 }}</p>
         </div>
 
         <!-- Botón para abrir el modal de creación de conciertos -->
-        <button class="btn btn-primary" (click)="openConcertModal()">➕ Nuevo Concierto</button>
+        <button class="buttonEditConcert" (click)="openConcertModal()">➕ Nuevo Concierto</button>
 
         <!-- 🎵 MODAL CREAR CONCIERTO -->
         <div *ngIf="creatingConcert" class="modal-overlay">
@@ -116,13 +116,12 @@
             <div *ngIf="band.upcomingConcerts.length > 0; else noUpcomingConcerts" class="concerts-container">
                 <div class="concert-card upcoming" *ngFor="let concert of band.upcomingConcerts"
                     (click)="goToConcert(concert)">
-                    <button class="btn btn-danger btn-sm" (click)="deleteConcert(concert.id)">🗑 Eliminar</button>
 
                     <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">
-                    <h1>{{concert.id}}</h1>
                     <h3>{{ concert.title }}</h3>
                     <p class="date">{{ concert.date | date: 'fullDate' }}</p>
                     <p class="location">{{ concert.location }}</p>
+                    <button class="buttonDelete" (click)="deleteConcert(concert.id)">🗑</button>
                 </div>
             </div>
         </div>

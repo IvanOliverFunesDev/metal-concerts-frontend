@@ -19,36 +19,34 @@
     align-items: center;
     justify-content: center;
     position: relative;
+}
 
-    .overlay {
-        background: rgba(0, 0, 0, 0.6);
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        text-align: center;
+.band-hero .overlay {
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
 
-        h1 {
-            font-size: 2.5rem;
-            margin: 0;
-        }
+.band-hero .overlay h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
 
-        .genre {
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-    }
+.band-hero .overlay .genre {
+    font-size: 1.2rem;
+    opacity: 0.8;
 }
 
 .band-details {
     text-align: center;
     max-width: 700px;
     padding: 20px;
-
-
 }
 
 .description {
@@ -69,149 +67,150 @@
 .concerts-section {
     margin: 40px 0;
     text-align: center;
-
-    h2 {
-        color: #ff00ff;
-        font-size: 2rem;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        letter-spacing: 1px;
-    }
 }
 
-.subscribe-button {
-    background-color: #FF0000;
-    /* Rojo YouTube */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+.concerts-section h2 {
+    color: #ff00ff;
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
 }
-
-.subscribe-button:hover {
-    background-color: #e60000;
-    /* Un rojo más oscuro al pasar el ratón */
-}
-
-.subscribed-button {
-    background-color: #4CAF50;
-    /* Verde para "subscribed" */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.subscribed-button:hover {
-    background-color: #45a049;
-    /* Verde más oscuro al pasar el ratón */
-}
-
 
 /* Contenedor de las tarjetas */
 .concerts-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* 4 tarjetas por fila */
     gap: 20px;
     padding: 20px;
+}
 
-    @media (max-width: 1200px) {
+@media (max-width: 1200px) {
+    .concerts-container {
         grid-template-columns: repeat(3, 1fr);
-        /* 3 tarjetas por fila en pantallas más pequeñas */
-    }
-
-    @media (max-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 tarjetas por fila en tablets */
-    }
-
-    @media (max-width: 480px) {
-        grid-template-columns: 1fr;
-        /* 1 tarjeta por fila en móviles */
     }
 }
 
-/* Tarjetas de conciertos */
+@media (max-width: 768px) {
+    .concerts-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .concerts-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tarjetas de conciertos con estilos de .card */
 .concert-card {
-    background: #1a1a1a;
+    position: relative;
+    width: 250px;
+    height: 300px;
+    background-color: #1a1a1a;
     border-radius: 10px;
     overflow: hidden;
-    /* Para que la imagen no sobresalga */
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0px 4px 15px rgba(255, 0, 255, 0.3);
-    border: 2px solid transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 6px 20px rgba(255, 0, 255, 0.5);
-        border-color: #ff00ff;
+.concert-card:hover {
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.8);
+}
+
+.concert-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 2px solid #ff00ff;
+}
+
+.concert-card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #ff00ff;
+}
+
+.concert-card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #fff;
+}
+
+.concert-card .date {
+    font-weight: bold;
+    color: #ff00ff;
+}
+
+.concert-card .location {
+    font-style: italic;
+}
+
+.concert-card .ended-message {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #ff4444;
+    margin-top: 10px;
+}
+
+/* Favorito (si lo usas en el futuro) */
+.favorite-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 30px;
+    color: #ff00ff;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.favorite-icon:hover {
+    transform: scale(1.3);
+}
+
+/* Animaciones del corazón */
+@keyframes pulseIn {
+    0% {
+        transform: scale(0.8);
     }
 
-    img {
-        width: 100%;
-        height: 200px;
-        /* Altura fija para todas las imágenes */
-        object-fit: cover;
-        /* Ajusta la imagen sin distorsionarla */
-        border-bottom: 2px solid #ff00ff;
-        /* Línea decorativa */
+    50% {
+        transform: scale(1.3);
     }
 
-    .card-content {
-        padding: 15px;
-        flex-grow: 1;
-        /* Para que el contenido ocupe el espacio restante */
-
-        h3 {
-            color: #fff;
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #ddd;
-            font-size: 1rem;
-            margin: 5px 0;
-        }
-
-        .date {
-            font-weight: bold;
-            color: #ff00ff;
-        }
-
-        .location {
-            font-style: italic;
-        }
-    }
-
-    &.upcoming {
-        border-left: 5px solid #00ff00;
-        /* Verde para futuros */
-    }
-
-    &.past {
-        border-left: 5px solid #ff0000;
-        /* Rojo para pasados */
-        opacity: 0.7;
-
-        .ended-message {
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: #ff4444;
-            margin-top: 10px;
-        }
+    100% {
+        transform: scale(1.1);
     }
 }
+
+@keyframes pulseOut {
+    0% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.fa-heart.filled {
+    animation: pulseIn 0.6s forwards;
+}
+
+.fa-heart.empty {
+    animation: pulseOut 0.6s forwards;
+}
+
 
 /* Estilo general del contenedor de edición */
 .edit-name-container,
@@ -240,37 +239,6 @@
     resize: vertical;
 }
 
-/* Botones de guardar y cancelar */
-.save-button,
-.cancel-button,
-.edit-button {
-    padding: 0.3rem 0.6rem;
-    margin-right: 0.4rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 0.9rem;
-    transition: background-color 0.2s ease-in-out;
-}
-
-/* Colores específicos */
-.save-button {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.cancel-button {
-    background-color: #f44336;
-    color: white;
-}
-
-.edit-button {
-    margin-left: 0.5rem;
-    background-color: #2196F3;
-    color: white;
-}
-
 /* Imagen previa al subir */
 .preview-image {
     width: 100%;
@@ -291,4 +259,209 @@
 .edit-image-container input[type="file"] {
     border: none;
     font-size: 0.9rem;
+}
+
+/* EDITAR */
+.edit-button {
+    background: transparent;
+    border: none;
+    color: #ff00ff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.edit-button:hover {
+    transform: scale(1.2);
+    color: #ff66ff;
+}
+
+/* GUARDAR */
+.save-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.save-button:hover {
+    background-color: #3ddc70;
+}
+
+/* CANCELAR */
+.cancel-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancel-button:hover {
+    background-color: #bd2130;
+}
+
+/* Botón principal "Nuevo Concierto" */
+.buttonEditConcert {
+    background-color: transparent;
+    color: #ff00ff;
+    border: 2px solid #ff00ff;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 0 0 transparent;
+}
+
+.buttonEditConcert:hover {
+    background-color: #ff00ff;
+    color: #000;
+    box-shadow: 0 0 12px #ff00ff;
+}
+
+/* Fondo oscuro + blur del modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background: #1a1a1a;
+    border: 2px solid #ff00ff;
+    border-radius: 12px;
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+    animation: scaleIn 0.3s ease;
+}
+
+/* Grupos de inputs */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    color: #ccc;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Estilo de inputs y textarea */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background-color: #111;
+    color: #fff;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: #ff00ff;
+    outline: none;
+    box-shadow: 0 0 8px #ff00ff;
+}
+
+/* Botones del modal */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Crear */
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #3ddc70;
+}
+
+/* Cancelar */
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Animaciones de aparición */
+@keyframes fadeIn {
+    from {
+        background-color: rgba(10, 10, 10, 0);
+    }
+
+    to {
+        background-color: rgba(10, 10, 10, 0.8);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.buttonDelete {
+    background-color: transparent;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonDelete:hover {
+    color: #000;
 }

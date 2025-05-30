@@ -25,8 +25,13 @@ export class NavbarComponent {
     this.menuActive = false;
   }
   logout(): void {
-    this.authService.logout(); // Ahora es una función sin Observable
-    this.router.navigateByUrl('/'); // 🔥 Redirigir a Home tras cerrar sesión
+    this.authService.logout();
+
+    if (this.router.url === '/home') {
+      window.location.reload(); // ya estás en home, recarga la página
+    } else {
+      this.router.navigateByUrl('/home');
+    }
   }
 
 }
