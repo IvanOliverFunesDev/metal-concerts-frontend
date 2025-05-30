@@ -32,8 +32,8 @@ export class LoginComponent {
           }).then(() => {
             const roleRoutes: { [key: string]: string } = {
               user: '/home',
-              band: '/band-panel'
-              //admin: '/home' crear ruta corresta
+              band: '/band-panel',
+              admin: '/admin-panel'
             };
 
             const route = roleRoutes[role];

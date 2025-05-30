@@ -13,7 +13,9 @@ import { ProfileComponent } from './components/users/profile/profile.component';
 import { FavoritesConcertsPageComponent } from './components/users/favorites-concerts-page/favorites-concerts-page.component';
 import { SubscriptionsPageComponent } from './components/users/subscriptions-page/subscriptions-page.component';
 import { BandPanel } from './components/bands/band-panel/band-panel.component';
-import { bandOnlyGuard, redirectPanelGuard } from './shared/guards/auth.guard';
+import { AdminComponent } from './components/admin/admin.component';
+
+import { adminOnlyGuard, authGuard, bandOnlyGuard, redirectPanelGuard } from './shared/guards/auth.guard';
 export const routes: Routes = [
     {
         path: '', component: MainComponent, children: [
@@ -36,18 +38,21 @@ export const routes: Routes = [
                 path: '', redirectTo: 'home', pathMatch: 'full'
             },
             {
-                path: 'profile', component: ProfileComponent, canMatch: [redirectPanelGuard]
+                path: 'profile', component: ProfileComponent, canMatch: [redirectPanelGuard, authGuard]
             },
             {
-                path: 'favorites-concerts', component: FavoritesConcertsPageComponent, canMatch: [redirectPanelGuard]
+                path: 'favorites-concerts', component: FavoritesConcertsPageComponent, canMatch: [redirectPanelGuard, authGuard]
             },
             {
-                path: 'subcriptions', component: SubscriptionsPageComponent, canMatch: [redirectPanelGuard]
+                path: 'subcriptions', component: SubscriptionsPageComponent, canMatch: [redirectPanelGuard, authGuard]
             },
         ],
     },
     {
         path: 'band-panel', component: BandPanel, canMatch: [bandOnlyGuard]
+    },
+    {
+        path: 'admin-panel', component: AdminComponent, canMatch: [adminOnlyGuard]
     },
     {
         path: 'login', component: LoginComponent

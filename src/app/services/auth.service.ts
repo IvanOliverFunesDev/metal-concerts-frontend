@@ -82,7 +82,6 @@ export class AuthService {
     return this.http.post<{ success: boolean, message: string }>(
       `${this.apiUrl}/verify-reset-code`,
       { email, code },
-      { withCredentials: true }
     ).pipe(
       tap(() => {
         console.log("🚫 email enviado correctamente"); // 🔥 PRUEBA
@@ -94,7 +93,6 @@ export class AuthService {
     return this.http.post<{ success: boolean, message: string }>(
       `${this.apiUrl}/reset-password`,
       { email, code, newPassword, confirmPassword },
-      { withCredentials: true }
     )
   }
 

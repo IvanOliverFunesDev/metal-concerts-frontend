@@ -1,1 +1,18 @@
-<p>admin works!</p>
+<div class="band-table">
+  <div *ngFor="let band of pendingBands" class="band-row" (click)="toggleDetails(band._id)">
+    <div class="band-name">
+      {{ band.bandName }}
+    </div>
+
+    <div *ngIf="expandedBandId === band._id" class="band-details">
+      <p><strong>Email:</strong> {{ band.email }}</p>
+      <p><strong>Género:</strong> {{ band.genre }}</p>
+      <p><strong>Descripción:</strong> {{ band.description }}</p>
+
+      <div class="actions">
+        <button (click)="approveBand(band._id); $event.stopPropagation()">✅ Aprobar</button>
+        <button (click)="rejectBand(band._id); $event.stopPropagation()">❌ Rechazar</button>
+      </div>
+    </div>
+  </div>
+</div>
