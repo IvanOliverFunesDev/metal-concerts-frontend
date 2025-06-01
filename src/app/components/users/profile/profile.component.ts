@@ -4,10 +4,11 @@ import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
 import { DatePipe, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { SliderComponent } from '../../layout/slider/slider.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [DatePipe, RouterLink, NgIf],
+  imports: [DatePipe, RouterLink, NgIf, SliderComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -33,9 +34,6 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  logout(): void {
-    this.authService.logout(); // Ahora es una función sin Observable
-    this.router.navigateByUrl('/home'); // 🔥 Redirigir a Home tras cerrar sesión
-  }
+
 
 }
