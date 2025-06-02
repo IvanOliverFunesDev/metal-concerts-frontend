@@ -157,3 +157,23 @@ p {
         transform: rotate(0deg);
     }
 }
+
+.login .inputBx select {
+    position: relative;
+    width: 100%;
+    padding: 12px 20px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    font-size: 1.2em;
+    color: #fff;
+    box-shadow: none;
+    outline: none;
+    appearance: none;
+    /* Elimina flecha nativa para personalizar si quieres */
+}
+
+.login .inputBx select option {
+    background-color: #111;
+    color: #fff;
+}
