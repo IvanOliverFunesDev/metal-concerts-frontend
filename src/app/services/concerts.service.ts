@@ -154,8 +154,8 @@ export class ConcertsService {
     );
   }
 
-  updateConcert(concertId: string, data: FormData): Observable<any> {
-    return this.http.put<{ success: boolean; message: string; data: any }>(
+  updateConcert(concertId: string, data: FormData): Observable<Concert> {
+    return this.http.put<{ success: boolean; message: string; data: Concert }>(
       `${this.apiUrl}/${concertId}`,
       data
     ).pipe(

@@ -90,7 +90,7 @@
         <!-- 🎵 MODAL CREAR CONCIERTO -->
         <div *ngIf="creatingConcert" class="modal-overlay">
             <div class="modal-content">
-                <h2>Crear nuevo concierto</h2>
+                <h2>{{ editingConcert ? 'Editar concierto' : 'Crear nuevo concierto' }}</h2>
                 <form [formGroup]="concertForm" (ngSubmit)="submitConcert()">
                     <div class="form-group">
                         <label for="title">Título</label>
@@ -110,17 +110,23 @@
 
                     <div class="form-group">
                         <label for="location">Ubicación</label>
-                        <input id="location" formControlName="location" type="text" class="form-control" required>
+                        <select id="location" formControlName="location" class="form-control" required>
+                            <option value="" disabled selected>Selecciona una ubicación</option>
+                            <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+                        </select>
                     </div>
+
 
                     <div class="form-group">
                         <label for="image">Imagen</label>
-                        <input id="image" type="file" class="form-control" (change)="onConcertImageChange($event)"
-                            required>
+                        <input id="image" type="file" class="form-control" (change)="onConcertImageChange($event)">
                     </div>
 
+
                     <div class="modal-actions">
-                        <button type="submit" class="btn btn-success" [disabled]="concertForm.invalid">Crear</button>
+                        <button type="submit" class="btn btn-success" [disabled]="concertForm.invalid">
+                            {{ editingConcert ? 'Guardar cambios' : 'Crear' }}
+                        </button>
                         <button type="button" class="btn btn-secondary" (click)="closeConcertModal()">Cancelar</button>
                     </div>
                 </form>
@@ -139,6 +145,8 @@
                     <p class="date">{{ concert.date | date: 'fullDate' }}</p>
                     <p class="location">{{ concert.location }}</p>
                     <button class="buttonDelete" (click)="deleteConcert(concert.id)">🗑</button>
+                    <button class="buttonDelete"
+                        (click)="openConcertModal(concert); $event.stopPropagation()">✏️</button>
                 </div>
             </div>
         </div>

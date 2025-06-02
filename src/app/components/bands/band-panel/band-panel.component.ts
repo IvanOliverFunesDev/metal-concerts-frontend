@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { BandsService } from '../../../services/bands.service';
 import { ConcertsService } from '../../../services/concerts.service';
-import { BaseConcert } from '../../../interfaces/concert';
+import { BaseConcert, Concert } from '../../../interfaces/concert';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
 import { NavbarbandsComponent } from "../../layout/navbarbands/navbarbands.component";
 import Swal from 'sweetalert2';
@@ -42,6 +42,11 @@ export class BandPanel implements OnInit {
 
   subscribers: any[] = [];
   showSubscribersModal = false;
+
+  locations: string[] = [];
+
+  editingConcert: Concert | null = null;
+
 
   constructor(
     private router: Router,
@@ -83,7 +88,22 @@ export class BandPanel implements OnInit {
       next: (data) => this.genres = data,
       error: (err) => console.error('❌ Error cargando géneros:', err)
     });
+
+    this.concertsService.getLocationsConcerts().subscribe({
+      next: (data) => {
+        this.locations = data;
+      },
+      error: (err) => console.error('Error cargando ubicaciones:', err)
+    });
+
+    this.concertsService.getLocationsConcerts().subscribe({
+      next: (data) => {
+        this.locations = data;
+      },
+      error: (err) => console.error('Error cargando ubicaciones:', err)
+    });
   }
+
 
   goToConcert(concert: BaseConcert): void {
     const concertId = concert.id;
@@ -194,15 +214,30 @@ export class BandPanel implements OnInit {
     });
   }
 
-  openConcertModal(): void {
+  openConcertModal(concert?: Concert): void {
     this.creatingConcert = true;
+    this.editingConcert = concert || null;
+
+    if (concert) {
+      this.concertForm.patchValue({
+        title: concert.title,
+        description: concert.description,
+        date: concert.date?.toString().substring(0, 10),
+        location: concert.location
+      });
+    } else {
+      this.concertForm.reset();
+      this.concertImageFile = null;
+    }
   }
 
   closeConcertModal(): void {
     this.creatingConcert = false;
+    this.editingConcert = null;
     this.concertForm.reset();
     this.concertImageFile = null;
   }
+
 
   onConcertImageChange(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -212,24 +247,48 @@ export class BandPanel implements OnInit {
   }
 
   submitConcert(): void {
-    if (!this.concertForm.valid || !this.concertImageFile) return;
+    if (!this.concertForm.valid) return;
 
     const formData = new FormData();
-    formData.append('file', this.concertImageFile);
+    if (this.concertImageFile) {
+      formData.append('file', this.concertImageFile);
+    }
+
     formData.append('title', this.concertForm.value.title!);
     formData.append('description', this.concertForm.value.description!);
     formData.append('date', this.concertForm.value.date!);
     formData.append('location', this.concertForm.value.location!);
 
-    this.concertsService.createConcert(formData).subscribe({
-      next: (concert) => {
-        this.band.upcomingConcerts.push(concert);
-        this.closeConcertModal();
-      },
-      error: (err) => {
-        console.error('❌ Error creando concierto:', err);
-      }
-    });
+    if (this.editingConcert) {
+      // Modo editar
+      this.concertsService.updateConcert(this.editingConcert.id!, formData).subscribe({
+        next: (updatedConcert) => {
+          Swal.fire('✅ Concierto actualizado', 'Los cambios han sido guardados.', 'success')
+            .then(() => {
+              window.location.reload(); // 🔁 Recargar para ver cambios
+            });
+          this.closeConcertModal();
+        },
+
+        error: (err) => {
+          console.error('❌ Error al actualizar concierto:', err);
+          Swal.fire('Error', 'No se pudo actualizar el concierto.', 'error');
+        }
+      });
+    } else {
+      // Modo crear
+      this.concertsService.createConcert(formData).subscribe({
+        next: (concert) => {
+          this.band.upcomingConcerts.push(concert);
+          this.closeConcertModal();
+          Swal.fire('✅ Concierto creado', '', 'success');
+        },
+        error: (err) => {
+          console.error('❌ Error creando concierto:', err);
+          Swal.fire('Error', 'No se pudo crear el concierto.', 'error');
+        }
+      });
+    }
   }
 
   deleteConcert(concertId: string): void {
