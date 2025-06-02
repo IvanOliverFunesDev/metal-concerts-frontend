@@ -4,11 +4,13 @@ import { BandsService } from '../../../services/bands.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { BandsListComponent } from '../../bands/bands-list/bands-list.component';
+import { SliderComponent } from '../../layout/slider/slider.component';
 
 @Component({
   selector: 'app-subscriptions-page',
-  imports: [BandsListComponent, RouterLink],
+  imports: [BandsListComponent, RouterLink, SliderComponent],
   templateUrl: './subscriptions-page.component.html',
+  standalone: true,
   styleUrl: './subscriptions-page.component.css'
 })
 export class SubscriptionsPageComponent implements OnInit {

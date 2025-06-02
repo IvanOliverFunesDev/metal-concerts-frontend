@@ -44,7 +44,7 @@ export const routes: Routes = [
                 path: 'favorites-concerts', component: FavoritesConcertsPageComponent, canMatch: [redirectPanelGuard, authGuard]
             },
             {
-                path: 'subcriptions', component: SubscriptionsPageComponent, canMatch: [redirectPanelGuard, authGuard]
+                path: 'subscriptions', component: SubscriptionsPageComponent, canMatch: [redirectPanelGuard, authGuard]
             },
         ],
     },
