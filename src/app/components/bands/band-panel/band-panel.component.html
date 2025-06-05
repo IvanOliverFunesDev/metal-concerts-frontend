@@ -27,7 +27,7 @@
                 </p>
                 <div *ngIf="editingGenre" class="edit-genre-form">
                     <select [(ngModel)]="temporaryGenre" name="genre" class="filter-select">
-                        <option value="" disabled>Selecciona un género</option>
+                        <option value="" disabled>Select a genre</option>
                         <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
                     </select>
                     <button (click)="saveGenre()" class="save-button">💾</button>
@@ -93,7 +93,7 @@
                 <h2>{{ editingConcert ? 'Editar concierto' : 'Crear nuevo concierto' }}</h2>
                 <form [formGroup]="concertForm" (ngSubmit)="submitConcert()">
                     <div class="form-group">
-                        <label for="title">Título</label>
+                        <label for="title">Title</label>
                         <input id="title" formControlName="title" type="text" class="form-control" required>
                     </div>
 
@@ -104,12 +104,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="date">Fecha</label>
+                        <label for="date">Date</label>
                         <input id="date" formControlName="date" type="date" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="location">Ubicación</label>
+                        <label for="location">Location</label>
                         <select id="location" formControlName="location" class="form-control" required>
                             <option value="" disabled selected>Selecciona una ubicación</option>
                             <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
@@ -160,23 +160,23 @@
                     <h3>{{ concert.title }}</h3>
                     <p class="date">{{ concert.date | date: 'fullDate' }}</p>
                     <p class="location">{{ concert.location }}</p>
-                    <p class="ended-message">🚫 Este concierto ha finalizado</p>
+                    <p class="ended-message">🚫 This concert has ended</p>
                 </div>
             </div>
         </div>
 
         <!-- Mensajes si no hay conciertos -->
         <ng-template #noUpcomingConcerts>
-            <p class="no-concerts">❌ No hay conciertos futuros programados.</p>
+            <p class="no-concerts">❌ No upcoming concerts scheduled.</p>
         </ng-template>
 
         <ng-template #noPastConcerts>
-            <p class="no-concerts">❌ No hay conciertos pasados.</p>
+            <p class="no-concerts">❌ No past concerts.</p>
         </ng-template>
     </div>
 
     <!-- Si la banda aún no está cargada -->
     <ng-template #loading>
-        <p class="loading-text">⏳ Cargando datos...</p>
+        <p class="loading-text">⏳ Loading data...</p>
     </ng-template>
 </main>

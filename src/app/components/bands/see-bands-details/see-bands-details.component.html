@@ -41,22 +41,22 @@
                 <h3>{{ concert.title }}</h3>
                 <p class="date">{{ concert.date | date: 'fullDate' }}</p>
                 <p class="location">{{ concert.location }}</p>
-                <p class="ended-message">🚫 Este concierto ha finalizado</p>
+                <p class="ended-message">🚫 This concert has ended</p>
             </div>
         </div>
     </div>
 
     <!-- Mensajes si no hay conciertos -->
     <ng-template #noUpcomingConcerts>
-        <p class="no-concerts">❌ No hay conciertos futuros programados.</p>
+        <p class="no-concerts">❌ No upcoming concerts scheduled.</p>
     </ng-template>
 
     <ng-template #noPastConcerts>
-        <p class="no-concerts">❌ No hay conciertos pasados.</p>
+        <p class="no-concerts">❌ No past concerts.</p>
     </ng-template>
 </div>
 
 <!-- Si la banda aún no está cargada -->
 <ng-template #loading>
-    <p class="loading-text">⏳ Cargando datos...</p>
+    <p class="loading-text">⏳ Loading data...</p>
 </ng-template>

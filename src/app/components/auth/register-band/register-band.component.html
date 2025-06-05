@@ -23,7 +23,7 @@
 
                 <div class="inputBx">
                     <select formControlName="genre">
-                        <option value="" disabled selected>Selecciona un género</option>
+                        <option value="" disabled selected>Select a genre</option>
                         <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
                     </select>
                     @if (isNotValidField('genre')) {

@@ -15,14 +15,19 @@
     font-size: 16px;
     color: #ff00ff;
     background-color: black;
-    /* Fondo negro */
     border: 1px solid #ff00ff;
     border-radius: 4px;
 }
 
+/* Placeholder style for input */
 .filter-input::placeholder {
     color: #ff00ff;
     opacity: 0.7;
+}
+
+/* Placeholder-like style for empty select */
+.filter-select:invalid {
+    color: rgba(255, 0, 255, 0.7);
 }
 
 .filter-select {

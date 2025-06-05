@@ -4,13 +4,13 @@ import { FavoriteConcert } from '../../../interfaces/concert';
 import { NgFor, NgIf } from '@angular/common';
 import { ConcertsListComponent } from "../../concerts/concerts-list/concerts-list.component";
 import { AuthService } from '../../../services/auth.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { SliderComponent } from '../../layout/slider/slider.component';
 
 
 @Component({
   selector: 'app-favorites-concerts-page',
-  imports: [ConcertsListComponent, RouterLink, SliderComponent],
+  imports: [ConcertsListComponent, SliderComponent],
   templateUrl: './favorites-concerts-page.component.html',
   styleUrl: './favorites-concerts-page.component.css'
 })

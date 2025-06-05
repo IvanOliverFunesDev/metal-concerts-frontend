@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { VeryBasicBand } from '../../../interfaces/band';
 import { BandsService } from '../../../services/bands.service';
 import { AuthService } from '../../../services/auth.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { BandsListComponent } from '../../bands/bands-list/bands-list.component';
 import { SliderComponent } from '../../layout/slider/slider.component';
 
 @Component({
   selector: 'app-subscriptions-page',
-  imports: [BandsListComponent, RouterLink, SliderComponent],
+  imports: [BandsListComponent, SliderComponent],
   templateUrl: './subscriptions-page.component.html',
   standalone: true,
   styleUrl: './subscriptions-page.component.css'

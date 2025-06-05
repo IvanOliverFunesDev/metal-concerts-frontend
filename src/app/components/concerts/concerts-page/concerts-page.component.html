@@ -1,15 +1,16 @@
-<!-- <main> -->
 <form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="filter-bar">
-    <input type="text" placeholder="Título" formControlName="title" class="filter-input">
-    <select formControlName="location" class="filter-select">
-        <option value="" selected>Selecciona una Ubicacion</option>
+    <input type="text" placeholder="Title" formControlName="title" class="filter-input" />
+
+    <select formControlName="location" class="filter-select" required>
+        <option value="" disabled selected hidden>Select a location</option>
         <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
     </select>
-    <select formControlName="genre" class="filter-select">
-        <option value="" selected>Selecciona un género</option>
+
+    <select formControlName="genre" class="filter-select" required>
+        <option value="" disabled selected hidden>Select a genre</option>
         <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
     </select>
 </form>
+
 <app-concerts-list [fetchData]="concertsService.getConcertsAll.bind(concertsService)" [filters]="filterForm.value">
 </app-concerts-list>
-<!-- </main> -->

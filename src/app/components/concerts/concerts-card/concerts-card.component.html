@@ -2,9 +2,9 @@
     <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}" (click)="goToDetails()">
     <div class="card-content">
         <h3>{{ concert.title }}</h3>
-        <p><strong>Fecha:</strong> {{ concert.date | date: 'd MMM y' }}</p>
-        <p><strong>Banda:</strong> {{ concert.band.bandName }}</p>
-        <p><strong>Lugar:</strong> {{ concert.location }}</p>
+        <p><strong>Date:</strong> {{ concert.date | date: 'd MMM y' }}</p>
+        <p><strong>Band:</strong> {{ concert.band.bandName }}</p>
+        <p><strong>Location:</strong> {{ concert.location }}</p>
     </div>
     <i (click)="toggleFavorite(concert)"
         [class]="concert.isFavorite ? 'fa-solid fa-heart filled' : 'fa-regular fa-heart empty'" class="favorite-icon">

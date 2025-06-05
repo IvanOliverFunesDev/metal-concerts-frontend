@@ -25,7 +25,7 @@
                 <h3>{{ related.title }}</h3>
                 <p>{{ related.date | date: 'fullDate' }}</p>
                 <p>{{ related.location }}</p>
-                <p>Banda: {{ related.band.bandName }}</p>
+                <p>Band {{ related.band.bandName }}</p>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
 <div *ngIf="relatedConcerts.length > 0" class="related-concerts">
     <h2>
         Más de {{concert?.band?.bandName}}
-        <a class="view-discography" (click)="goToDetailsBand()">Ver discografía</a>
+        <a class="view-discography" (click)="goToDetailsBand()">View discography</a>
     </h2>
     <div class="related-concerts-container">
         <div class="related-concert-card" *ngFor="let sameBandConcert of concertsOfSameBand"
@@ -82,7 +82,7 @@
                 <label for="comment">Comment:</label>
                 <textarea id="comment" required [(ngModel)]="newReview.comment" name="comment" rows="3"></textarea>
 
-                <button type="submit">Enviar Reseña</button>
+                <button type="submit">Post Review</button>
             </form>
 
         </div>
