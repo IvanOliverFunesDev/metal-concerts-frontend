@@ -1,5 +1,8 @@
 <header class="header">
-    <a routerLink="/" class="logo">Logo</a>
+    <a routerLink="/" class="logo">
+        <img src="logo.png" alt="Logo" class="logo-img" />
+    </a>
+
     <i class="fa-solid fa-bars" id="menu-icon" [class.active]="menuActive" (click)="toggleMenu()"></i>
 
     <nav class="navbar" [class.active]="menuActive">

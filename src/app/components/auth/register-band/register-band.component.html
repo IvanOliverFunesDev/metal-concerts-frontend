@@ -10,14 +10,14 @@
                 <div class="inputBx">
                     <input type="text" placeholder="Band Name" formControlName="bandName" />
                     @if (isNotValidField('bandName')) {
-                    <p class="error">El bandName es requerido</p>
+                    <p class="error">Band name is required</p>
                     }
                 </div>
 
                 <div class="inputBx">
                     <input type="text" placeholder="Description" formControlName="description" />
                     @if (isNotValidField('description')) {
-                    <p class="error">La descripción es requerida</p>
+                    <p class="error">Description is required</p>
                     }
                 </div>
 
@@ -27,21 +27,21 @@
                         <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
                     </select>
                     @if (isNotValidField('genre')) {
-                    <p class="error">El género es requerido</p>
+                    <p class="error">Genre is required</p>
                     }
                 </div>
 
                 <div class="inputBx">
                     <input type="text" placeholder="Email" formControlName="email" />
                     @if (isNotValidField('email')) {
-                    <p class="error">El email es requerido y debe tener un formato válido</p>
+                    <p class="error">Email is required and must have a valid format</p>
                     }
                 </div>
 
                 <div class="inputBx">
                     <input type="password" placeholder="Password" formControlName="password" />
                     @if (isNotValidField('password')) {
-                    <p class="error">La contraseña es requerida y debe tener mínimo 6 caracteres</p>
+                    <p class="error">Password is required and must be at least 6 characters long</p>
                     }
                 </div>
 

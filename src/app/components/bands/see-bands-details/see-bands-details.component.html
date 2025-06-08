@@ -12,7 +12,7 @@
     </div>
 
     <div class="band-details">
-        <p class="description">Descripción: {{ band.description }}</p>
+        <p class="description">Description: {{ band.description }}</p>
         <p class="description">⭐ Rating: {{ band.averageRating || 'Sin valoraciones' }}</p>
         <p class="description">💬 Total Reviews: {{ band.totalReviews || 0 }}</p>
         <p class="description">💬 Subscritores: {{ band.subscribersCount || 0 }}</p>
@@ -20,7 +20,7 @@
 
     <!-- Conciertos Futuros -->
     <div class="concerts-section">
-        <h2>🎤 Próximos Conciertos</h2>
+        <h2>🎤 Upcoming Concerts</h2>
         <div *ngIf="band.upcomingConcerts.length > 0; else noUpcomingConcerts" class="concerts-container">
             <div class="concert-card upcoming" *ngFor="let concert of band.upcomingConcerts"
                 (click)="goToConcert(concert)">
@@ -34,7 +34,7 @@
 
     <!-- Conciertos Pasados -->
     <div class="concerts-section">
-        <h2>🎸 Conciertos Pasados</h2>
+        <h2>🎸 Past Concerts </h2>
         <div *ngIf="band.pastConcerts.length > 0; else noPastConcerts" class="concerts-container">
             <div class="concert-card past" *ngFor="let concert of band.pastConcerts " (click)="goToConcert(concert)">
                 <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">

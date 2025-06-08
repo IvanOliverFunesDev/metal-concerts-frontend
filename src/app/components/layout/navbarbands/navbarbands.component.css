@@ -33,13 +33,18 @@
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
+  display: block;
+  height: 100%;
   position: relative;
-  z-index: 101;
-  /* Para que quede encima del efecto */
+}
+
+.logo-img {
+  position: absolute;
+  top: -40px;
+  /* Ajusta este valor según el diseño */
+  height: 80px;
+  /* Más grande */
+  width: auto;
 }
 
 /* ===== Icono del menú hamburguesa ===== */

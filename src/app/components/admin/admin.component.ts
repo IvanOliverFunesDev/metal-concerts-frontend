@@ -37,49 +37,51 @@ export class AdminComponent implements OnInit {
 
   approveBand(bandId: string): void {
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: '¿Quieres aprobar esta banda?',
+      title: 'Are you sure?',
+      text: 'Do you want to approve this band?',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Sí, aprobar',
-      cancelButtonText: 'Cancelar'
+      confirmButtonText: 'Yes, approve',
+      cancelButtonText: 'Cancel'
     }).then(result => {
       if (result.isConfirmed) {
         this.adminService.approveBand(bandId).subscribe({
           next: () => {
-            Swal.fire('Aprobada', 'La banda ha sido aprobada.', 'success');
+            Swal.fire('Approved', 'The band has been approved.', 'success');
             this.fetchPendingBands();
           },
           error: (err) => {
-            console.error('Error al aprobar banda', err);
-            Swal.fire('Error', 'No se pudo aprobar la banda.', 'error');
+            console.error('Error approving band', err);
+            Swal.fire('Error', 'The band could not be approved.', 'error');
           }
         });
       }
     });
   }
 
+
   rejectBand(bandId: string): void {
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: '¿Quieres rechazar esta banda?',
+      title: 'Are you sure?',
+      text: 'Do you want to reject this band?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sí, rechazar',
-      cancelButtonText: 'Cancelar'
+      confirmButtonText: 'Yes, reject',
+      cancelButtonText: 'Cancel'
     }).then(result => {
       if (result.isConfirmed) {
         this.adminService.rejectBand(bandId).subscribe({
           next: () => {
-            Swal.fire('Rechazada', 'La banda ha sido rechazada.', 'success');
+            Swal.fire('Rejected', 'The band has been rejected.', 'success');
             this.fetchPendingBands();
           },
           error: (err) => {
-            console.error('Error al rechazar banda', err);
-            Swal.fire('Error', 'No se pudo rechazar la banda.', 'error');
+            console.error('Error rejecting band', err);
+            Swal.fire('Error', 'The band could not be rejected.', 'error');
           }
         });
       }
     });
   }
+
 }

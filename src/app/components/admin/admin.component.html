@@ -6,12 +6,12 @@
 
     <div *ngIf="expandedBandId === band._id" class="band-details">
       <p><strong>Email:</strong> {{ band.email }}</p>
-      <p><strong>Género:</strong> {{ band.genre }}</p>
-      <p><strong>Descripción:</strong> {{ band.description }}</p>
+      <p><strong>Genre:</strong> {{ band.genre }}</p>
+      <p><strong>Description:</strong> {{ band.description }}</p>
 
       <div class="actions">
-        <button (click)="approveBand(band._id); $event.stopPropagation()">✅ Aprobar</button>
-        <button (click)="rejectBand(band._id); $event.stopPropagation()">❌ Rechazar</button>
+        <button (click)="approveBand(band._id); $event.stopPropagation()">✅ Approve</button>
+        <button (click)="rejectBand(band._id); $event.stopPropagation()">❌ Reject</button>
       </div>
     </div>
   </div>

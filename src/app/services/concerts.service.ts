@@ -10,9 +10,6 @@ export class ConcertsService {
   private apiUrl = 'https://metal-concerts-backend.onrender.com/api/v1/concerts';
   private apiUrlUser = 'https://metal-concerts-backend.onrender.com/api/v1/users';
 
-  // private apiUrl = 'http://localhost:3000/api/v1/concerts';
-  // private apiUrlUser = 'http://localhost:3000/api/v1/users';
-
   constructor(private http: HttpClient) { }
 
   getConcertsAll(filters: { title?: string; location?: string; date?: string; bandName?: string; genre?: string } = {}): Observable<Concert[]> {

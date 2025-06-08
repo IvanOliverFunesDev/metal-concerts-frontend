@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { ReviewsService } from '../../../services/reviews.service';
 import { Review } from '../../../interfaces/review';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-concert-details-page',
@@ -65,22 +66,39 @@ export class ConcertDetailsPageComponent implements OnInit {
 
     this.reviewsService.postReviews(this.concert.id, this.newReview).subscribe({
       next: (createdReview) => {
-        //------------------------------------------- ESTO ES UN PARCHE, EL BACKEND DEBE DEVOLVER EL DATA POPULADO ACUERDATE CABEZA
         createdReview.user = {
           _id: this.currentUserId!,
           username: 'Tú'
         };
-        //-------------------------------------------
 
         this.reviews.push(createdReview);
-        this.newReview = { rating: 5, comment: '' }; // reset form
-        console.log("hola")
+        this.newReview = { rating: 5, comment: '' };
+        console.log("hola");
       },
       error: (err) => {
-        console.error('Error enviando la review:', err);
+        console.error('Error submitting the review:', err);
+
+        if (err.message === 'You have already reviewed this concert') {
+          Swal.fire({
+            icon: 'warning',
+            title: 'You have already submitted a review',
+            text: 'You can only leave one review per concert.',
+            confirmButtonText: 'Got it'
+          });
+          return;
+        }
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Submission Error',
+          text: 'The review could not be submitted. Please try again later.',
+          confirmButtonText: 'Close'
+        });
       }
+
     });
   }
+
 
   deleteReview() {
     const concertId = this.concert?.id;

@@ -22,7 +22,7 @@
 
                 <!-- Género -->
                 <p class="genre" *ngIf="!editingGenre">
-                    Género: {{ band.genre }}
+                    Genre: {{ band.genre }}
                     <button class="edit-button" (click)="enableGenreEdit()">✏️</button>
                 </p>
                 <div *ngIf="editingGenre" class="edit-genre-form">
@@ -36,7 +36,7 @@
 
                 <!-- Imagen de la banda -->
                 <div class="image-edit-container" *ngIf="!editingImage">
-                    <button class="edit-button" (click)="editingImage = true">🖼️ Cambiar imagen</button>
+                    <button class="edit-button" (click)="editingImage = true">🖼️ Update Image</button>
                 </div>
 
                 <div *ngIf="editingImage" class="edit-image-container">
@@ -53,7 +53,7 @@
 
         <div class="band-details">
             <p class="description" *ngIf="!editingDescription">
-                Descripción: {{ band.description }}
+                Description: {{ band.description }}
                 <button class="edit-button" (click)="enableDescriptionEdit()">✏️</button>
             </p>
 
@@ -69,14 +69,14 @@
         </div>
 
         <!-- Botón para abrir el modal de creación de conciertos -->
-        <button class="buttonEditConcert" (click)="openConcertModal()">➕ Nuevo Concierto</button>
+        <button class="buttonEditConcert" (click)="openConcertModal()">➕ New Concert</button>
 
         <!-- ver subcriptores -->
-        <button (click)="loadSubscribers()">👥 Ver suscriptores</button>
+        <button (click)="loadSubscribers()">👥 See Subscribers</button>
 
         <div *ngIf="showSubscribersModal" class="modal-subscribers-overlay">
             <div class="modal-subscribers">
-                <h2>👥 Lista de suscriptores</h2>
+                <h2>👥 Subscriber List</h2>
                 <ul>
                     <li *ngFor="let user of subscribers">
                         <strong>{{ user.username }}</strong> – {{ user.email }}
@@ -90,7 +90,7 @@
         <!-- 🎵 MODAL CREAR CONCIERTO -->
         <div *ngIf="creatingConcert" class="modal-overlay">
             <div class="modal-content">
-                <h2>{{ editingConcert ? 'Editar concierto' : 'Crear nuevo concierto' }}</h2>
+                <h2>{{ editingConcert ? 'Update Concert' : 'Create New Concert' }}</h2>
                 <form [formGroup]="concertForm" (ngSubmit)="submitConcert()">
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Descripción</label>
+                        <label for="description">Description</label>
                         <textarea id="description" formControlName="description" class="form-control"
                             required></textarea>
                     </div>
@@ -125,17 +125,18 @@
 
                     <div class="modal-actions">
                         <button type="submit" class="btn btn-success" [disabled]="concertForm.invalid">
-                            {{ editingConcert ? 'Guardar cambios' : 'Crear' }}
+                            {{ editingConcert ? 'Save changes' : 'Create' }}
                         </button>
-                        <button type="button" class="btn btn-secondary" (click)="closeConcertModal()">Cancelar</button>
+                        <button type="button" class="btn btn-secondary" (click)="closeConcertModal()">Cancel</button>
                     </div>
+
                 </form>
             </div>
         </div>
 
         <!-- Conciertos Futuros -->
         <div class="concerts-section">
-            <h2>🎤 Próximos Conciertos</h2>
+            <h2>🎤 Upcoming Concerts</h2>
             <div *ngIf="band.upcomingConcerts.length > 0; else noUpcomingConcerts" class="concerts-container">
                 <div class="concert-card upcoming" *ngFor="let concert of band.upcomingConcerts"
                     (click)="goToConcert(concert)">
@@ -144,16 +145,17 @@
                     <h3>{{ concert.title }}</h3>
                     <p class="date">{{ concert.date | date: 'fullDate' }}</p>
                     <p class="location">{{ concert.location }}</p>
-                    <button class="buttonDelete" (click)="deleteConcert(concert.id)">🗑</button>
-                    <button class="buttonDelete"
-                        (click)="openConcertModal(concert); $event.stopPropagation()">✏️</button>
+                    <div class="card-actions" (click)="$event.stopPropagation()">
+                        <button class="buttonDelete" (click)="deleteConcert(concert.id)">🗑</button>
+                        <button class="buttonDelete" (click)="openConcertModal(concert)">✏️</button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Conciertos Pasados -->
         <div class="concerts-section">
-            <h2>🎸 Conciertos Pasados</h2>
+            <h2>🎸 Past Concerts</h2>
             <div *ngIf="band.pastConcerts.length > 0; else noPastConcerts" class="concerts-container">
                 <div class="concert-card past" *ngFor="let concert of band.pastConcerts" (click)="goToConcert(concert)">
                     <img [src]="concert.image || 'noImage.png'" alt="{{concert.title}}">

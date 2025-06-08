@@ -144,8 +144,9 @@ export class BandsService {
     ).pipe(
       map(res => res.data),
       catchError(err => {
-        console.error('Error actualizando descripción:', err);
-        return throwError(() => new Error('Error actualizando la descripción de la banda'));
+        console.error('Error updating description:', err);
+        return throwError(() => new Error('Error updating the band description'));
+
       })
     );
   }
@@ -157,8 +158,9 @@ export class BandsService {
     ).pipe(
       map(res => res.data),
       catchError(err => {
-        console.error('Error actualizando género:', err);
-        return throwError(() => new Error('Error actualizando el género de la banda'));
+        console.error('Error updating genre:', err);
+        return throwError(() => new Error('Error updating the band genre'));
+
       })
     );
   }

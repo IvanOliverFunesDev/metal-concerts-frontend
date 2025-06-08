@@ -157,7 +157,7 @@ export class BandPanel implements OnInit {
         this.editingDescription = false;
       },
       error: (err) => {
-        console.error('❌ Error actualizando la descripción:', err);
+        console.error('❌ Error updating the description:', err);
       }
     });
   }
@@ -260,62 +260,63 @@ export class BandPanel implements OnInit {
     formData.append('location', this.concertForm.value.location!);
 
     if (this.editingConcert) {
-      // Modo editar
+      // Edit mode
       this.concertsService.updateConcert(this.editingConcert.id!, formData).subscribe({
         next: (updatedConcert) => {
-          Swal.fire('✅ Concierto actualizado', 'Los cambios han sido guardados.', 'success')
+          Swal.fire('✅ Concert updated', 'Changes have been saved.', 'success')
             .then(() => {
-              window.location.reload(); // 🔁 Recargar para ver cambios
+              window.location.reload(); // 🔁 Reload to see changes
             });
           this.closeConcertModal();
         },
-
         error: (err) => {
-          console.error('❌ Error al actualizar concierto:', err);
-          Swal.fire('Error', 'No se pudo actualizar el concierto.', 'error');
+          console.error('❌ Error updating concert:', err);
+          Swal.fire('Error', 'The concert could not be updated.', 'error');
         }
       });
     } else {
-      // Modo crear
+      // Create mode
       this.concertsService.createConcert(formData).subscribe({
         next: (concert) => {
           this.band.upcomingConcerts.push(concert);
           this.closeConcertModal();
-          Swal.fire('✅ Concierto creado', '', 'success');
+          Swal.fire('✅ Concert created', '', 'success');
         },
         error: (err) => {
-          console.error('❌ Error creando concierto:', err);
-          Swal.fire('Error', 'No se pudo crear el concierto.', 'error');
+          console.error('❌ Error creating concert:', err);
+          Swal.fire('Error', 'The concert could not be created.', 'error');
         }
       });
     }
+
   }
 
   deleteConcert(concertId: string): void {
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Esta acción eliminará el concierto permanentemente.',
+      title: 'Are you sure?',
+      text: 'This action will permanently delete the concert.',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
+      confirmButtonText: 'Yes, delete',
+      cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
         this.concertsService.deleteConcert(concertId).subscribe({
           next: () => {
-            // Eliminar de la lista local
+            // Remove from local list
             this.band.upcomingConcerts = this.band.upcomingConcerts.filter(c => c.id !== concertId);
 
-            Swal.fire('¡Eliminado!', 'El concierto ha sido eliminado.', 'success');
+            Swal.fire('Deleted!', 'The concert has been deleted.', 'success');
           },
           error: (err) => {
-            console.error('❌ Error al eliminar el concierto:', err);
-            Swal.fire('Error', 'No se pudo eliminar el concierto.', 'error');
+            console.error('❌ Error deleting concert:', err);
+            Swal.fire('Error', 'The concert could not be deleted.', 'error');
           }
         });
       }
     });
   }
+
   loadSubscribers(): void {
     this.bandsService.getSubscribers().subscribe({
       next: (res) => {

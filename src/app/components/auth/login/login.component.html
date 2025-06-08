@@ -9,14 +9,14 @@
                 <div class="inputBx">
                     <input type="text" placeholder="Email" formControlName="email">
                     @if (isNotValidField('email')) { <!-- para mostrar los errores -->
-                    <p class="error">El email es requerido y debe de tener un formato de email</p>
+                    <p class="error">Email is required and must be in a valid format</p>
                     }
                 </div>
                 <br>
                 <div class="inputBx">
                     <input type="password" placeholder="Password" formControlName="password">
                     @if (isNotValidField('password')) { <!-- para mostrar los errores -->
-                    <p class="error">La password es requerido</p>
+                    <p class="error">Password is required</p>
                     }
                 </div>
                 <br>
