@@ -44,3 +44,37 @@
     background-color: #ff00ff;
     color: black;
 }
+
+@media (max-width: 768px) {
+    .filter-bar {
+        flex-direction: column;
+        /* Apila elementos verticalmente */
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .filter-input,
+    .filter-select,
+    .filter-button {
+        width: 100%;
+        /* Ocupa todo el ancho disponible */
+        padding: 12px;
+        /* Más área táctil */
+        font-size: 14px;
+        /* Texto ligeramente más pequeño */
+    }
+
+    /* Mejora visual para selects en móvil */
+    .filter-select {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff00ff'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 12px;
+    }
+
+    /* Efecto táctil en botón */
+    .filter-button:active {
+        background-color: #ff00ff !important;
+        color: black !important;
+    }
+}

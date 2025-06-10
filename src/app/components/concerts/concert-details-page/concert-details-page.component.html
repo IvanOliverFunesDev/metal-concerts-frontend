@@ -17,7 +17,7 @@
 </div>
 
 <div *ngIf="relatedConcerts.length > 0" class="related-concerts">
-    <h2>🎸 Conciertos Relacionados</h2>
+    <h2>🎸 Related Concerts</h2>
     <div class="related-concerts-container">
         <div class="related-concert-card" *ngFor="let related of relatedConcerts" (click)="goToDetails(related)">
             <img [src]="related.image || 'noImage.png'" alt="{{ related.title }}">
@@ -33,7 +33,7 @@
 
 <div *ngIf="relatedConcerts.length > 0" class="related-concerts">
     <h2>
-        Más de {{concert?.band?.bandName}}
+        More from {{concert?.band?.bandName}}
         <a class="view-discography" (click)="goToDetailsBand()">View discography</a>
     </h2>
     <div class="related-concerts-container">
