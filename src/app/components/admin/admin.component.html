@@ -1,3 +1,5 @@
+<a routerLink="/home" (click)="logout()" class="btn_logout">Logout</a>
+
 <div class="band-table">
   <div *ngFor="let band of pendingBands" class="band-row" (click)="toggleDetails(band._id)">
     <div class="band-name">

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import { NgFor, NgIf } from '@angular/common';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +16,7 @@ export class AdminComponent implements OnInit {
   pendingBands: any[] = [];
   expandedBandId: string | null = null;
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private authService: AuthService, public router: Router) { }
 
   ngOnInit(): void {
     this.fetchPendingBands();
@@ -83,5 +85,11 @@ export class AdminComponent implements OnInit {
       }
     });
   }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigateByUrl('/home');
+  }
+
 
 }
